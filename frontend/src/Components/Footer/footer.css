@@ -1,0 +1,16 @@
+footer {
+  background-color: rgb(58, 58, 58);
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  width: 100%;
+}
+
+.footer-title{
+    font-size: 2.5rem;
+    cursor: pointer;
+}

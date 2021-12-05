@@ -1,0 +1,73 @@
+.edit-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #0c0c0c;
+  height: 100vh;
+}
+.close {
+  background-color: transparent;
+  border: none;
+  align-self: end;
+  margin: 1rem 1.15rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: rgb(41, 128, 243);
+}
+.input-container {
+  width: 80%;
+  font-size: 1rem;
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+.input-container > input {
+  margin: 1rem 0 1rem 0;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  background-color: #505050;
+  border: none;
+  border-radius: 4px;
+  color: white;
+}
+.input-container > textarea{
+  padding: 0.25rem 0.5rem 4rem 0.5rem;
+  height: 100px;
+  background-color: #505050;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  margin: 1rem 0 1rem 0;
+  text-align: start;
+  font-family: "Noto Sans", sans-serif;
+}
+.input-image-container {
+  flex-wrap: wrap;
+}
+
+label:nth-child(7) {
+  margin-bottom: 1rem;
+}
+
+.input-image {
+  cursor: pointer;
+  border-radius: 14px;
+  background-color: white;
+  padding: 0.5rem;
+  width: 90px;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+  height: 130px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.theme-container {
+    display: flex;
+    align-items:center;
+    margin-bottom: 3rem;
+}
+
+.theme-container > label {
+    margin-right: 5rem;
+}

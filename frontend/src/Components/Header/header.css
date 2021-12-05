@@ -1,0 +1,42 @@
+header {
+
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.info-edit{
+    cursor: pointer;
+    align-self: flex-end;
+    border:2px solid white;
+    margin: 1rem 1.15rem 0 0;
+    padding: 0.45rem;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  padding-left: 2rem;
+  color: white;
+}
+.info-username {
+  width: 50%;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.info-age, .info-about {
+    font-size:0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-ava {
+  width: 85px;
+  height: 130px;
+  object-fit: cover;
+  overflow: hidden;
+}

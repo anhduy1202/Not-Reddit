@@ -1,0 +1,114 @@
+.makepost-container {
+  height: 70vh;
+  background-color: #292929;
+  padding: 0.75rem 1.25rem 0 1.25rem;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+}
+.makepost-navigation {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.25rem;
+}
+
+.makepost-save {
+  cursor: pointer;
+}
+.makepost-desc {
+  background-color: #535353;
+  color: white;
+  border: none;
+  font-family: "Noto Sans", sans-serif;
+  padding: 0.25rem 0.5rem 4rem 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.makepost-title {
+  height: 50px;
+  background-color: #535353;
+  color: white;
+  border: none;
+  font-family: "Noto Sans", sans-serif;
+  padding: 0.25rem 0.5rem 4rem 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.makepost-tags {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.makepost-tags > button {
+  color: white;
+  border: none;
+  padding: 0.4rem;
+  font-family: "Noto Sans", sans-serif;
+  border-radius: 14px;
+  cursor: pointer;
+}
+.makepost-tags-NSFW {
+  background-color: rgb(209, 66, 47);
+}
+.makepost-tags-Mood {
+  background-color: rgb(1, 111, 201);
+}
+.makepost-tags-Quotes {
+  background-color: rgb(183, 47, 224);
+}
+.makepost-tags-Shitpost {
+  background-color: rgb(197, 186, 23);
+}
+.makepost-tags-None {
+  background-color: grey;
+}
+.makepost-tags-selected {
+  background-color: teal;
+  box-shadow: 0px 0px 10px 7px rgb(0, 204, 160);
+}
+
+/* Post.css */
+.post-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.85rem;
+  font-family: "Noto Sans", sans-serif;
+}
+.posts {
+  background-color: rgb(49, 49, 49);
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 1rem 2rem;
+  font-family: "Noto Sans", sans-serif;
+}
+.posts-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.posts-tags {
+  color: white;
+  border: none;
+  margin:0.75rem 0 0.75rem 0;
+  font-size: 0.75rem;
+  font-family: "Noto Sans", sans-serif;
+  border-radius: 14px;
+  width: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+.posts-tags-NSFW {
+  background-color: rgb(209, 66, 47);
+}
+.posts-tags-Mood {
+  background-color: rgb(1, 111, 201);
+}
+.posts-tags-Quotes {
+  background-color: rgb(183, 47, 224);
+}
+.posts-tags-Shitpost {
+  background-color: rgb(197, 186, 23);
+}
+.posts-tags-None {
+  background-color: grey;
+}
