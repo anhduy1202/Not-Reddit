@@ -6,6 +6,7 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const authRoute = require("./routes/auth");
+const postRoute = require("./routes/post");
 dotenv.config();
 
 mongoose.connect(process.env.DB_URL, () => {
@@ -19,6 +20,7 @@ app.use(morgan("common"));
 
 //Routes
 app.use("/v1/auth", authRoute);
+app.use("/v1/post",postRoute);
 
 // app.post("/v1/update", (req, res) => {
 //   setTimeout(() => {

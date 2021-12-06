@@ -23,5 +23,26 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//LOG IN
+router.post("/login", async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) {
+      res.status(404).json("Incorrect username");
+    }
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!validPassword) {
+      res.status(404).json("Incorrect password");
+    }
+    if (user && validPassword) {
+      const { password, ...others } = user._doc;
+      res.status(200).json({ ...others });
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
-
