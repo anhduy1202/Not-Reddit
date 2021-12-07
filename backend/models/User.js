@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "New User",
     },
+    age: {
+      type: Number,
+      min: 14,
+      default: 99,
+    },
     email: {
       type: String,
       require: true,
@@ -24,9 +29,9 @@ const userSchema = new mongoose.Schema(
       require: true,
       min: 6,
     },
-    isAdmin:{
-      type:Boolean,
-      default:false
+    isAdmin: {
+      type: Boolean,
+      default: false,
     },
     profilePicture: {
       type: String,

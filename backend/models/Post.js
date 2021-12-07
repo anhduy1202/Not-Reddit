@@ -22,9 +22,13 @@ const postSchema = new mongoose.Schema(
       require: true,
       default: 0,
     },
-    votes: {
-      type: Number,
-      default: 0,
+    upvotes: {
+      type: Array,
+      default: [],
+    },
+    downvotes:{
+      type:Array,
+      default:[],
     },
     comments: {
       type: Array,
