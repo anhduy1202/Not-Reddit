@@ -1,6 +1,6 @@
 const router = require("express").Router();
+const fetchComments = require("../controllers/commentController");
 const Post = require("../models/Post");
-const User = require("../models/User");
 
 //CREATE A POST
 router.post("/", async (req, res) => {
@@ -29,7 +29,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //DELETE A POST
-router.get("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   const post = await Post.findById(req.params.id);
   if (req.body.userId === post.userId) {
     try {
@@ -80,7 +80,7 @@ router.put("/upvote/:id", async (req, res) => {
 });
 
 //DOWNVOTE A POST
-router.put("/downvot/:id", async (req, res) => {
+router.put("/downvote/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id.trim());
     if (!post.downvotes.includes(req.body.userId)) {
@@ -94,4 +94,36 @@ router.put("/downvot/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//ADD A COMMENT
+router.post("/comment/:id", async (req, res) => {
+  try {
+    await Post.findByIdAndUpdate(req.params.id, {
+      $push: {
+        comments: { content: req.body.content, ownerId: req.body.ownerId },
+      },
+    });
+    res.status(200).json("A comment is added");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET ALL COMMENTS IN A POST
+router.get("/comment/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    const comments = post.comments;
+    const commentArr = await fetchComments(comments);
+    console.log(commentArr);
+    res.status(200).json(commentArr);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//DELETE COMMENT IN A POST
+
+//EDIT COMMENT IN A POST
+
 module.exports = router;

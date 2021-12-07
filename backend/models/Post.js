@@ -30,10 +30,10 @@ const postSchema = new mongoose.Schema(
       type:Array,
       default:[],
     },
-    comments: {
-      type: Array,
-      default: [],
-    },
+    comments: [{
+      content:String,
+      ownerId:String, 
+    }],
   },
   { timestamps: true }
 );
