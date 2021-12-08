@@ -115,7 +115,6 @@ router.get("/comment/:id", async (req, res) => {
     const post = await Post.findById(req.params.id);
     const comments = post.comments;
     const commentArr = await fetchComments(comments);
-    console.log(commentArr);
     res.status(200).json(commentArr);
   } catch (err) {
     res.status(500).json(err);
@@ -123,7 +122,22 @@ router.get("/comment/:id", async (req, res) => {
 });
 
 //DELETE COMMENT IN A POST
-
+router.get("/comment/:id/:commentId", async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  const comments = post.comments; 
+  try {
+    // const comment = await Post.updateOne(
+    //   {_id : req.params.id },
+    //   {
+    //     $pull: { comments: { _id: req.params.commentId} },
+    //   }
+    // );
+    console.log(comments);
+    res.status(200).json("Comment is deleted");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 //EDIT COMMENT IN A POST
 
 module.exports = router;
