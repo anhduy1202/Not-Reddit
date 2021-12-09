@@ -1,6 +1,4 @@
 const router = require("express").Router();
-const User = require("../models/User");
-const bcrypt = require("bcrypt");
 const userController = require("../controllers/userController");
 
 //UPDATE A USER
@@ -13,7 +11,8 @@ router.delete("/:id", userController.deleteUser);
 router.get("/:id", userController.getUser);
 
 //FOLLOW A USER
+router.put("/:id/follow", userController.followUser);
 //UNFOLLOW A USER
-
+router.put("/:id/unfollow",userController.unfollowUser);
 
 module.exports = router;
