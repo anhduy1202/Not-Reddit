@@ -33,13 +33,13 @@ const postController = {
     const post = await Post.findById(req.params.id);
     if (req.body.userId === post.userId) {
       try {
-        await post.findByIdAndDelete(req.params.id);
-        res.send(200).json("Delete post succesfully");
+        await Post.findByIdAndDelete(req.params.id);
+        res.status(200).json("Delete post succesfully");
       } catch (err) {
         res.status(500).json(err);
       }
     } else {
-      res.send(403).json("You can't delete other people post");
+      res.status(403).json("You can't delete other people post");
     }
   },
 

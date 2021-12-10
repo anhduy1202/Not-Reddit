@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
 const userRoute = require("./routes/user");
@@ -16,6 +17,7 @@ mongoose.connect(process.env.DB_URL, () => {
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 app.use(helmet());
 app.use(morgan("common"));
 
@@ -23,12 +25,6 @@ app.use(morgan("common"));
 app.use("/v1/auth", authRoute);
 app.use("/v1/post", postRoute);
 app.use("/v1/users", userRoute);
-
-// app.post("/v1/update", (req, res) => {
-//   setTimeout(() => {
-//     res.status(200).json(req.body);
-//   }, [1000]);
-// });
 
 app.listen(8000, () => {
   console.log("Server is running");
