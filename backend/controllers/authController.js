@@ -68,9 +68,13 @@ const authController = {
         //Generate refresh token
         const refreshToken = authController.generateRefreshToken(user);
         refreshTokens.push(refreshToken);
-        //STORE JWT IN COOKIES
-        res.cookie("accessToken", accessToken, { httpOnly: true });
-        res.cookie("refreshToken", refreshToken, { httpOnly: true });
+        //STORE REFRESH TOKEN IN COOKIE
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true,
+          secure:false,
+          path: "/",
+          sameSite: "strict",
+        });
         const { password, ...others } = user._doc;
         res.status(200).json({ ...others, accessToken, refreshToken });
       }
@@ -96,8 +100,12 @@ const authController = {
       const newAccessToken = authController.generateAccessToken(user);
       const newRefreshToken = authController.generateRefreshToken(user);
       refreshTokens.push(newRefreshToken);
-      res.cookie("accessToken", newAccessToken, { httpOnly: true });
-      res.cookie("refreshToken", newRefreshToken, { httpOnly: true });
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure:false,
+        path: "/",
+        sameSite: "strict",
+      });
       res.status(200).json({
         accessToken: newAccessToken,
         refreshToken: newRefreshToken,
@@ -108,7 +116,7 @@ const authController = {
   //LOG OUT
   logOut: async (req, res) => {
     //Clear cookies when user logs out
-    res.clearCookie("accessToken");
+    refreshTokens = refreshTokens.filter((token) => token !== req.body.token);
     res.clearCookie("refreshToken");
     res.status(200).json("Logged out successfully!");
   },

@@ -1,10 +1,12 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  //USING TOKEN FROM COOKIES
-  const accessToken = req.cookies.accessToken;
+  //ACCESS TOKEN FROM HEADER, REFRESH TOKEN FROM COOKIE
+  const token = req.headers.token;
   const refreshToken = req.cookies.refreshToken;
-  if (accessToken && refreshToken) {
+  if (token && refreshToken) {
+    const accessToken = token.split(" ")[1];
+    console.log(accessToken);
     jwt.verify(accessToken, process.env.JWT_KEY, (err, user) => {
       if (err) {
         res.status(403).json("Token is not valid!");
