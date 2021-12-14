@@ -27,6 +27,7 @@ const MakePost = (props) => {
         </p>
       </div>
       <InputField
+        type="text"
         data={title}
         inputType="textarea"
         setData={setTitle}
@@ -34,6 +35,7 @@ const MakePost = (props) => {
         classStyle="makepost-title"
       />
       <InputField
+        type="text"
         data={desc}
         inputType="textarea"
         setData={setDesc}

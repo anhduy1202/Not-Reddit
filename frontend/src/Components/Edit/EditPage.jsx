@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../redux/apiRequests";
-import { updateTheme } from "../../redux/themeSlice";
-// import { update } from "../../redux/userSlice";
 import InputField from "../InputFields/Input";
 
 import "./edit.css";
@@ -37,16 +35,20 @@ const EditPage = (props) => {
       age: age,
       about: about,
       avaUrl: url,
+      theme:theme
     };
     updateUser(updatedUser, dispatch);
-    dispatch(updateTheme({ theme }));
   };
   const changeAvatar = (e) => {
     setUrl(e.target.src);
   };
   return (
     <>
-      <form onSubmit={handleSubmit}className="edit-form" data-testid="editForm">
+      <form
+        onSubmit={handleSubmit}
+        className="edit-form"
+        data-testid="editForm"
+      >
         <section className="edit-container">
           <button type="submit" className="close">
             SAVE
@@ -54,11 +56,17 @@ const EditPage = (props) => {
           <div className="edit-profile"> Edit Profile </div>
           <div className="input-container">
             <InputField
+              type="text"
               data={user.name}
               setData={setName}
               label="Display name"
             />
-            <InputField data={user.age} setData={setAge} label="Age" />
+            <InputField
+              type="text"
+              data={user.age}
+              setData={setAge}
+              label="Age"
+            />
             {/* <label> About </label>
             <textarea
               className="input-about"
@@ -66,7 +74,13 @@ const EditPage = (props) => {
               placeholder={user.about}
               onChange={(e) => setAbout(e.target.value)}
             /> */}
-            <InputField inputType="textarea" data={user.about} setData={setAbout} classStyle="input-about" label="About"/>
+            <InputField
+              inputType="textarea"
+              data={user.about}
+              setData={setAbout}
+              classStyle="input-about"
+              label="About"
+            />
             <label> Profile Picture </label>
             <section className="input-image-container">
               {avaUrl.map((url) => {

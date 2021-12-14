@@ -1,0 +1,29 @@
+.register-container {
+  text-align: center;
+}
+.register-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  min-width: 100%;
+}
+.register-title {
+  font-weight: 700;
+  font-size: 1.75rem;
+  padding: 1.25rem;
+  background-color: #ff3cac;
+  background-image: linear-gradient(
+    225deg,
+    #ff3cac 0%,
+    #784ba0 50%,
+    #2b86c5 100%
+  );
+}
+
+.register-error {
+  margin-top: 1rem;
+  align-self: center;
+  color: rgb(255, 0, 55);
+}

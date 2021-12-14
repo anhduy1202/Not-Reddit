@@ -1,7 +1,7 @@
 import "../Edit/edit.css";
 import "../Posts/post.css";
 const InputField = (props) => {
-  const { inputType, data, setData, label, classStyle } = props;
+  const { inputType,type, data, setData, label, classStyle } = props;
   return (
     <>
       <label> {label} </label>
@@ -14,7 +14,8 @@ const InputField = (props) => {
         />
       ) : (
         <input
-          type="text"
+          type={type}
+          className={classStyle}
           placeholder={data}
           onChange={(e) => setData(e.target.value)}
         />
