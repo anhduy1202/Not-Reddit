@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import SideBar from "./FeedSideBar";
 import { Link, useNavigate } from "react-router-dom";
-const Feed = () => {
+import FeedHeader from "./Header/FeedHeader";
+const Feed = (props) => {
+  const { setOpenSide, isOpenSide } = props;
   const user = useSelector((state) => state.auth.login?.currentUser);
-  const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     if (!user) {
@@ -16,23 +17,17 @@ const Feed = () => {
     <>
       {user && (
         <>
-          {isOpen && (
-            <div className="feed-sidebar">
-              <SideBar setOpen={setOpen} />
-            </div>
-          )}
-          <section
-            className={`${isOpen ? "feed-container-opened" : "feed-container"}`}
+          <div
+            className={`${isOpenSide ? "feed-sidebar-opened" : "feed-sidebar"}`}
           >
-            <header className="feed-logo">
-              <img
-                onClick={() => setOpen(true)}
-                className="feed-logo-img"
-                src={user?.profilePicture}
-                alt=""
-              />
-            </header>
-            <Link to="/user/122"> go to header</Link>
+            <SideBar setOpen={setOpenSide} />
+          </div>
+          <section
+            className={`${
+              isOpenSide ? "feed-container-opened" : "feed-container"
+            }`}
+          >
+            <FeedHeader setOpen={setOpenSide} isOpen={isOpenSide} user={user} />
           </section>
         </>
       )}

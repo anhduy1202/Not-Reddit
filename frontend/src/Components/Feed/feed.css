@@ -1,5 +1,6 @@
 .feed-container {
   height: 100vh;
+  width: 100%;
   background-color: #0c0c0c;
 }
 .feed-container-opened {
@@ -7,6 +8,7 @@
   background-color: #0c0c0c;
   width: 30%;
   align-self: end;
+  transition: width 300ms;  
 }
 .feed-logo {
   font-size: 1.5rem;
@@ -22,13 +24,26 @@
   object-fit: cover;
   overflow: hidden;
 }
-.feed-sidebar {
+.feed-sidebar-opened {
   display: flex;
   flex-direction: column;
   padding:1rem;
   position: absolute;
   height: 100vh;
-  background-color: #363636;
+  background-color: #222222;
   color: rgb(219, 218, 218);
   width: 70%;
+  transition: transform 300ms;  
+}
+.feed-sidebar{
+  display: flex;
+  flex-direction: column;
+  padding:1rem;
+  position: absolute;
+  height: 100vh;
+  background-color: #222222;
+  color: rgb(219, 218, 218);
+  width: 70%;
+  transition: transform 300ms;  
+  transform: translateX(-100%);
 }

@@ -10,13 +10,14 @@ import Feed from "./Components/Feed/Feed";
 function App() {
   const [isEdit, setEdit] = useState(false);
   const [isOpenPost, setOpen] = useState(false);
+  const [isOpenSide,setOpenSide] = useState(false);
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Feed />} />
+          <Route path="/" element={<Feed setOpenSide={setOpenSide} isOpenSide={isOpenSide}/>} />
           <Route
             path="/user/:id"
             element={

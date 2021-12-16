@@ -1,0 +1,28 @@
+.navbar-container {
+  font-family: "Inter", sans-serif;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.navbar-profile > a,
+.navbar-saved > a, .navbar-logout > a {
+  margin: 0.5rem 0;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  justify-content: start;
+}
+
+.navbar-profile > a > img {
+  margin: 0 0.55rem;
+}
+
+.navbar-saved > a > img {
+  margin: 0 0.55rem;
+}
+
+.navbar-logout > a > img {
+  margin: 0 0.55rem;
+}

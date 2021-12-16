@@ -8,6 +8,8 @@
   justify-content: center;
   height: 50vh;
   min-width: 100%;
+  margin-top: 2rem;
+
 }
 .register-title {
   font-weight: 700;

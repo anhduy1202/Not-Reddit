@@ -1,4 +1,87 @@
 .sidebar-close {
-    cursor: pointer;
-    font-size: 1.5rem;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-weight: 200;
+  font-size: 1.75rem;
+}
+.sidebar-container {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.sidebar-ava {
+  text-align: center;
+}
+.sidebar-img {
+  width: 120px;
+  cursor: pointer;
+  height: 150px;
+  object-fit: cover;
+}
+
+.sidebar-username {
+  display: flex;
+  margin-left: 0.25rem;
+  justify-content: center;
+  align-items: center;
+}
+.sidebar-username-dropdown {
+  background-color: transparent;
+  width: 24px;
+  margin-left: 0.25rem;
+  height: 24px;
+}
+.sidebar-styleava {
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  background-color: #ff3830;
+  background-image: linear-gradient(90deg, #ff3830 0%, #df811c 100%);
+  padding: 0.25rem;
+  border-radius: 14px;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 0.5fr 1.5fr;
+  margin-top: 2rem;
+}
+.sidebar-styleava > img {
+  width: 24px;
+  height: 24px;
+  margin-left: 0.5rem;
+}
+.sidebar-info {
+  margin-top: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgb(126, 126, 126);
+}
+.karmas-logo,
+.age-logo {
+  margin:0 0.55rem;
+  text-align: center;
+}
+
+.karmas-container,
+.age-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+}
+.karmas-container {
+  border-right: 1px solid rgb(126, 126, 126);
+}
+.karmas-header,
+.age-header {
+  font-size: 1rem;
+  color: rgb(151, 151, 151);
+  font-weight: 400;
+}
+.sidebar-nav {
+  width: 100%;
 }
