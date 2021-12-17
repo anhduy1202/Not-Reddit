@@ -18,9 +18,9 @@
   background-color: #222222;
 }
 .feed-logo-img {
-  width: 85px;
+  width: 80px;
   cursor: pointer;
-  height: 50px;
+  height: 80px;
   object-fit: cover;
   overflow: hidden;
 }

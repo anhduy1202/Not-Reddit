@@ -6,6 +6,15 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    username: {
+      type:String
+    },
+    avaUrl: {
+      type:String
+    },
+    theme: {
+      type:String
+    },
     title: {
       type: String,
       required: true,

@@ -4,7 +4,14 @@ const User = require("../models/User");
 const postController = {
   //CREATE A POST
   createPost: async (req, res) => {
-    const newPost = new Post(req.body);
+    const users = await User.findById(req.body.userId);
+    const makePost = {
+      ...req.body,
+      username: users.username,
+      avaUrl: users.profilePicture,
+      theme: users.theme
+    }
+    const newPost = new Post(makePost);
     try {
       const savedPost = await newPost.save();
       res.status(200).json(savedPost);
@@ -59,7 +66,7 @@ const postController = {
       const posts = await Post.find();
       res.status(200).json(posts);
     } catch (err) {
-      res.status(500).json(err);
+      return res.status(500).json(err);
     }
   },
 

@@ -9,13 +9,13 @@ const verifyToken = (req, res, next) => {
     console.log(accessToken);
     jwt.verify(accessToken, process.env.JWT_KEY, (err, user) => {
       if (err) {
-        res.status(403).json("Token is not valid!");
+        return res.status(403).json("Token is not valid!");
       }
       req.user = user;
       next();
     });
   } else {
-    res.status(401).json("You're not authenticated");
+    return res.status(401).json("You're not authenticated");
   }
 };
 
@@ -24,19 +24,17 @@ const verifyTokenAndUserAuthorization = (req, res, next) => {
     if (req.user.id === req.params.id.trim() || req.user.isAdmin) {
       next();
     } else {
-      res.status(403).json("You're not allowed to do that!");
+      return res.status(403).json("You're not allowed to do that!");
     }
   });
 };
 
 const verifyTokenAndUserPostAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
-    console.log(req.user.id);
-    console.log(req.body.userId);
     if (req.user.id === req.body.userId || req.user.isAdmin) {
       next();
-    } else {
-      res.status(403).json("You're not allowed to do that!");
+    } else { 
+      return res.status(403).json("You're not allowed to do that!");
     }
   });
 };
@@ -46,7 +44,7 @@ const verifyTokenAndAdmin = (req, res, next) => {
     if (req.user.isAdmin) {
       next();
     } else {
-      res.status(403).json("You're not allowed to do that!");
+      return res.status(403).json("You're not allowed to do that!");
     }
   });
 };

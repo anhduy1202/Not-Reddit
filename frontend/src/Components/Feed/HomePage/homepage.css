@@ -1,0 +1,103 @@
+.homepage-post {
+  display: flex;
+  flex-direction: column;
+}
+.homepage-container{
+  display: flex;
+  flex-direction: column;
+}
+.post-ava-container {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 1rem;
+  overflow: hidden;
+}
+.post-ava {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.post-author {
+  font-size: 1rem;
+}
+.post-time {
+  font-size: 0.85rem;
+  color: rgb(165, 165, 165);
+  font-weight: 500;
+}
+.post-container {
+  display: grid;
+  margin-bottom: 1rem;
+  background-color: #292929;
+  padding: 0.75rem;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.post-context {
+  margin-top: 0.75rem;
+}
+.post-context > button {
+  font-size: 0.85rem;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+}
+.post-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
+.post-desc {
+  font-size: 0.85rem;
+}
+.post-interactions {
+  margin-top: 0.75rem;
+  color: grey;
+}
+.post-vote {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+.post-edit-delete{
+  background-color: transparent;
+  margin-left: auto;
+}
+.post-edit-delete > img {
+  cursor: pointer;
+  width: 24px;
+  margin-right: 0.75rem;
+  height: 24px;
+}
+.upvote > img,
+.downvote > img,
+.comments > img {
+  width: 24px;
+  cursor: pointer;
+  height: 24px;
+}
+.upvote,
+.downvote,
+.comments {
+  width: 24px;
+  height: 24px;
+}
+
+.votes {
+  margin: 0 0.75rem;
+}
+.comments {
+  margin-left: auto;
+}
+.comment-no {
+  margin-left: 0.75rem;
+}

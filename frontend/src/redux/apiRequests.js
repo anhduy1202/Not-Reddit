@@ -8,6 +8,11 @@ import {
   registerStart,
   registerSuccess,
 } from "./authSlice";
+import {
+  getAllPostFailed,
+  getAllPostStart,
+  getAllPostSuccess,
+} from "./postSlice";
 
 export const updateUser = async (user, dispatch) => {
   dispatch(updateStart());
@@ -21,14 +26,14 @@ export const updateUser = async (user, dispatch) => {
   }
 };
 
-export const loginUser = async (user, dispatch, navigate) => {
+export const loginUser = async (user, dispatch, navigate, state) => {
   dispatch(loginStart());
   dispatch(updateStart());
   try {
     const res = await axios.post("/v1/auth/login", user);
     dispatch(loginSuccess(res.data));
     dispatch(updateSuccess(res.data));
-    navigate("/");
+    navigate(state?.path || "/");
   } catch {
     dispatch(loginFailed());
     dispatch(updateError());
@@ -44,5 +49,17 @@ export const registerUser = async (user, dispatch, navigate) => {
   } catch (err) {
     console.log(err);
     dispatch(registerFailed("Something is wrong"));
+  }
+};
+
+export const getAllPosts = async (dispatch, token) => {
+  dispatch(getAllPostStart());
+  try {
+    const res = await axios.get("/v1/post/", {
+      headers: {token: `Bearer ${token}`},
+    });
+    dispatch(getAllPostSuccess(res.data));
+  } catch (err) {
+    dispatch(getAllPostFailed());
   }
 };

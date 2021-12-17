@@ -1,0 +1,12 @@
+.feed-navbar{
+    display:flex;
+    justify-content: space-around;
+    background-color: #222222;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+
+}
+.feed-navbar > a{
+    text-decoration: none;
+    color:white;
+}
