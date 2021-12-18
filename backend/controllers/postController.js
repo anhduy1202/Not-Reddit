@@ -9,8 +9,8 @@ const postController = {
       ...req.body,
       username: users.username,
       avaUrl: users.profilePicture,
-      theme: users.theme
-    }
+      theme: users.theme,
+    };
     const newPost = new Post(makePost);
     try {
       const savedPost = await newPost.save();
@@ -62,8 +62,14 @@ const postController = {
 
   //GET ALL POSTS
   getAllPosts: async (req, res) => {
+    const byVotes = req.query.hot;
+    let posts;
     try {
-      const posts = await Post.find();
+      if (byVotes) {
+        posts = await Post.find().sort({ upvotes: -1});
+      } else {
+        posts = await Post.find().sort({ createdAt: -1 });
+      }
       res.status(200).json(posts);
     } catch (err) {
       return res.status(500).json(err);
@@ -95,22 +101,28 @@ const postController = {
   },
 
   //DOWNVOTE POST
-  downvotePost: async(req,res)=>{
+  downvotePost: async (req, res) => {
     try {
-        const post = await Post.findById(req.params.id.trim());
-        if (!post.downvotes.includes(req.body.userId)) {
-          await post.updateOne({ $push: { downvotes: req.body.userId } });
-          //POST OWNER LOSES KARMAS FROM THE DOWNVOTES
-          await User.findOneAndUpdate({_id:post.userId},{$inc: {'karmas':-10}});
-          res.status(200).json("Post is downvoted!");
-        } else if (post.downvotes.includes(req.body.userId)) {
-          await post.updateOne({ $pull: { downvotes: req.body.userId } });
-          await User.findOneAndUpdate({_id:post.userId},{$inc: {'karmas':10}});
-          res.status(200).json("Post is no longer downvoted!");
-        }
-      } catch (err) {
-        res.status(500).json(err);
+      const post = await Post.findById(req.params.id.trim());
+      if (!post.downvotes.includes(req.body.userId)) {
+        await post.updateOne({ $push: { downvotes: req.body.userId } });
+        //POST OWNER LOSES KARMAS FROM THE DOWNVOTES
+        await User.findOneAndUpdate(
+          { _id: post.userId },
+          { $inc: { karmas: -10 } }
+        );
+        res.status(200).json("Post is downvoted!");
+      } else if (post.downvotes.includes(req.body.userId)) {
+        await post.updateOne({ $pull: { downvotes: req.body.userId } });
+        await User.findOneAndUpdate(
+          { _id: post.userId },
+          { $inc: { karmas: 10 } }
+        );
+        res.status(200).json("Post is no longer downvoted!");
       }
+    } catch (err) {
+      res.status(500).json(err);
+    }
   },
 };
 module.exports = postController;

@@ -6,28 +6,33 @@ import downVoteIcon from "../../../assets/icons/downvote.svg";
 import commentIcon from "../../../assets/icons/comments.svg";
 import trashIcon from "../../../assets/icons/trash.svg";
 import editIcon from "../../../assets/icons/edit.svg";
+import rocketIcon from "../../../assets/icons/rocket.svg";
 import { useState } from "react";
 import { useEffect } from "react";
 import { format } from "timeago.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../../redux/apiRequests";
 import Popup from "../Popup/Popup";
+import { useLocation } from "react-router-dom";
 
 const HomePage = () => {
   //Dummy data
   const user = useSelector((state) => state.auth.login?.currentUser);
+  const location = useLocation();
+  const cat = location.pathname.split("/")[1];
   const allPosts = useSelector((state) => state.post.allPosts?.posts);
   const [isDelete, setDelete] = useState({
     status: false,
     id: 0,
   });
+  const [filter,setFilters] = useState("");
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
   const dispatch = useDispatch();
 
   // const [isDownVote, setDownVote] = useState(false);
   useEffect(() => {
-    getAllPosts(dispatch, user?.accessToken);
-  }, [user]);
+    getAllPosts(dispatch, user?.accessToken,filter);
+  }, [user,filter]);
 
   const handleDelete = (id) => {
     setDelete({
@@ -35,9 +40,19 @@ const HomePage = () => {
       id: id,
     });
   };
+
+  const handleFilters = (e) => {
+    setFilters(e.target.value);
+  }
+
   return (
     <FeedLayout>
       <section className="homepage-container">
+        <select className="filter-posts" onChange={handleFilters}>
+          <option disabled selected value=""> SORT POSTS BY </option>
+          <option value=""> 🤩 NEW</option>
+          <option value="hot"> 🔥 HOT</option>
+        </select>
         <div className="popup">
           {isDelete.status && (
             <Popup

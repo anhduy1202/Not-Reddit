@@ -101,3 +101,13 @@
 .comment-no {
   margin-left: 0.75rem;
 }
+.filter-posts {
+  width: 40%;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  color: grey;
+  width: 30%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}

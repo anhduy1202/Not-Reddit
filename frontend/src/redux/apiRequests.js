@@ -52,11 +52,11 @@ export const registerUser = async (user, dispatch, navigate) => {
   }
 };
 
-export const getAllPosts = async (dispatch, token) => {
+export const getAllPosts = async (dispatch, token, hot) => {
   dispatch(getAllPostStart());
   try {
-    const res = await axios.get("/v1/post/", {
-      headers: {token: `Bearer ${token}`},
+    const res = await axios.get(hot ? `/v1/post?${hot}=true` : `/v1/post`, {
+      headers: { token: `Bearer ${token}` },
     });
     dispatch(getAllPostSuccess(res.data));
   } catch (err) {
