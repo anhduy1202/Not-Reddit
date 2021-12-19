@@ -36,7 +36,7 @@ const SideBar = () => {
               <div className="sidebar-ava">
                 <img src={user?.profilePicture} className="sidebar-img" alt="profile pic"/>
               </div>
-              <div className="sidebar-username">
+              <div className="text-4xl font-bold">
                 u/{user?.username}
                 <img className="sidebar-username-dropdown" src={arrowDown} alt="arrow img"/>
               </div>

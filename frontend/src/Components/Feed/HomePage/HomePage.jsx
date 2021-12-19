@@ -13,48 +13,57 @@ import { format } from "timeago.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../../redux/apiRequests";
 import Popup from "../Popup/Popup";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const HomePage = () => {
-  //Dummy data
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.login?.currentUser);
-  const location = useLocation();
-  const cat = location.pathname.split("/")[1];
   const allPosts = useSelector((state) => state.post.allPosts?.posts);
   const [isDelete, setDelete] = useState({
+    open: false,
     status: false,
     id: 0,
   });
-  const [filter,setFilters] = useState("");
+  const [filter, setFilters] = useState("");
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
   const dispatch = useDispatch();
 
   // const [isDownVote, setDownVote] = useState(false);
   useEffect(() => {
-    getAllPosts(dispatch, user?.accessToken,filter);
-  }, [user,filter]);
+    getAllPosts(dispatch, user?.accessToken, filter);
+    console.log("success");
+  }, [user, filter, isDelete.status]);
 
   const handleDelete = (id) => {
     setDelete({
-      status: true,
+      status: false,
+      open: true,
       id: id,
     });
   };
 
   const handleFilters = (e) => {
     setFilters(e.target.value);
-  }
+  };
+
+  const goToUserProfile = (id) => {
+    navigate(`/user/${id}`);
+  };
 
   return (
     <FeedLayout>
       <section className="homepage-container">
-        <select className="filter-posts" onChange={handleFilters}>
-          <option disabled selected value=""> SORT POSTS BY </option>
-          <option value=""> 🤩 NEW</option>
-          <option value="hot"> 🔥 HOT</option>
-        </select>
+        {!isDelete.open && (
+          <select className="filter-posts" onChange={handleFilters}>
+            <option disabled selected value="">
+              SORT POSTS BY
+            </option>
+            <option value=""> 🤩 NEW</option>
+            <option value="hot"> 🔥 HOT</option>
+          </select>
+        )}
         <div className="popup">
-          {isDelete.status && (
+          {isDelete.open && (
             <Popup
               setDelete={setDelete}
               isDelete={isDelete}
@@ -77,6 +86,7 @@ const HomePage = () => {
                     <img
                       className="post-ava"
                       src={post.avaUrl}
+                      onClick={() => goToUserProfile(post?.userId)}
                       alt="post user img"
                     />
                   </div>
@@ -84,14 +94,16 @@ const HomePage = () => {
                     u/{post.username}
                     <div className="post-time">{format(post?.createdAt)}</div>
                   </div>
-                  <div className="post-edit-delete">
-                    <img
-                      src={trashIcon}
-                      alt="delete"
-                      onClick={() => handleDelete(post._id)}
-                    />
-                    <img src={editIcon} alt="delete" />
-                  </div>
+                  {user?._id === post?.userId && (
+                    <div className="post-edit-delete">
+                      <img
+                        src={trashIcon}
+                        alt="delete"
+                        onClick={() => handleDelete(post._id)}
+                      />
+                      <img src={editIcon} alt="delete" />
+                    </div>
+                  )}
                 </div>
                 <div className="post-context">
                   <button className={`posts-tags-${tags[post?.tags]}`}>

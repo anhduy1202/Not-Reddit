@@ -7,13 +7,15 @@
   margin-top: 0.5rem;
 }
 .navbar-profile > a,
-.navbar-saved > a, .navbar-logout > a {
+.navbar-saved > a, .navbar-logout  {
   margin: 0.5rem 0;
   text-decoration: none;
   color: white;
   display: flex;
   justify-content: start;
+  cursor: pointer;
 }
+
 
 .navbar-profile > a > img {
   margin: 0 0.55rem;
@@ -23,6 +25,6 @@
   margin: 0 0.55rem;
 }
 
-.navbar-logout > a > img {
+.navbar-logout > img {
   margin: 0 0.55rem;
 }

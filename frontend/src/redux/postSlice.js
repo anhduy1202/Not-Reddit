@@ -8,6 +8,10 @@ export const postSlice = createSlice({
       pending: false,
       error: false,
     },
+    deletePost: {
+      pending: false,
+      error: null,
+    },
     posts: [
       {
         title: "",
@@ -31,6 +35,17 @@ export const postSlice = createSlice({
       state.allPosts.pending = false;
       state.allPosts.error = true;
     },
+    deletePostStart: (state) => {
+      state.deletePost.pending = true;
+    },
+    deletePostSuccess: (state) => {
+      state.deletePost.pending = false;
+      state.deletePost.error = false;
+    },
+    deletePostFailed: (state) => {
+      state.deletePost.error = true;
+      state.deletePost.pending = false;
+    },
   },
 });
 
@@ -39,5 +54,8 @@ export const {
   getAllPostStart,
   getAllPostSuccess,
   getAllPostFailed,
+  deletePostStart,
+  deletePostFailed,
+  deletePostSuccess,
 } = postSlice.actions;
 export default postSlice.reducer;

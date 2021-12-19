@@ -4,11 +4,17 @@ import {
   loginFailed,
   loginStart,
   loginSuccess,
+  logoutFailed,
+  logoutStart,
+  logoutSuccess,
   registerFailed,
   registerStart,
   registerSuccess,
 } from "./authSlice";
 import {
+  deletePostFailed,
+  deletePostStart,
+  deletePostSuccess,
   getAllPostFailed,
   getAllPostStart,
   getAllPostSuccess,
@@ -52,6 +58,19 @@ export const registerUser = async (user, dispatch, navigate) => {
   }
 };
 
+export const logOutUser = async (dispatch, token, userId, navigate) => {
+  dispatch(logoutStart());
+  try {
+    await axios.post("/v1/auth/logout", userId, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(logoutSuccess());
+    navigate("/login");
+  } catch (err) {
+    dispatch(logoutFailed());
+  }
+};
+
 export const getAllPosts = async (dispatch, token, hot) => {
   dispatch(getAllPostStart());
   try {
@@ -61,5 +80,22 @@ export const getAllPosts = async (dispatch, token, hot) => {
     dispatch(getAllPostSuccess(res.data));
   } catch (err) {
     dispatch(getAllPostFailed());
+  }
+};
+
+export const deletePost = async (dispatch, token, id, userId, setDelete) => {
+  dispatch(deletePostStart());
+  try {
+    await axios.delete(`/v1/post/${id}`, {
+      headers: { token: `Bearer ${token}` },
+      data: { userId: userId },
+    });
+    dispatch(deletePostSuccess());
+    setDelete({
+      open: false,
+      status: true,
+    });
+  } catch (err) {
+    dispatch(deletePostFailed());
   }
 };

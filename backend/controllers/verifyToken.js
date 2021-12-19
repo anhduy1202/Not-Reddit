@@ -3,10 +3,9 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => {
   //ACCESS TOKEN FROM HEADER, REFRESH TOKEN FROM COOKIE
   const token = req.headers.token;
-  const refreshToken = req.cookies.refreshToken;
-  if (token && refreshToken) {
+  console.log(token);
+  if (token) {
     const accessToken = token.split(" ")[1];
-    console.log(accessToken);
     jwt.verify(accessToken, process.env.JWT_KEY, (err, user) => {
       if (err) {
         return res.status(403).json("Token is not valid!");
@@ -33,7 +32,7 @@ const verifyTokenAndUserPostAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user.id === req.body.userId || req.user.isAdmin) {
       next();
-    } else { 
+    } else {
       return res.status(403).json("You're not allowed to do that!");
     }
   });
