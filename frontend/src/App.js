@@ -8,6 +8,7 @@ import Register from "./Components/Auth/Register";
 import HomePage from "./Components/Feed/HomePage/HomePage";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import News from "./Components/Feed/News/News";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   const [isEdit, setEdit] = useState(false);

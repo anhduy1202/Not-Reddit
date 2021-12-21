@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { updateUser } from "../../redux/apiRequests";
 import InputField from "../InputFields/Input";
 
 import "./edit.css";
 const EditPage = (props) => {
   const { setEdit } = props;
+  const { id } = useParams();
+  const currentUser = useSelector((state) => state.auth.login?.currentUser);
   const user = useSelector((state) => state.user);
   const [name, setName] = useState("Daniel");
   const [age, setAge] = useState(20);
@@ -31,13 +34,13 @@ const EditPage = (props) => {
     e.preventDefault();
     setEdit(false);
     const updatedUser = {
-      name: name,
+      displayName: name,
       age: age,
       about: about,
-      avaUrl: url,
-      theme:theme
+      profilePicture: url,
+      theme: theme,
     };
-    updateUser(updatedUser, dispatch);
+    updateUser(dispatch, updatedUser, id, currentUser?.accessToken);
   };
   const changeAvatar = (e) => {
     setUrl(e.target.src);
@@ -50,9 +53,14 @@ const EditPage = (props) => {
         data-testid="editForm"
       >
         <section className="edit-container">
-          <button type="submit" className="close">
-            SAVE
-          </button>
+          <div className="close-container">
+            <p className="close-x" onClick={() => setEdit(false)}>
+              X
+            </p>
+            <button type="submit" className="close">
+              SAVE
+            </button>
+          </div>
           <div className="edit-profile"> Edit Profile </div>
           <div className="input-container">
             <InputField

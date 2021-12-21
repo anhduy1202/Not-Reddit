@@ -7,7 +7,6 @@ import shirtIcon from "../../../assets/icons/shirt.svg";
 import karmasIcon from "../../../assets/icons/karmas.svg";
 import cakeIcon from "../../../assets/icons/cake.svg";
 import SideNavBar from "../SideNavBar/SideNavBar";
-import { useEffect } from "react";
 import { sideBarToggle } from "../../../redux/navigateSlice";
 
 const SideBar = () => {
@@ -42,24 +41,24 @@ const SideBar = () => {
               </div>
               <div className="sidebar-styleava">
                 <img src={shirtIcon} alt="shirt icon" />
-                <p className="sidebar-styleava-title" onClick={goToHeader}>
+                <span className="sidebar-styleava-title" onClick={goToHeader}>
                   Style Avatar
-                </p>
+                </span>
               </div>
               <div className="sidebar-info">
                 <div className="karmas-container">
                   <img src={karmasIcon} className="karmas-logo" alt="karam logo"/>
-                  <p className="karmas-title">
+                  <span className="karmas-title">
                     {user?.karmas}
                     <div className="karmas-header">Karma </div>
-                  </p>
+                  </span>
                 </div>
                 <div className="age-container">
                   <img src={cakeIcon} className="age-logo" alt="cake logo" />
-                  <p className="age-title">
+                  <span className="age-title">
                     {format(user?.createdAt).split("ago")}
                     <div className="age-header"> Age </div>{" "}
-                  </p>
+                  </span>
                 </div>
               </div>
               <div className="sidebar-nav">

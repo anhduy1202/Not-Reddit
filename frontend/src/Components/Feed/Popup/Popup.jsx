@@ -1,20 +1,30 @@
-import { useEffect } from "react";
 import "./popups.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "../../../redux/apiRequests";
+import { setDelete } from "../../../redux/navigateSlice";
 
 const Popup = (props) => {
-  const { setDelete, isDelete, h1, h2, button2 } = props;
+  const { h1, h2, button2 } = props;
   const user = useSelector((state) => state.auth.login?.currentUser);
   const dispatch = useDispatch();
+  const isDelete = useSelector((state) => state.nav.deleteState);
+
   const handleDelete = () => {
+    dispatch(
+      setDelete({
+        status: false,
+        open: false,
+      })
+    );
     deletePost(dispatch, user?.accessToken, isDelete.id, user?._id, setDelete);
   };
   const closePopup = () => {
-    setDelete({
-      status: false,
-      open: false,
-    });
+    dispatch(
+      setDelete({
+        status: false,
+        open: false,
+      })
+    );
   };
 
   return (

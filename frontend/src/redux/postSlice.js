@@ -8,22 +8,21 @@ export const postSlice = createSlice({
       pending: false,
       error: false,
     },
+    userPost: {
+      posts: null,
+      pending: false,
+      error: false,
+    },
     deletePost: {
       pending: false,
       error: null,
     },
-    posts: [
-      {
-        title: "",
-        tag: 0,
-        description: "",
-      },
-    ],
+    createPost: {
+      pending: false,
+      error: null,
+    },
   },
   reducers: {
-    createPost: (state, action) => {
-      state.posts = [...state.posts, action.payload];
-    },
     getAllPostStart: (state) => {
       state.allPosts.pending = true;
     },
@@ -34,6 +33,29 @@ export const postSlice = createSlice({
     getAllPostFailed: (state) => {
       state.allPosts.pending = false;
       state.allPosts.error = true;
+    },
+    getUserPostStart: (state) => {
+      state.userPost.pending = true;
+    },
+    getUserPostSuccess: (state, action) => {
+      state.userPost.pending = false;
+      state.userPost.posts = action.payload;
+    },
+    getUserPostFailed: (state) => {
+      state.userPost.pending = false;
+      state.userPost.error = true;
+    },
+    createPostStart: (state) => {
+      state.createPost.pending = true;
+      state.createPost.error = false;
+    },
+    createPostSuccess: (state) => {
+      state.createPost.pending = false;
+      state.createPost.error = false;
+    },
+    createPostFailed: (state) => {
+      state.createPost.pending = false;
+      state.createPost.error = true;
     },
     deletePostStart: (state) => {
       state.deletePost.pending = true;
@@ -50,10 +72,15 @@ export const postSlice = createSlice({
 });
 
 export const {
-  createPost,
+  createPostStart,
+  createPostSuccess,
+  createPostFailed,
   getAllPostStart,
   getAllPostSuccess,
   getAllPostFailed,
+  getUserPostStart,
+  getUserPostSuccess,
+  getUserPostFailed,
   deletePostStart,
   deletePostFailed,
   deletePostSuccess,

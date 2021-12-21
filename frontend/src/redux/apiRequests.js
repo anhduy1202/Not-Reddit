@@ -1,4 +1,11 @@
-import { updateStart, updateSuccess, updateError } from "./userSlice";
+import {
+  updateStart,
+  updateSuccess,
+  updateError,
+  getUserStart,
+  getUserSuccess,
+  getUserFailed,
+} from "./userSlice";
 import axios from "axios";
 import {
   loginFailed,
@@ -12,26 +19,21 @@ import {
   registerSuccess,
 } from "./authSlice";
 import {
+  createPostFailed,
+  createPostStart,
+  createPostSuccess,
   deletePostFailed,
   deletePostStart,
   deletePostSuccess,
   getAllPostFailed,
   getAllPostStart,
   getAllPostSuccess,
+  getUserPostFailed,
+  getUserPostStart,
+  getUserPostSuccess,
 } from "./postSlice";
 
-export const updateUser = async (user, dispatch) => {
-  dispatch(updateStart());
-  try {
-    console.log(user);
-    const res = await axios.post("/v1/update", user);
-    dispatch(updateSuccess(res.data));
-  } catch (err) {
-    console.log(err);
-    dispatch(updateError());
-  }
-};
-
+//AUTH
 export const loginUser = async (user, dispatch, navigate, state) => {
   dispatch(loginStart());
   dispatch(updateStart());
@@ -71,6 +73,37 @@ export const logOutUser = async (dispatch, token, userId, navigate) => {
   }
 };
 
+export const updateUser = async (dispatch, user, id, token) => {
+  dispatch(updateStart());
+  try {
+    console.log(user);
+    const res = await axios.put(`/v1/users/${id}`, user, {
+      headers: { token: `Bearer ${token}` },
+    });
+    const updatedInfo = {
+      ...res.data,
+      accessToken: token,
+    };
+    dispatch(updateSuccess(updatedInfo));
+  } catch (err) {
+    console.log(err);
+    dispatch(updateError());
+  }
+};
+
+export const getUser = async (dispatch, id, token) => {
+  dispatch(getUserStart());
+  try {
+    const res = await axios.get(`/v1/users/${id}`, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(getUserSuccess(res.data));
+  } catch (err) {
+    dispatch(getUserFailed());
+  }
+};
+
+//POST
 export const getAllPosts = async (dispatch, token, hot) => {
   dispatch(getAllPostStart());
   try {
@@ -80,6 +113,30 @@ export const getAllPosts = async (dispatch, token, hot) => {
     dispatch(getAllPostSuccess(res.data));
   } catch (err) {
     dispatch(getAllPostFailed());
+  }
+};
+
+export const getUserPost = async (dispatch, token, userId) => {
+  dispatch(getUserPostStart());
+  try {
+    const res = await axios.get(`/v1/post/user/${userId}`, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(getUserPostSuccess(res.data));
+  } catch (err) {
+    dispatch(getUserPostFailed());
+  }
+};
+
+export const createPost = async (dispatch, token, post) => {
+  dispatch(createPostStart());
+  try {
+    await axios.post("/v1/post", post, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(createPostSuccess());
+  } catch (err) {
+    dispatch(createPostFailed());
   }
 };
 

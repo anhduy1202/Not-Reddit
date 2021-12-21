@@ -12,7 +12,7 @@
   text-decoration: none;
   color: white;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   cursor: pointer;
 }
 

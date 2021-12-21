@@ -54,7 +54,6 @@ export const authSlice = createSlice({
       state.logout.isFetching = true;
     },
     logoutSuccess: (state) => {
-      Object.assign(state, initialState);
     },
     logoutFailed: (state) => {
       state.logout.isFetching = false;

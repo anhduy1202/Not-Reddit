@@ -1,5 +1,6 @@
 .popups-overlay {
   position: absolute;
+  top:0;
   text-align: center;
   width: 100%;
   height: 100%;
@@ -10,10 +11,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
   text-align: center;
+  justify-content:center;
   width: 100%;
-  height: 200px;
+  min-height: 250px;
   background-color: #0c0c0c;
 }
 .popups-h2{

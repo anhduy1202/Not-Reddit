@@ -1,20 +1,15 @@
 header {
   height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
-.info-edit{
-    cursor: pointer;
-    align-self: flex-end;
-    border:2px solid white;
-    margin: 1rem 1.15rem 0 0;
-    padding: 0.45rem;
-    border-radius: 16px;
-    font-weight: 700;
-    font-size: 1rem;
+.info-edit {
+  cursor: pointer;
+  align-self: flex-end;
+  border: 2px solid white;
+  padding: 0.45rem;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1rem;
 }
-
 
 .info-container {
   display: flex;
@@ -23,14 +18,20 @@ header {
   padding-left: 2rem;
   color: white;
 }
-.info-username {
-  width: 50%;
+.info-displayname {
+  width: 100%;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
-.info-age, .info-about {
-    font-size:0.85rem;
-    margin-bottom: 0.5rem;
+.info-username {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+.info-age,
+.info-about {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 .info-ava {
@@ -38,4 +39,21 @@ header {
   height: 130px;
   object-fit: cover;
   overflow: hidden;
+}
+
+.go-back {
+  
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+}
+.go-back > img {
+  width: 36px;
+  height: 36px;
+}
+.edit-goback{
+  margin: 1rem 1.15rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

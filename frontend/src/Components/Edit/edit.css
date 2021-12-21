@@ -9,11 +9,25 @@
   background-color: transparent;
   border: none;
   align-self: end;
-  margin: 1rem 1.15rem 0 0;
+  margin: 0rem 1.15rem 0 0;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   color: rgb(41, 128, 243);
+}
+.close-x{
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+}
+.close-container{
+  margin: 1rem 1rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
 }
 .input-container {
   width: 80%;

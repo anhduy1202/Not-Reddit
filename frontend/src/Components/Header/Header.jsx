@@ -1,15 +1,23 @@
+import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import gpBackIcon from "../../assets/icons/leftarrow.svg";
+import { getUser } from "../../redux/apiRequests";
 import "./header.css";
 const Header = (props) => {
-  const currentUser = useSelector((state) => state.user.user?.currentUser);
-  const location = useLocation();
-  const visitId = location.pathname.split("/")[2];
+  const user = useSelector((state) => state.auth.login?.currentUser);
+  const currentUser = useSelector((state) => state.user.otherUser?.otherUser);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { setEdit, isEdit } = props;
   const handleEdit = () => {
     setEdit(!isEdit);
   };
+  useEffect(() => {
+    getUser(dispatch, id, user?.accessToken);
+  }, []);
   return (
     <>
       <header
@@ -19,18 +27,22 @@ const Header = (props) => {
         }}
       >
         <div className="info-container">
-          {currentUser?._id === visitId && (
-            <div className="info-edit" onClick={handleEdit}>
-              Edit
-            </div>
-          )}
-          <img
-            className="info-ava"
-            src={currentUser?.profilePicture}
-            alt=""
-            srcset=""
-          />
-          <div className="info-username"> {currentUser?.displayName} </div>
+          <div className="edit-goback">
+            <p className="go-back">
+              <img
+                src={gpBackIcon}
+                onClick={() => navigate("/")}
+                alt="go back icon"
+              />
+            </p>
+            {user?._id === id && (
+              <div className="info-edit" onClick={handleEdit}>
+                Edit
+              </div>
+            )}
+          </div>
+          <img className="info-ava" src={currentUser?.profilePicture} alt="" />
+          <div className="info-displayname"> {`${currentUser?.displayName}`} <span className="info-username"> (u/{currentUser?.username})</span> </div>
           <div className="info-age"> {currentUser?.age} years old </div>
           <div className="info-about"> {currentUser?.about} </div>
         </div>

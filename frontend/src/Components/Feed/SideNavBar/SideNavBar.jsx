@@ -8,8 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOutUser } from "../../../redux/apiRequests";
 const SideNavBar = (props) => {
   const { id } = props;
-  const user = useSelector(
-    (state) => state.auth.login?.currentUser);
+  const user = useSelector((state) => state.auth.login?.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const logOut = () => {
@@ -19,18 +18,18 @@ const SideNavBar = (props) => {
     <nav className="navbar-container">
       <div className="navbar-profile">
         <Link to={`/user/${id}`}>
-          <img src={profileIcon} />
+          <img src={profileIcon} alt="profile icon" />
           My profile
         </Link>
       </div>
       <div className="navbar-saved">
         <Link to={`/user/${id}/saved`}>
-          <img src={savedIcon} />
+          <img src={savedIcon} alt="save post icon" />
           Saved{" "}
         </Link>
       </div>
       <div className="navbar-logout" onClick={logOut}>
-        <img src={exitIcon} />
+        <img src={exitIcon} alt="exit icon" />
         Log out{" "}
       </div>
     </nav>

@@ -38,8 +38,10 @@ const userController = {
       }
     }
     try {
-      await User.findByIdAndUpdate(req.params.id.trim(), { $set: req.body });
-      res.status(200).json("Account has been updated");
+      const user = await User.findByIdAndUpdate(req.params.id.trim(), {
+        $set: req.body,
+      });
+      res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
     }

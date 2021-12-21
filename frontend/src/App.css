@@ -5,14 +5,22 @@
   padding: 0;
   margin: 0;
 }
-.App{
+
+html,
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+.App {
+  overflow: scroll;
+  scrollbar-width: none;
+  margin-bottom: 4rem;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-body, .App {
-  min-height: 100vh;
-  margin: 0;
+body {
   text-align: left;
   scroll-behavior: smooth;
   text-rendering: optimizeSpeed;
@@ -20,13 +28,23 @@ body, .App {
   font-size: 1.15rem;
   font-family: "Noto Sans", sans-serif;
   background-color: #0c0c0c;
-  color:white;
+  color: white;
 }
-.loading{
-  color:white;
+.loading {
+  color: white;
   text-align: center;
 }
 .error {
-  color:rgb(255, 56, 56);
+  color: rgb(255, 56, 56);
   text-align: center;
+}
+.userprofile-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.post-big-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5rem;
 }

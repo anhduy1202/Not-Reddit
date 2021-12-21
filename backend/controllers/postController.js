@@ -66,7 +66,7 @@ const postController = {
     let posts;
     try {
       if (byVotes) {
-        posts = await Post.find().sort({ upvotes: -1});
+        posts = await Post.find().sort({ upvotes: -1 });
       } else {
         posts = await Post.find().sort({ createdAt: -1 });
       }
