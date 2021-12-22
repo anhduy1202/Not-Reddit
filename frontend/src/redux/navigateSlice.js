@@ -10,10 +10,14 @@ export const navigateSlice = createSlice({
       open: false,
     },
     deleteState: {
-      status:false,
-      open:false,
-      id:0
-    }
+      status: false,
+      open: false,
+      id: 0,
+    },
+    fullPost: {
+      open: false,
+      postId: null,
+    },
   },
   reducers: {
     sideBarToggle: (state, action) => {
@@ -22,11 +26,14 @@ export const navigateSlice = createSlice({
     makePostToggle: (state, action) => {
       state.makepost.open = action.payload;
     },
-    setDelete: (state,action)=>{
+    setDelete: (state, action) => {
       state.deleteState = action.payload;
-    }
+    },
+    fullPostToggle: (state, action) => {
+      state.fullPost = action.payload;
+    },
   },
 });
 
-export const { sideBarToggle, makePostToggle, setDelete } = navigateSlice.actions;
+export const { sideBarToggle, makePostToggle, setDelete, fullPostToggle } =navigateSlice.actions;
 export default navigateSlice.reducer;

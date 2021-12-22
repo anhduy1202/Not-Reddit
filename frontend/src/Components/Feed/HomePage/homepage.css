@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
 }
-.homepage-container{
+.homepage-container {
   display: flex;
   flex-direction: column;
 }
@@ -43,8 +43,8 @@
   margin-right: 0;
 }
 
-
 .post-context {
+  text-align: start;
   margin-top: 0.75rem;
 }
 .post-context > button {
@@ -52,14 +52,26 @@
   padding: 0.25rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-
 }
 .post-title {
   font-weight: 700;
   font-size: 1rem;
 }
 .post-desc {
+  overflow: hidden;
+  height: 40px;
   font-size: 0.85rem;
+}
+.post-desc-full {
+  line-height: 1.5rem;
+  font-family: "Noto Sans", sans-serif;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+.post-desc-readmore {
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: rgb(160, 159, 159);
 }
 .post-interactions {
   margin-top: 0.75rem;
@@ -70,7 +82,7 @@
   display: flex;
   align-items: center;
 }
-.post-edit-delete{
+.post-edit-delete {
   background-color: transparent;
   margin-left: auto;
 }
@@ -79,6 +91,13 @@
   width: 24px;
   margin-right: 0.75rem;
   height: 24px;
+}
+.close-post {
+  cursor: pointer;
+  margin-left: auto;
+  color: rgb(160, 159, 159);
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
 }
 .upvote > img,
 .downvote > img,

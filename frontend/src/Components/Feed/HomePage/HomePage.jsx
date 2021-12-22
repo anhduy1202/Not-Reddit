@@ -7,10 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllPosts } from "../../../redux/apiRequests";
 import Popup from "../Popup/Popup";
 import Posts from "../../Posts/Posts";
+import FullPost from "../../Posts/FullPost/FullPost";
 
 const HomePage = () => {
-  const user = useSelector((state) => state.auth.login?.currentUser);
+  const user = useSelector((state) => state.user.user?.currentUser);
   const createPost = useSelector((state) => state.post.createPost);
+  const fullPost = useSelector((state) => state.nav.fullPost);
+  const interactPost = useSelector((state) => state.post.interactPost);
   const allPosts = useSelector((state) => state.post.allPosts?.posts);
   const isDelete = useSelector((state) => state.nav.deleteState);
   const deletePost = useSelector((state) => state.post.deletePost);
@@ -20,7 +23,7 @@ const HomePage = () => {
   useEffect(() => {
     getAllPosts(dispatch, user?.accessToken, filter);
     console.log("rendered");
-  }, [user, filter, deletePost, createPost]);
+  }, [user, filter, deletePost, createPost, interactPost]);
 
   const handleFilters = (e) => {
     setFilters(e.target.value);
@@ -49,6 +52,7 @@ const HomePage = () => {
           )}
         </div>
         <div className="homepage-post">
+          {fullPost.open && <FullPost />}
           {allPosts?.map((post, idx) => {
             return <Posts post={post} />;
           })}

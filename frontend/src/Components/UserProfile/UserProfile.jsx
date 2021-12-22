@@ -16,6 +16,7 @@ const UserProfile = (props) => {
   const post = useSelector((state) => state.post.userPost?.posts);
   const isOpenPost = useSelector((state) => state.nav.makepost.open);
   const isDelete = useSelector((state) => state.nav.deleteState);
+  const interactPost = useSelector((state) => state.post.interactPost);
   const user = useSelector((state) => state.user.user?.currentUser);
   const deletePost = useSelector((state) => state.post.deletePost);
   const createPost = useSelector((state) => state.post.createPost);
@@ -25,7 +26,7 @@ const UserProfile = (props) => {
 
   useEffect(() => {
     getUserPost(dispatch, user?.accessToken, id);
-  }, [dispatch, user, id, deletePost, createPost]);
+  }, [dispatch, user, id, deletePost, createPost, interactPost]);
 
   return (
     <section className="userprofile-container">

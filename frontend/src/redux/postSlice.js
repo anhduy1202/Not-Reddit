@@ -21,6 +21,10 @@ export const postSlice = createSlice({
       pending: false,
       error: null,
     },
+    interactPost: {
+      pending: false,
+      error: null,
+    },
   },
   reducers: {
     getAllPostStart: (state) => {
@@ -68,6 +72,17 @@ export const postSlice = createSlice({
       state.deletePost.error = true;
       state.deletePost.pending = false;
     },
+    interactPostStart: (state) => {
+      state.interactPost.pending = true;
+    },
+    interactPostSuccess: (state) => {
+      state.interactPost.pending = false;
+      state.interactPost.error = false;
+    },
+    interactPostFailed: (state) => {
+      state.interactPost.error = true;
+      state.interactPost.pending = false;
+    },
   },
 });
 
@@ -84,5 +99,8 @@ export const {
   deletePostStart,
   deletePostFailed,
   deletePostSuccess,
+  interactPostStart,
+  interactPostSuccess,
+  interactPostFailed,
 } = postSlice.actions;
 export default postSlice.reducer;

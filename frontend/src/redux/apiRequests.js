@@ -31,6 +31,9 @@ import {
   getUserPostFailed,
   getUserPostStart,
   getUserPostSuccess,
+  interactPostFailed,
+  interactPostStart,
+  interactPostSuccess,
 } from "./postSlice";
 
 //AUTH
@@ -76,15 +79,11 @@ export const logOutUser = async (dispatch, token, userId, navigate) => {
 export const updateUser = async (dispatch, user, id, token) => {
   dispatch(updateStart());
   try {
-    console.log(user);
     const res = await axios.put(`/v1/users/${id}`, user, {
       headers: { token: `Bearer ${token}` },
     });
-    const updatedInfo = {
-      ...res.data,
-      accessToken: token,
-    };
-    dispatch(updateSuccess(updatedInfo));
+    console.log(res.data);
+    dispatch(updateSuccess(res.data));
   } catch (err) {
     console.log(err);
     dispatch(updateError());
@@ -154,5 +153,29 @@ export const deletePost = async (dispatch, token, id, userId, setDelete) => {
     });
   } catch (err) {
     dispatch(deletePostFailed());
+  }
+};
+
+export const upvotePost = async (dispatch, token, id, userId) => {
+  dispatch(interactPostStart());
+  try {
+    await axios.put(`/v1/post/${id}/upvote`, userId, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(interactPostSuccess());
+  } catch (err) {
+    dispatch(interactPostFailed());
+  }
+};
+
+export const downvotePost = async (dispatch, token, id, userId) => {
+  dispatch(interactPostStart());
+  try {
+    await axios.put(`/v1/post/${id}/downvote`, userId, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(interactPostSuccess());
+  } catch (err) {
+    dispatch(interactPostFailed());
   }
 };

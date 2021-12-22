@@ -1,5 +1,7 @@
 const User = require("../models/User");
+const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
+const authController = require("./authController");
 
 const userController = {
   //GET A USER
@@ -38,10 +40,29 @@ const userController = {
       }
     }
     try {
-      const user = await User.findByIdAndUpdate(req.params.id.trim(), {
-        $set: req.body,
-      });
-      res.status(200).json(user);
+      const user = await User.findByIdAndUpdate(
+        req.params.id.trim(),
+        {
+          $set: req.body,
+        },
+        { returnDocument: "after" }
+      );
+      console.log(user);
+      const accessToken = await authController.generateAccessToken(user);
+      if (req.body.profilePicture || req.body.theme) {
+        try {
+          await Post.updateMany(
+            { userId: req.params.id },
+            {
+              $set: { avaUrl: req.body.profilePicture, theme: req.body.theme },
+            }
+          );
+        } catch (err) {
+          return res.status(500).json(err);
+        }
+      }
+      const { password, ...others } = user._doc;
+      res.status(200).json({ ...others, accessToken });
     } catch (err) {
       res.status(500).json(err);
     }

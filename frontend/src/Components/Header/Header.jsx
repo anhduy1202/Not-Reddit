@@ -6,7 +6,7 @@ import gpBackIcon from "../../assets/icons/leftarrow.svg";
 import { getUser } from "../../redux/apiRequests";
 import "./header.css";
 const Header = (props) => {
-  const user = useSelector((state) => state.auth.login?.currentUser);
+  const user = useSelector((state) => state.user.user?.currentUser);
   const currentUser = useSelector((state) => state.user.otherUser?.otherUser);
   const { id } = useParams();
   const navigate = useNavigate();

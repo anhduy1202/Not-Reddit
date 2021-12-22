@@ -8,12 +8,11 @@ import "./edit.css";
 const EditPage = (props) => {
   const { setEdit } = props;
   const { id } = useParams();
-  const currentUser = useSelector((state) => state.auth.login?.currentUser);
-  const user = useSelector((state) => state.user);
-  const [name, setName] = useState("Daniel");
-  const [age, setAge] = useState(20);
-  const [about, setAbout] = useState("I'm a software engineer");
-  const [theme, setTheme] = useState("#ff9051");
+  const user = useSelector((state) => state.user.user?.currentUser);
+  const [name, setName] = useState(user?.displayName);
+  const [age, setAge] = useState(user?.age);
+  const [about, setAbout] = useState(user?.about);
+  const [theme, setTheme] = useState(user?.theme);
   const [url, setUrl] = useState(
     "https://preview.redd.it/rrz3hmsxcll71.png?width=640&crop=smart&auto=webp&s=87cc5ed38d8f088ef9fffef7a4c5756b64309d6a"
   );
@@ -40,7 +39,7 @@ const EditPage = (props) => {
       profilePicture: url,
       theme: theme,
     };
-    updateUser(dispatch, updatedUser, id, currentUser?.accessToken);
+    updateUser(dispatch, updatedUser, id, user?.accessToken);
   };
   const changeAvatar = (e) => {
     setUrl(e.target.src);

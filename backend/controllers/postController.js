@@ -59,6 +59,7 @@ const postController = {
       res.status(500).json(err);
     }
   },
+  
 
   //GET ALL POSTS
   getAllPosts: async (req, res) => {
