@@ -36,7 +36,7 @@
 }
 .makepost-tags {
   margin-top: 1rem;
-  margin-bottom:2rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -85,7 +85,7 @@
 .posts-tags {
   color: white;
   border: none;
-  margin:0.75rem 0 0.75rem 0;
+  margin: 0.75rem 0 0.75rem 0;
   font-size: 0.75rem;
   font-family: "Noto Sans", sans-serif;
   border-radius: 14px;
@@ -107,4 +107,36 @@
 }
 .posts-tags-None {
   background-color: grey;
+}
+.comments-title {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+.comments-opened {
+  text-align: start;
+}
+.comments-interact {
+  display: flex;
+  margin-bottom: 2rem;
+  flex-direction: row;
+  align-items: center;
+}
+.comment-input {
+  margin-left: 1rem;
+  background-color: #3b3b3b;
+  color: white;
+  padding: 0.75rem 0.5rem;
+  border-radius: 12px;
+}
+.comment-input:focus {
+  outline:none;
+  box-shadow: 0px 0px 12px 1px rgb(0, 204, 160);
+}
+.user-avatar {
+  cursor: pointer;
+  width: 40px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
 }

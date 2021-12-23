@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const bcrypt = require("bcrypt");
 const authController = require("./authController");
 
@@ -47,12 +48,17 @@ const userController = {
         },
         { returnDocument: "after" }
       );
-      console.log(user);
       const accessToken = await authController.generateAccessToken(user);
       if (req.body.profilePicture || req.body.theme) {
         try {
           await Post.updateMany(
             { userId: req.params.id },
+            {
+              $set: { avaUrl: req.body.profilePicture, theme: req.body.theme },
+            }
+          );
+          await Comment.updateMany(
+            { ownerId: req.params.id },
             {
               $set: { avaUrl: req.body.profilePicture, theme: req.body.theme },
             }

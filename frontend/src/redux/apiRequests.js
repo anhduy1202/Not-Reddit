@@ -25,6 +25,7 @@ import {
   deletePostFailed,
   deletePostStart,
   deletePostSuccess,
+  getAllCommentsSuccess,
   getAllPostFailed,
   getAllPostStart,
   getAllPostSuccess,
@@ -35,6 +36,11 @@ import {
   interactPostStart,
   interactPostSuccess,
 } from "./postSlice";
+import {
+  addCommentFailed,
+  addCommentStart,
+  addCommentSuccess,
+} from "./commentSlice";
 
 //AUTH
 export const loginUser = async (user, dispatch, navigate, state) => {
@@ -109,7 +115,11 @@ export const getAllPosts = async (dispatch, token, hot) => {
     const res = await axios.get(hot ? `/v1/post?${hot}=true` : `/v1/post`, {
       headers: { token: `Bearer ${token}` },
     });
+    const comments = await axios.get(`/v1/post/comments`, {
+      headers: { token: `Bearer ${token}` },
+    });
     dispatch(getAllPostSuccess(res.data));
+    dispatch(getAllCommentsSuccess(comments.data));
   } catch (err) {
     dispatch(getAllPostFailed());
   }
@@ -177,5 +187,18 @@ export const downvotePost = async (dispatch, token, id, userId) => {
     dispatch(interactPostSuccess());
   } catch (err) {
     dispatch(interactPostFailed());
+  }
+};
+
+//COMMENT
+export const addComment = async (dispatch, token, id, comment) => {
+  dispatch(addCommentStart());
+  try {
+   const res = await axios.post(`/v1/post/comment/${id}`, comment, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(addCommentSuccess());
+  } catch (err) {
+    dispatch(addCommentFailed());
   }
 };

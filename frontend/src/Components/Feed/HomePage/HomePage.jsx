@@ -13,6 +13,7 @@ const HomePage = () => {
   const user = useSelector((state) => state.user.user?.currentUser);
   const createPost = useSelector((state) => state.post.createPost);
   const fullPost = useSelector((state) => state.nav.fullPost);
+  const allComments = useSelector((state) => state.comment.addComments);
   const interactPost = useSelector((state) => state.post.interactPost);
   const allPosts = useSelector((state) => state.post.allPosts?.posts);
   const isDelete = useSelector((state) => state.nav.deleteState);
@@ -23,7 +24,7 @@ const HomePage = () => {
   useEffect(() => {
     getAllPosts(dispatch, user?.accessToken, filter);
     console.log("rendered");
-  }, [user, filter, deletePost, createPost, interactPost]);
+  }, [user, filter, deletePost, createPost, interactPost, allComments]);
 
   const handleFilters = (e) => {
     setFilters(e.target.value);
@@ -32,6 +33,7 @@ const HomePage = () => {
   return (
     <FeedLayout>
       <section className="homepage-container">
+        {interactPost.pending && <div className=""> Loading...</div>}
         {!isDelete.open && (
           <select className="filter-posts" onChange={handleFilters}>
             <option disabled value="">

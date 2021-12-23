@@ -7,13 +7,13 @@ const postSchema = new mongoose.Schema(
       required: true,
     },
     username: {
-      type:String
+      type: String,
     },
     avaUrl: {
-      type:String
+      type: String,
     },
     theme: {
-      type:String
+      type: String,
     },
     title: {
       type: String,
@@ -35,16 +35,16 @@ const postSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    downvotes:{
-      type:Array,
-      default:[],
+    downvotes: {
+      type: Array,
+      default: [],
     },
-    comments: [{
-      content:String,
-      ownerId:String, 
-    }],
+    comments: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Post",postSchema);
+module.exports = mongoose.model("Post", postSchema);

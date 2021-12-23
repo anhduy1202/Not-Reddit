@@ -59,7 +59,6 @@ const postController = {
       res.status(500).json(err);
     }
   },
-  
 
   //GET ALL POSTS
   getAllPosts: async (req, res) => {
@@ -81,23 +80,32 @@ const postController = {
   upvotePost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id.trim());
-      if (!post.upvotes.includes(req.body.userId)) {
+      if (!post.upvotes.includes(req.body.userId) && post.downvotes.includes(req.body.userId)) {
+        await post.updateOne({ $push: { upvotes: req.body.userId } });
+        await post.updateOne({ $pull: { downvotes: req.body.userId } });
+        await User.findOneAndUpdate(
+          { _id: post.userId },
+          { $inc: { karmas: 10 } }
+        );
+       return res.status(200).json("Post is upvoted!");
+      } else if (!post.upvotes.includes(req.body.userId) && !post.downvotes.includes(req.body.userId))
+        {
         await post.updateOne({ $push: { upvotes: req.body.userId } });
         await User.findOneAndUpdate(
           { _id: post.userId },
           { $inc: { karmas: 10 } }
         );
-        res.status(200).json("Post is upvoted!");
+        return res.status(200).json("Post is upvoted!");
       } else if (post.upvotes.includes(req.body.userId)) {
         await post.updateOne({ $pull: { upvotes: req.body.userId } });
         await User.findOneAndUpdate(
           { _id: post.userId },
           { $inc: { karmas: -10 } }
         );
-        res.status(200).json("Post is no longer upvoted!");
+      return res.status(200).json("Post is no longer upvoted!");
       }
     } catch (err) {
-      res.status(500).json(err);
+     return res.status(500).json(err);
     }
   },
 
@@ -105,24 +113,34 @@ const postController = {
   downvotePost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id.trim());
-      if (!post.downvotes.includes(req.body.userId)) {
+      if (!post.downvotes.includes(req.body.userId) && post.upvotes.includes(req.body.userId)) {
         await post.updateOne({ $push: { downvotes: req.body.userId } });
+        await post.updateOne({ $pull: { upvotes: req.body.userId } });
         //POST OWNER LOSES KARMAS FROM THE DOWNVOTES
         await User.findOneAndUpdate(
           { _id: post.userId },
           { $inc: { karmas: -10 } }
         );
-        res.status(200).json("Post is downvoted!");
-      } else if (post.downvotes.includes(req.body.userId)) {
+        return res.status(200).json("Post is downvoted!");
+      }
+      else if (!post.downvotes.includes(req.body.userId) && !post.upvotes.includes(req.body.userId)) {
+        await post.updateOne({ $push: { downvotes: req.body.userId } });
+        await User.findOneAndUpdate(
+          { _id: post.userId },
+          { $inc: { karmas: -10 } }
+        );
+        return res.status(200).json("Post is downvoted!");
+      }
+       else if (post.downvotes.includes(req.body.userId)) {
         await post.updateOne({ $pull: { downvotes: req.body.userId } });
         await User.findOneAndUpdate(
           { _id: post.userId },
           { $inc: { karmas: 10 } }
         );
-        res.status(200).json("Post is no longer downvoted!");
+       return res.status(200).json("Post is no longer downvoted!");
       }
     } catch (err) {
-      res.status(500).json(err);
+     return res.status(500).json(err);
     }
   },
 };

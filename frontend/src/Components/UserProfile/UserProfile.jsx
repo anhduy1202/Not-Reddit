@@ -20,8 +20,8 @@ const UserProfile = (props) => {
   const user = useSelector((state) => state.user.user?.currentUser);
   const deletePost = useSelector((state) => state.post.deletePost);
   const createPost = useSelector((state) => state.post.createPost);
-  const pending = useSelector((state) => state.user.pending);
-  const error = useSelector((state) => state.user.error);
+  const pending = useSelector((state) => state.user.user.pending);
+  const error = useSelector((state) => state.user.user.error);
   const dispatch = useDispatch();
 
   useEffect(() => {

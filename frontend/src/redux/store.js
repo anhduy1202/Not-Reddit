@@ -3,11 +3,13 @@ import userReducer from "./userSlice";
 import postReducer from "./postSlice";
 import navigateReducer from "./navigateSlice";
 import authReducer from "./authSlice";
+import commentReducer from "./commentSlice";
 
 const combinedReducer = combineReducers({
   auth: authReducer,
   user: userReducer,
   post: postReducer,
+  comment: commentReducer,
   nav: navigateReducer,
 });
 

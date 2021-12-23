@@ -38,6 +38,16 @@ const verifyTokenAndUserPostAuthorization = (req, res, next) => {
   });
 };
 
+const verifyTokenAndCommentAuthorization = (req,res,next) => {
+  verifyToken(req,res,()=>{
+    if (req.user.id === req.body.ownerId || req.user.isAdmin || req.user.id === req.body.postId) {
+      next();
+    } else {
+      return res.status(403).json("You're not allowed to do that!");
+    }
+  })
+} 
+
 const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user.isAdmin) {
@@ -52,5 +62,6 @@ module.exports = {
   verifyToken,
   verifyTokenAndUserAuthorization,
   verifyTokenAndUserPostAuthorization,
+  verifyTokenAndCommentAuthorization,
   verifyTokenAndAdmin,
 };

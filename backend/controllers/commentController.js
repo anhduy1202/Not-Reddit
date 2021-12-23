@@ -1,46 +1,55 @@
 const Post = require("../models/Post");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 
 const commentController = {
   //ADD A COMMENT
   addComment: async (req, res) => {
     try {
-      await Post.findByIdAndUpdate(req.params.id, {
-        $push: {
-          comments: { content: req.body.content, ownerId: req.body.ownerId },
-        },
-      });
-      res.status(200).json("A comment is added");
+      const user = await User.findById(req.body.ownerId);
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        { $inc: { comments: 1 } }
+      );
+      const makeComment = {
+        ...req.body,
+        postId: req.params.id,
+        username: user.username,
+        avaUrl: user.profilePicture,
+        theme: user.theme,
+      };
+      const newComment = new Comment(makeComment);
+      const savedComment = await newComment.save();
+      res.status(200).json(savedComment);
     } catch (err) {
       res.status(500).json(err);
     }
   },
 
-  //FETCH COMMENTS
-  fetchComments: async (comments) => {
-    const commentArr = [];
-    for (const comment of comments) {
-      try {
-        const username = await User.findById(comment.ownerId);
-        const newComment = {
-          content: comment.content,
-          owner: username.displayName,
-        };
-        commentArr.push(newComment);
-      } catch (err) {
-        console.log(err);
-      }
+  //GET ALL COMMENTS
+  getAllComments: async (req, res) => {
+    try {
+      const comments = await Comment.find();
+      res.status(200).json(comments);
+    } catch (err) {
+      res.status(500).json(err);
     }
-    return commentArr;
   },
-
   //GET ALL COMMENTS IN A POST
   getCommentsInPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      const comments = post.comments;
-      const commentArr = await commentController.fetchComments(comments);
-      res.status(200).json(commentArr);
+      const comments = await Comment.find({ postId: req.params.id });
+      res.status(200).json(comments);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  //DELETE COMMENT
+  deleteComment: async (req, res) => {
+    try {
+      await Comment.findByIdAndDelete(req.params.id);
+      res.status(200).json("Delete comment succesfully");
     } catch (err) {
       res.status(500).json(err);
     }

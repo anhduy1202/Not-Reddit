@@ -4,6 +4,7 @@ const postController = require("../controllers/postController");
 const {
   verifyToken,
   verifyTokenAndUserPostAuthorization,
+  verifyTokenAndCommentAuthorization,
 } = require("../controllers/verifyToken");
 
 //CREATE A POST
@@ -38,7 +39,12 @@ router.put("/:id/downvote", verifyToken, postController.downvotePost);
 //ADD A COMMENT
 router.post("/comment/:id", verifyToken, commentController.addComment);
 
+//GET ALL COMMENTS
+router.get("/comments", verifyToken, commentController.getAllComments);
+
 //GET ALL COMMENTS IN A POST
 router.get("/comment/:id", verifyToken, commentController.getCommentsInPost);
 
+//DELETE A COMMENT
+router.delete("/comment/:id", verifyTokenAndCommentAuthorization, commentController.deleteComment);
 module.exports = router;

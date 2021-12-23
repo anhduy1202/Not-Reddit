@@ -5,6 +5,7 @@ export const postSlice = createSlice({
   initialState: {
     allPosts: {
       posts: null,
+      comments: [],
       pending: false,
       error: false,
     },
@@ -24,6 +25,7 @@ export const postSlice = createSlice({
     interactPost: {
       pending: false,
       error: null,
+      success: null,
     },
   },
   reducers: {
@@ -33,6 +35,9 @@ export const postSlice = createSlice({
     getAllPostSuccess: (state, action) => {
       state.allPosts.pending = false;
       state.allPosts.posts = action.payload;
+    },
+    getAllCommentsSuccess: (state, action) => {
+      state.allPosts.comments = action.payload;
     },
     getAllPostFailed: (state) => {
       state.allPosts.pending = false;
@@ -74,13 +79,16 @@ export const postSlice = createSlice({
     },
     interactPostStart: (state) => {
       state.interactPost.pending = true;
+      state.interactPost.success = false;
     },
     interactPostSuccess: (state) => {
       state.interactPost.pending = false;
       state.interactPost.error = false;
+      state.interactPost.success = true;
     },
     interactPostFailed: (state) => {
       state.interactPost.error = true;
+      state.interactPost.success = false;
       state.interactPost.pending = false;
     },
   },
@@ -93,6 +101,7 @@ export const {
   getAllPostStart,
   getAllPostSuccess,
   getAllPostFailed,
+  getAllCommentsSuccess,
   getUserPostStart,
   getUserPostSuccess,
   getUserPostFailed,
