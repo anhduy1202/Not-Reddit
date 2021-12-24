@@ -27,7 +27,6 @@ const Login = () => {
     }
   }, []);
   return (
-    
     <section className="login-container">
       <div className="login-title"> Log in </div>
       <div className="login-input">
@@ -35,6 +34,7 @@ const Login = () => {
           <InputField
             data={username}
             type="text"
+            placeholder="Enter username"
             setData={setUsername}
             label="USERNAME"
             classStyle="login-username"
@@ -42,6 +42,7 @@ const Login = () => {
           <InputField
             data={password}
             type="password"
+            placeholder="Enter password"
             setData={setPassword}
             label="PASSWORD"
             classStyle="login-password"

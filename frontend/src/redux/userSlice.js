@@ -13,6 +13,11 @@ export const userSlice = createSlice({
       pending: false,
       error: false,
     },
+    followUser: {
+      currentUser: null,
+      pending: false,
+      error: false,
+    },
   },
   reducers: {
     updateStart: (state) => {
@@ -39,6 +44,17 @@ export const userSlice = createSlice({
       state.otherUser.pending = false;
       state.otherUser.error = true;
     },
+    followUserStart: (state) => {
+      state.followUser.pending = false;
+    },
+    followUserSuccess: (state, action) => {
+      state.followUser.currentUser = action.payload;
+      state.followUser.pending = false;
+    },
+    followUserFailed: (state) => {
+      state.followUser.pending = false;
+      state.followUser.error = false;
+    },
   },
 });
 
@@ -49,6 +65,8 @@ export const {
   getUserStart,
   getUserSuccess,
   getUserFailed,
+  followUserStart,
+  followUserSuccess,
+  followUserFailed
 } = userSlice.actions;
 export default userSlice.reducer;
-

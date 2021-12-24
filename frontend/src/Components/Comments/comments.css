@@ -50,7 +50,6 @@
 }
 .comment-date::before {
   content: "o";
-  margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
 .comment-content {
@@ -72,10 +71,10 @@
   justify-content: space-around;
 }
 .comment-delete-confirm-yes {
-  background-color: rgb(0, 143, 95);
-  padding:0.5rem 2rem 0.5rem 2rem;
+  background-color: rgb(248, 69, 69);
+  padding:0.5rem 1.5rem 0.5rem 1.5rem;
 }
 .comment-delete-confirm-no {
-  background-color: rgb(248, 69, 69);
+  background-color: rgb(160, 160, 160);
   padding:0.5rem 2rem 0.5rem 2rem;
 }

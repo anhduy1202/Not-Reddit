@@ -16,10 +16,17 @@ import Comments from "../Comments/Comments";
 import InputField from "../InputFields/Input";
 import { useState } from "react";
 const Posts = (props) => {
-  const { post, comments } = props;
+  const { post, comments, setDeleteComment,deleteComment } = props;
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.user.user?.currentUser);
+  const [totalVotes, setTotal] = useState(
+    post?.upvotes?.length - post?.downvotes?.length
+  );
+  const [isUpVote, setUpVote] = useState(post?.upvotes?.includes(user?._id));
+  const [isDownVote, setDownVote] = useState(
+    post?.downvotes?.includes(user?._id)
+  );
   const fullPost = useSelector((state) => state.nav.fullPost);
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
   const dispatch = useDispatch();
@@ -49,12 +56,18 @@ const Posts = (props) => {
     const userId = {
       userId: user?._id,
     };
+    setTotal(isUpVote ? totalVotes - 1 : isDownVote ? totalVotes + 2 : totalVotes+ 1);
+    setUpVote(isUpVote ? false : true);
+    setDownVote(false);
     upvotePost(dispatch, user?.accessToken, id, userId);
   };
   const handleDownVote = (id) => {
     const userId = {
       userId: user?._id,
     };
+    setTotal(isDownVote ? totalVotes + 1 : isUpVote ? totalVotes-2 : totalVotes - 1 );
+    setDownVote(isDownVote ? false : true);
+    setUpVote(false);
     downvotePost(dispatch, user?.accessToken, id, userId);
   };
 
@@ -90,7 +103,7 @@ const Posts = (props) => {
           u/{post?.username}
           <div className="post-time">{format(post?.createdAt)}</div>
         </div>
-        {user?._id === post?.userId && (
+        {(user?._id === post?.userId || user?.isAdmin) && (
           <div className="post-edit-delete">
             <img
               src={trashIcon}
@@ -130,8 +143,7 @@ const Posts = (props) => {
       <div className="post-interactions">
         <div className="post-vote">
           <div className="upvote">
-            {post?.upvotes.includes(user?._id) &&
-            !post?.downvotes.includes(user?._id) ? (
+            {isUpVote ? (
               <img
                 src={upVotedIcon}
                 alt="upvoted icon"
@@ -145,12 +157,9 @@ const Posts = (props) => {
               />
             )}
           </div>
-          <div className="votes">
-            {post?.upvotes?.length - post?.downvotes?.length}
-          </div>
+          <div className="votes">{totalVotes}</div>
           <div className="downvote">
-            {post?.downvotes.includes(user._id) &&
-            !post?.upvotes.includes(user?._id) ? (
+            {isDownVote ? (
               <img
                 src={downVotedIcon}
                 alt="downvoted icon"
@@ -180,6 +189,8 @@ const Posts = (props) => {
               return (
                 <Comments
                   _id={comment._id}
+                  setDeleteComment={setDeleteComment}
+                  deleteComment={deleteComment}
                   postId={comment.postId}
                   ownerId={comment.ownerId}
                   username={comment.username}
@@ -203,6 +214,7 @@ const Posts = (props) => {
               />
               <InputField
                 data={comment}
+                value={comment}
                 setData={setComment}
                 type="text"
                 placeholder="Add a comment"

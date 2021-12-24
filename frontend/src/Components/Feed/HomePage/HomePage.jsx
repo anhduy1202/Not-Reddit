@@ -14,17 +14,18 @@ const HomePage = () => {
   const createPost = useSelector((state) => state.post.createPost);
   const fullPost = useSelector((state) => state.nav.fullPost);
   const allComments = useSelector((state) => state.comment.addComments);
-  const interactPost = useSelector((state) => state.post.interactPost);
+  const deleteComment = useSelector((state)=>state.comment.deleteComments);
   const allPosts = useSelector((state) => state.post.allPosts?.posts);
+  const [deletedPostId, setDeletedId] = useState([]);
   const isDelete = useSelector((state) => state.nav.deleteState);
-  const deletePost = useSelector((state) => state.post.deletePost);
   const [filter, setFilters] = useState("");
+  const filteredPost = allPosts?.filter((post) => !deletedPostId.includes(post._id));
   const dispatch = useDispatch();
 
   useEffect(() => {
     getAllPosts(dispatch, user?.accessToken, filter);
     console.log("rendered");
-  }, [user, filter, deletePost, createPost, interactPost, allComments]);
+  }, [user, filter, createPost, allComments, dispatch,deleteComment]);
 
   const handleFilters = (e) => {
     setFilters(e.target.value);
@@ -33,7 +34,6 @@ const HomePage = () => {
   return (
     <FeedLayout>
       <section className="homepage-container">
-        {interactPost.pending && <div className=""> Loading...</div>}
         {!isDelete.open && (
           <select className="filter-posts" onChange={handleFilters}>
             <option disabled value="">
@@ -46,6 +46,8 @@ const HomePage = () => {
         <div className="popup">
           {isDelete.open && (
             <Popup
+              deletedPostId={deletedPostId}
+              setDeletedPostId={setDeletedId}
               h1="Are you sure?"
               h2="You cannot restore posts that have been deleted"
               button1="Go Back"
@@ -55,7 +57,7 @@ const HomePage = () => {
         </div>
         <div className="homepage-post">
           {fullPost.open && <FullPost />}
-          {allPosts?.map((post, idx) => {
+          {filteredPost?.map((post, idx) => {
             return <Posts post={post} />;
           })}
         </div>

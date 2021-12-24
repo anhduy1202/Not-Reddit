@@ -37,17 +37,12 @@ const postController = {
 
   //DELETE A POST
   deletePost: async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    if (req.body.userId === post.userId) {
       try {
         await Post.findByIdAndDelete(req.params.id);
         res.status(200).json("Delete post succesfully");
       } catch (err) {
         res.status(500).json(err);
       }
-    } else {
-      res.status(403).json("You can't delete other people post");
-    }
   },
 
   //GET ALL POST FROM A USER

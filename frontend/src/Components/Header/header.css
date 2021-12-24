@@ -11,6 +11,15 @@ header {
   font-weight: 700;
   font-size: 1rem;
 }
+.follow{
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 14px;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-family: "Noto Sans", sans-serif;
+  margin: 0;
+}
 
 .info-container {
   display: flex;
@@ -43,7 +52,6 @@ header {
 }
 
 .go-back {
-  
   cursor: pointer;
   width: 36px;
   height: 36px;
@@ -57,4 +65,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.follow-container{
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-family: "Inter",sans-serif;
+}
+.follower {
+  flex:1;
+  margin:0.5rem 0;
+}
+.following{
+  flex:1;
+  margin:0.5rem 0;
+}
+.follower-num, .following-num {
+  font-weight: 700;
+}
+.follower-title, .following-title{
+  color:#a1a1a4;
 }

@@ -8,6 +8,11 @@ export const commentSlice = createSlice({
       error: false,
       success: false,
     },
+    deleteComments: {
+      pending: false,
+      error: false,
+      success: false,
+    },
   },
   reducers: {
     addCommentStart: (state) => {
@@ -23,9 +28,28 @@ export const commentSlice = createSlice({
       state.addComments.pending = false;
       state.addComments.error = true;
     },
+    deleteCommentStart: (state) => {
+      state.deleteComments.pending = true;
+      state.deleteComments.success = false;
+      state.deleteComments.error = false;
+    },
+    deleteCommentSuccess: (state) => {
+      state.deleteComments.pending = false;
+      state.deleteComments.success = true;
+    },
+    deleteCommentFailed: (state) => {
+      state.deleteComments.pending = false;
+      state.deleteComments.error = true;
+    },
   },
 });
 
-export const { addCommentStart, addCommentSuccess, addCommentFailed } =
-  commentSlice.actions;
+export const {
+  addCommentStart,
+  addCommentSuccess,
+  addCommentFailed,
+  deleteCommentStart,
+  deleteCommentSuccess,
+  deleteCommentFailed,
+} = commentSlice.actions;
 export default commentSlice.reducer;

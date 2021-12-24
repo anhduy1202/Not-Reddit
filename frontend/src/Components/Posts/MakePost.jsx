@@ -13,7 +13,7 @@ const MakePost = () => {
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
   const handlePost = () => {
     dispatch(makePostToggle(false));
-    const newPost = {
+    const newPost = { 
       userId: user?._id,
       title: title,
       description: desc,

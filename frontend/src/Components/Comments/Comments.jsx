@@ -5,12 +5,15 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { deleteUserComment } from "../../redux/apiRequests";
 const Comments = (props) => {
   const user = useSelector((state) => state.user.user?.currentUser);
   const [openDelete, setOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
+    deleteComment,
+    setDeleteComment,
     _id,
     postId,
     ownerId,
@@ -21,11 +24,22 @@ const Comments = (props) => {
     createdAt,
     updatedAt,
   } = props;
+
   const goToProfile = (userId) => {
     navigate(`/user/${userId}`);
   };
   const handleDelete = () => {
     setOpen(true);
+  };
+  const confirmDelete = () => {
+    setOpen(false);
+    deleteUserComment(
+      dispatch,
+      user?.accessToken,
+      _id,
+      setDeleteComment,
+      deleteComment
+    );
   };
   const closePopup = () => {
     setOpen(false);
@@ -49,7 +63,7 @@ const Comments = (props) => {
           </div>
           <div className="author-name">u/{username}</div>
           <div className="comment-date">{format(createdAt).split("ago")}</div>
-          {user?._id === ownerId && (
+          {(user?._id === ownerId || user?.isAdmin) && (
             <img
               src={trashIcon}
               alt="delete icon"
@@ -63,13 +77,17 @@ const Comments = (props) => {
           <div className="comment-delete">
             <div className="comment-delete-title"> Delete this comment? </div>
             <div className="comment-delete-confirm">
-              <button className="comment-delete-confirm-yes"> Yes </button>
+              <button
+                className="comment-delete-confirm-yes"
+                onClick={confirmDelete}
+              >
+                Delete
+              </button>
               <button
                 className="comment-delete-confirm-no"
                 onClick={closePopup}
               >
-                {" "}
-                No{" "}
+                No
               </button>
             </div>
           </div>

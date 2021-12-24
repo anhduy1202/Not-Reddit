@@ -48,7 +48,12 @@ const commentController = {
   //DELETE COMMENT
   deleteComment: async (req, res) => {
     try {
+      const comment = await Comment.findById(req.params.id);
       await Comment.findByIdAndDelete(req.params.id);
+      await Post.findOneAndUpdate(
+        { _id: comment.postId},
+        { $inc: { comments: -1 } }
+      );
       res.status(200).json("Delete comment succesfully");
     } catch (err) {
       res.status(500).json(err);

@@ -28,6 +28,7 @@ const Register = () => {
           <InputField
             data={email}
             type="text"
+            placeholder="Enter email"
             setData={setEmail}
             label="EMAIL"
             classStyle="register-email"
@@ -35,6 +36,7 @@ const Register = () => {
           <InputField
             data={username}
             type="text"
+            placeholder="Enter username"
             setData={setUsername}
             label="USERNAME"
             classStyle="register-username"
@@ -42,6 +44,7 @@ const Register = () => {
           <InputField
             data={password}
             type="password"
+            placeholder="Enter password"
             setData={setPassword}
             label="PASSWORD"
             classStyle="register-password"

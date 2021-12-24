@@ -13,7 +13,5 @@ router.get("/:id", verifyToken, userController.getUser);
 
 //FOLLOW A USER
 router.put("/:id/follow", verifyToken, userController.followUser);
-//UNFOLLOW A USER
-router.put("/:id/unfollow", verifyToken, userController.unfollowUser);
 
 module.exports = router;
