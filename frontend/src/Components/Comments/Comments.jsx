@@ -37,6 +37,7 @@ const Comments = (props) => {
       dispatch,
       user?.accessToken,
       _id,
+      ownerId,
       setDeleteComment,
       deleteComment
     );

@@ -9,6 +9,7 @@ import HomePage from "./Components/Feed/HomePage/HomePage";
 import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import News from "./Components/Feed/News/News";
 import Footer from "./Components/Footer/Footer";
+import Friends from "./Components/Friends/Friends";
 
 function App() {
   const [isEdit, setEdit] = useState(false);
@@ -32,6 +33,14 @@ function App() {
             element={
               <RequireAuth>
                 <News />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/friends"
+            element={
+              <RequireAuth>
+                <Friends />
               </RequireAuth>
             }
           />

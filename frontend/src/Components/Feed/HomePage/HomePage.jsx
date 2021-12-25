@@ -15,6 +15,7 @@ const HomePage = () => {
   const fullPost = useSelector((state) => state.nav.fullPost);
   const allComments = useSelector((state) => state.comment.addComments);
   const deleteComment = useSelector((state)=>state.comment.deleteComments);
+  const interactPost = useSelector((state)=>state.post.interactPost)
   const allPosts = useSelector((state) => state.post.allPosts?.posts);
   const [deletedPostId, setDeletedId] = useState([]);
   const isDelete = useSelector((state) => state.nav.deleteState);
@@ -25,7 +26,7 @@ const HomePage = () => {
   useEffect(() => {
     getAllPosts(dispatch, user?.accessToken, filter);
     console.log("rendered");
-  }, [user, filter, createPost, allComments, dispatch,deleteComment]);
+  }, [user, filter, createPost, allComments, dispatch,deleteComment,interactPost]);
 
   const handleFilters = (e) => {
     setFilters(e.target.value);

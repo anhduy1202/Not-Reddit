@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const verifyToken = (req, res, next) => {
   //ACCESS TOKEN FROM HEADER, REFRESH TOKEN FROM COOKIE
   const token = req.headers.token;
-  console.log(token);
   if (token) {
     const accessToken = token.split(" ")[1];
     jwt.verify(accessToken, process.env.JWT_KEY, (err, user) => {
@@ -40,6 +39,8 @@ const verifyTokenAndUserPostAuthorization = (req, res, next) => {
 
 const verifyTokenAndCommentAuthorization = (req,res,next) => {
   verifyToken(req,res,()=>{
+    console.log("req.user.id: " + req.user.id);
+    console.log("ownerId: :" + req.body.ownerId);
     if (req.user.id === req.body.ownerId || req.user.isAdmin || req.user.id === req.body.postId) {
       next();
     } else {

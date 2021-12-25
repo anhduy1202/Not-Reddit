@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/apiRequests";
 import InputField from "../InputFields/Input";
 import "./login.css";
 
 const Login = () => {
   const user = useSelector((state) => state.auth.login?.currentUser);
-  const { state } = useLocation();
   const [username, setUsername] = useState("username");
   const [password, setPassword] = useState("password");
   const dispatch = useDispatch();
@@ -19,11 +18,11 @@ const Login = () => {
       username: username,
       password: password,
     };
-    loginUser(newUser, dispatch, navigate, state);
+    loginUser(newUser, dispatch, navigate);
   };
   useEffect(() => {
     if (user) {
-      navigate(state?.path || "/");
+      navigate("/");
     }
   }, []);
   return (

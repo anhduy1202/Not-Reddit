@@ -62,7 +62,7 @@ const UserProfile = (props) => {
           <div className="fullpost-container">
             {fullPost.open && <FullPost />}
             {post?.map((post) => {
-              return <Posts post={post} />;
+              return <Posts key={post._id} post={post} />;
             })}
           </div>
           <Footer />
