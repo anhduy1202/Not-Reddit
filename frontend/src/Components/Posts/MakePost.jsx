@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/apiRequests";
@@ -11,16 +12,40 @@ const MakePost = () => {
   const [desc, setDesc] = useState("Add some descriptions");
   const [selectIdx, setSelectIdx] = useState(0);
   const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
+  const [previewSource, setPreviewSource] = useState("");
   const handlePost = () => {
-    dispatch(makePostToggle(false));
-    const newPost = { 
-      userId: user?._id,
-      title: title,
-      description: desc,
-      tags: selectIdx,
-    };
-    createPost(dispatch, user?.accessToken, newPost);
+    if (!previewSource) {
+      const newPost = {
+        userId: user?._id,
+        title: title,
+        description: desc,
+        tags: selectIdx,
+      };
+      createPost(dispatch, user?.accessToken, newPost, makePostToggle);
+    } else if (previewSource) {
+      const newPost = {
+        userId: user?._id,
+        title: title,
+        description: desc,
+        tags: selectIdx,
+        imageUrl: previewSource,
+      };
+      createPost(dispatch, user?.accessToken, newPost, makePostToggle);
+    }
   };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+  };
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
   return (
     <section className="makepost-container">
       <div className="makepost-navigation">
@@ -44,6 +69,21 @@ const MakePost = () => {
         label="Descriptions"
         classStyle="makepost-desc"
       />
+
+      <input
+        type="file"
+        id="fileInput"
+        name="image"
+        onChange={handleFileInputChange}
+        className="makepost-img"
+      />
+      {previewSource && (
+        <img
+          src={previewSource}
+          alt="chosen"
+          className="makepost-img-preview"
+        />
+      )}
       <label> Tags </label>
       <div className="makepost-tags">
         {tags.map((tag, idx) => {
@@ -57,8 +97,7 @@ const MakePost = () => {
               }`}
               onClick={() => setSelectIdx(idx)}
             >
-              {" "}
-              {tag}{" "}
+              {tag}
             </button>
           );
         })}

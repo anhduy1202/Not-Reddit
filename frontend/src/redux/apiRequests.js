@@ -171,12 +171,13 @@ export const getUserPost = async (dispatch, token, userId) => {
   }
 };
 
-export const createPost = async (dispatch, token, post) => {
+export const createPost = async (dispatch, token, post, postToggle) => {
   dispatch(createPostStart());
   try {
     await axios.post("/v1/post", post, {
       headers: { token: `Bearer ${token}` },
     });
+    dispatch(postToggle(false));
     dispatch(createPostSuccess());
   } catch (err) {
     dispatch(createPostFailed());

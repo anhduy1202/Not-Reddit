@@ -12,6 +12,12 @@ const postSchema = new mongoose.Schema(
     avaUrl: {
       type: String,
     },
+    imageUrl:{
+      type:String,
+    },
+    cloudinaryId:{
+      type:String
+    },
     theme: {
       type: String,
     },

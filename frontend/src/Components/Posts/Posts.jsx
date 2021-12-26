@@ -148,6 +148,11 @@ const Posts = (props) => {
         >
           {post?.description}
         </div>
+        {post?.imageUrl && (
+          <div className="post-image-container">
+            <img className="post-image" src={post?.imageUrl} alt="postImg" />
+          </div>
+        )}
       </div>
       <div className="post-interactions">
         <div className="post-vote">

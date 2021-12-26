@@ -1,5 +1,5 @@
 .makepost-container {
-  height: 70vh;
+  min-height: 100vh;
   background-color: #292929;
   padding: 0.75rem 1.25rem 0 1.25rem;
   border-radius: 14px;
@@ -67,6 +67,11 @@
 .makepost-tags-selected {
   background-color: teal;
   box-shadow: 0px 0px 10px 7px rgb(0, 204, 160);
+}
+.makepost-img-preview > img {
+  width:150px;
+  height:150px;
+  object-fit:contain;
 }
 
 /* Post.css */
@@ -139,4 +144,10 @@
   border-radius: 50%;
   object-fit: cover;
   overflow: hidden;
+}
+
+.post-image{
+  margin-top: 1rem;
+  width:100%;
+  object-fit:cover;
 }
