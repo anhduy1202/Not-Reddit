@@ -3,6 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 export const commentSlice = createSlice({
   name: "comment",
   initialState: {
+    userComments:{
+      comments: null,
+      pending:false,
+      error:false,
+      success:false
+    },
     addComments: {
       pending: false,
       error: false,
@@ -15,6 +21,22 @@ export const commentSlice = createSlice({
     },
   },
   reducers: {
+    getUserCommentStart: (state) =>{
+      state.userComments.pending = true;
+      state.userComments.success = false;
+      state.userComments.error = false;
+    },
+    getUserCommentSuccess: (state,action) => {
+      state.userComments.pending = false;
+      state.userComments.success = true;
+      state.userComments.error = false;
+      state.userComments.comments = action.payload;
+    },
+    getUserCommentFailed: (state) => {
+      state.userComments.pending = false;
+      state.userComments.error = true;
+      state.userComments.success = false;
+    },
     addCommentStart: (state) => {
       state.addComments.pending = true;
       state.addComments.success = false;
@@ -45,6 +67,9 @@ export const commentSlice = createSlice({
 });
 
 export const {
+  getUserCommentStart,
+  getUserCommentSuccess,
+  getUserCommentFailed,
   addCommentStart,
   addCommentSuccess,
   addCommentFailed,

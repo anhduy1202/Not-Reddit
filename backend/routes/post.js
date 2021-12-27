@@ -1,60 +1,86 @@
 const router = require("express").Router();
+const Post = require("../models/Post");
 const commentController = require("../controllers/commentController");
+const middlewareController = require("../controllers/middleWareController");
 const postController = require("../controllers/postController");
 const upload = require("../utils/multer");
-const {
-  verifyToken,
-  verifyTokenAndUserPostAuthorization,
-  verifyTokenAndCommentAuthorization,
-} = require("../controllers/verifyToken");
 
 //CREATE A POST
 router.post(
   "/",
   upload.single("image"),
-  verifyToken,
+  middlewareController.verifyToken,
   postController.createPost
 );
 
 //UPDATE A POST
 router.put(
   "/:id",
-  verifyTokenAndUserPostAuthorization,
+  middlewareController.verifyTokenAndUserPostAuthorization,
   postController.updatePost
 );
 
 //DELETE A POST
 router.delete(
   "/:id",
-  verifyTokenAndUserPostAuthorization,
+  middlewareController.verifyTokenAndUserPostAuthorization,
   postController.deletePost
 );
 
 //GET ALL POST FROM A USER
-router.get("/user/:id", verifyToken,postController.getPostsFromOne);
+router.get(
+  "/user/:id",
+  middlewareController.verifyToken,
+  postController.getPostsFromOne
+);
 
 //GET ALL POSTS
-router.get("/", verifyToken, postController.getAllPosts);
+router.get(
+  "/",
+  middlewareController.verifyToken,
+  middlewareController.paginatedResult(Post),
+  postController.getAllPosts
+);
 
 //UPVOTE A POST
-router.put("/:id/upvote", verifyToken, postController.upvotePost);
+router.put(
+  "/:id/upvote",
+  middlewareController.verifyToken,
+  postController.upvotePost
+);
 
 //DOWNVOTE A POST
-router.put("/:id/downvote", verifyToken, postController.downvotePost);
+router.put(
+  "/:id/downvote",
+  middlewareController.verifyToken,
+  postController.downvotePost
+);
 
 //ADD A COMMENT
-router.post("/comment/:id", verifyToken, commentController.addComment);
+router.post(
+  "/comment/:id",
+  middlewareController.verifyToken,
+  commentController.addComment
+);
 
 //GET ALL COMMENTS
-router.get("/comments", verifyToken, commentController.getAllComments);
+router.get(
+  "/comments",
+  middlewareController.verifyToken,
+  commentController.getAllComments
+);
 
 //GET ALL COMMENTS IN A POST
-router.get("/comment/:id", verifyToken, commentController.getCommentsInPost);
+router.get(
+  "/comment/:id",
+  middlewareController.verifyToken,
+  commentController.getCommentsInPost
+);
 
 //DELETE A COMMENT
 router.delete(
   "/comment/:id",
-  verifyTokenAndCommentAuthorization,
+  middlewareController.verifyTokenAndCommentAuthorization,
   commentController.deleteComment
 );
 module.exports = router;

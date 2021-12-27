@@ -10,6 +10,7 @@ const EditPage = (props) => {
   const { id } = useParams();
   const user = useSelector((state) => state.user.user?.currentUser);
   const [name, setName] = useState(user?.displayName);
+  const [selectedIdx, setSelectedIdx] = useState(0);
   const [age, setAge] = useState(user?.age);
   const [about, setAbout] = useState(user?.about);
   const [theme, setTheme] = useState(user?.theme);
@@ -41,8 +42,9 @@ const EditPage = (props) => {
     };
     updateUser(dispatch, updatedUser, id, user?.accessToken);
   };
-  const changeAvatar = (e) => {
+  const changeAvatar = (e, idx) => {
     setUrl(e.target.src);
+    setSelectedIdx(idx);
   };
   return (
     <>
@@ -74,13 +76,6 @@ const EditPage = (props) => {
               setData={setAge}
               label="Age"
             />
-            {/* <label> About </label>
-            <textarea
-              className="input-about"
-              type="text"
-              placeholder={user.about}
-              onChange={(e) => setAbout(e.target.value)}
-            /> */}
             <InputField
               inputType="textarea"
               data={user.about}
@@ -90,12 +85,16 @@ const EditPage = (props) => {
             />
             <label> Profile Picture </label>
             <section className="input-image-container">
-              {avaUrl.map((url) => {
+              {avaUrl.map((url, idx) => {
                 return (
                   <>
                     <img
-                      onClick={(e) => changeAvatar(e)}
-                      className="input-image"
+                      onClick={(e) => changeAvatar(e,idx)}
+                      className={`${
+                        selectedIdx === idx
+                          ? `input-image-selected`
+                          : `input-image`
+                      }`}
                       src={url}
                       alt=""
                     />

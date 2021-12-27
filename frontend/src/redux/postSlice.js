@@ -4,7 +4,7 @@ export const postSlice = createSlice({
   name: "post",
   initialState: {
     allPosts: {
-      posts: null,
+      posts: [],
       comments: [],
       pending: false,
       error: false,
@@ -34,7 +34,7 @@ export const postSlice = createSlice({
     },
     getAllPostSuccess: (state, action) => {
       state.allPosts.pending = false;
-      state.allPosts.posts = action.payload;
+      state.allPosts.posts = [...state.allPosts.posts,...action.payload];
     },
     getAllCommentsSuccess: (state, action) => {
       state.allPosts.comments = action.payload;
