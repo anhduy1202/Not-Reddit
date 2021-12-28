@@ -14,7 +14,9 @@ import { addComment, downvotePost, upvotePost } from "../../redux/apiRequests";
 import Comments from "../Comments/Comments";
 import InputField from "../InputFields/Input";
 import React, { useState } from "react";
+import listContainer from "../../utils/listContainer";
 import { useEffect } from "react";
+
 const Posts = React.forwardRef((props, ref) => {
   const { post, comments, setDeleteComment, deleteComment } = props;
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const Posts = React.forwardRef((props, ref) => {
     post?.downvotes?.includes(user?._id)
   );
   const fullPost = useSelector((state) => state.nav.fullPost);
-  const tags = ["None", "NSFW", "Mood", "Quotes", "Shitpost"];
+  const tags = listContainer.tags;
   const dispatch = useDispatch();
   useEffect(() => {
     setUpVote(post?.upvotes?.includes(user?._id));
@@ -202,6 +204,7 @@ const Posts = React.forwardRef((props, ref) => {
             {comments?.map((comment) => {
               return (
                 <Comments
+                  key={comment._id}
                   _id={comment._id}
                   setDeleteComment={setDeleteComment}
                   deleteComment={deleteComment}

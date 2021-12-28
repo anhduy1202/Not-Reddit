@@ -24,6 +24,7 @@ const UserProfile = (props) => {
   const user = useSelector((state) => state.user.user?.currentUser);
   const deletePost = useSelector((state) => state.post.deletePost);
   const createPost = useSelector((state) => state.post.createPost);
+  const loading = useSelector((state) => state.user.otherUser?.pending);
   const pending = useSelector((state) => state.user.user.pending);
   const error = useSelector((state) => state.user.user.error);
   const dispatch = useDispatch();
@@ -39,13 +40,22 @@ const UserProfile = (props) => {
       ) : !isEdit && !isOpenPost ? (
         <>
           <Header isEdit={isEdit} setEdit={setEdit} />
-          <div className="follow-container" style={{boxShadow: `0px 0px 10px 3px ${currentUser?.theme}`}}>
-            <div className="follower" style={{borderRight: `1px solid ${currentUser?.theme}`}}>
+          <div
+            className="follow-container"
+            style={{ boxShadow: `0px 0px 10px 3px ${currentUser?.theme}` }}
+          >
+            <div
+              className="follower"
+              style={{ borderRight: `1px solid ${currentUser?.theme}` }}
+            >
               <p className="follower-num">{currentUser?.followers.length}</p>
               <p className="follower-title">Followers</p>
             </div>
             <div className="following">
-              <p className="following-num"> {currentUser?.followings.length} </p>
+              <p className="following-num">
+                {" "}
+                {currentUser?.followings.length}{" "}
+              </p>
               <p className="following-title"> Following</p>
             </div>
           </div>
@@ -69,7 +79,7 @@ const UserProfile = (props) => {
         </>
       ) : (
         <>
-          <Header isEdit={isEdit} setEdit={setEdit} />
+          <Header isEdit={isEdit} setEdit={setEdit} />   
           <MakePost />
           <Footer />
         </>

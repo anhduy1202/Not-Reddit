@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/apiRequests";
 import InputField from "../InputFields/Input";
 import "./register.css";
@@ -11,15 +11,15 @@ const Register = () => {
   const [password, setPassword] = useState("password");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleRegister = (e)=>{
+  const handleRegister = (e) => {
     e.preventDefault();
     const newUser = {
       email: email,
       username: username,
-      password: password
-    }
-    registerUser(newUser,dispatch,navigate);
-  }
+      password: password,
+    };
+    registerUser(newUser, dispatch, navigate);
+  };
   return (
     <section className="register-container">
       <div className="register-title"> Sign Up </div>
@@ -51,6 +51,10 @@ const Register = () => {
           />
           <button type="submit"> Create account </button>
         </form>
+        <div className="register-login"> Already have an account? </div>
+        <Link className="register-login-link" to="/login">
+          Log in
+        </Link>
       </div>
     </section>
   );

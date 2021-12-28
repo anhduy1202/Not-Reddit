@@ -28,7 +28,6 @@ import {
   deletePostFailed,
   deletePostStart,
   deletePostSuccess,
-  getAllCommentsSuccess,
   getAllPostFailed,
   getAllPostStart,
   getAllPostSuccess,
@@ -160,7 +159,7 @@ export const getAllPosts = async (
       }
     );
     setHasMore(res.data.results.length > 0);
-    dispatch(getAllPostSuccess(res.data.results));
+      dispatch(getAllPostSuccess(res.data.results));
   } catch (err) {
     dispatch(getAllPostFailed());
   }

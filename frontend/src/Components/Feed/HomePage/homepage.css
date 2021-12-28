@@ -6,6 +6,9 @@
   display: flex;
   flex-direction: column;
 }
+.homepage-loading {
+ color:red;
+}
 .post-ava-container {
   border-radius: 50%;
   width: 50px;
