@@ -11,6 +11,7 @@ const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
 const userRoute = require("./routes/user");
+const newsRoute = require("./routes/news");
 dotenv.config();
 
 mongoose.connect(process.env.DB_URL, () => {
@@ -34,6 +35,7 @@ app.use(morgan("common"));
 app.use("/v1/auth", authRoute);
 app.use("/v1/post", postRoute);
 app.use("/v1/users", userRoute);
+app.use("/v1/news",newsRoute);
 
 app.listen(8000, () => {
   console.log("Server is running");

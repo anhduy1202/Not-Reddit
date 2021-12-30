@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const commentSchema = new mongoose.Schema(
   {
     postId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
     },
     ownerId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     content: {
