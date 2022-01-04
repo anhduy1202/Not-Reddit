@@ -12,7 +12,8 @@ body {
   min-height: 100vh;
 }
 .App {
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   scrollbar-width: none;
   margin-bottom: 4rem;
   min-height: 100vh;

@@ -12,6 +12,7 @@ import { useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { unmountPost } from "../../../redux/postSlice";
 import Loading from "../../Loading/Loading";
+import useInfiniteScroll from "../../Hooks/useInfiniteScroll";
 
 const HomePage = () => {
   const user = useSelector((state) => state.user.user?.currentUser);
@@ -25,31 +26,24 @@ const HomePage = () => {
   const [deletedPostId, setDeletedId] = useState([]);
   const isDelete = useSelector((state) => state.nav.deleteState);
   const [filter, setFilters] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
-  const [hasMore, setHasMore] = useState(false);
   const loading = useSelector((state) => state.post.allPosts?.pending);
-  const observer = useRef();
   const filteredPost = allPosts?.filter(
     (post) => !deletedPostId.includes(post._id)
   );
   const dispatch = useDispatch();
-  const lastPostRef = useCallback(
-    (node) => {
-      if (loading) return;
-      if (observer.current) observer.current.disconnect();
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          setPageNumber((prevPageNumber) => prevPageNumber + 1);
-        }
-      });
-      if (node) observer.current.observe(node);
-    },
-    [loading, hasMore]
-  );
+  const { pageNumber, setHasMore, setPageNumber, lastPostRef } =
+    useInfiniteScroll(loading);
 
   useEffect(() => {
     dispatch(unmountPost());
   }, [location]);
+
+  const handleFilters = (e) => {
+    dispatch(unmountPost());
+    setPageNumber(1);
+    setHasMore(false);
+    setFilters(e.target.value);
+  };
 
   useEffect(() => {
     getAllPosts(dispatch, user?.accessToken, filter, pageNumber, setHasMore);
@@ -63,10 +57,6 @@ const HomePage = () => {
     interactPost,
     pageNumber,
   ]);
-
-  const handleFilters = (e) => {
-    setFilters(e.target.value);
-  };
 
   return (
     <FeedLayout>
@@ -102,9 +92,9 @@ const HomePage = () => {
           {fullPost.open && <FullPost />}
           {filteredPost?.map((post, idx) => {
             if (filteredPost.length === idx + 1) {
-              return <Posts ref={lastPostRef} post={post} />;
+              return <Posts key={filteredPost?._id} ref={lastPostRef} post={post} />;
             }
-            return <Posts post={post} />;
+            return <Posts key={filteredPost?._id} post={post} />;
           })}
         </div>
       </section>

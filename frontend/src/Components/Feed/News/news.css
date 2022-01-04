@@ -1,0 +1,31 @@
+.news-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.newslist-container{
+    background-color: #292929;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+}
+.newslist-info-container{
+    display:flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1rem;
+}
+.newslist-time {
+    font-size: 0.85rem;
+    color: rgb(165, 165, 165);
+}
+.newslist-content-container{
+    margin-top: 0.85rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+.newslist-image{
+   width: 100%;
+   cursor: pointer;
+   margin-top: 1rem;
+   object-fit: cover;
+}

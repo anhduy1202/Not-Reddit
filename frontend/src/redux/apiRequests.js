@@ -152,8 +152,8 @@ export const getAllPosts = async (
   try {
     const res = await axios.get(
       hot
-        ? `/v1/post?${hot}=true&page=${pageNumber}&limit=3`
-        : `/v1/post?page=${pageNumber}&limit=3`,
+        ? `/v1/post?${hot}=true&page=${pageNumber}&limit=2`
+        : `/v1/post?page=${pageNumber}&limit=2`,
       {
         headers: { token: `Bearer ${token}` },
       }

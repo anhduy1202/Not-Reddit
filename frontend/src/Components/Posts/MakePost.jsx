@@ -69,14 +69,15 @@ const MakePost = () => {
         label="Descriptions"
         classStyle="makepost-desc"
       />
-
-      <input
-        type="file"
-        id="fileInput"
-        name="image"
-        onChange={handleFileInputChange}
-        className="makepost-img"
-      />
+      <label className="makepost-file-label">
+        <input
+          type="file"
+          id="fileInput"
+          name="image"
+          onChange={handleFileInputChange}
+          className="makepost-img"
+        />
+      </label>
       {previewSource && (
         <img
           src={previewSource}

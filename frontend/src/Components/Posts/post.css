@@ -35,7 +35,6 @@
   margin-bottom: 1rem;
 }
 .makepost-tags {
-  margin-top: 1rem;
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
@@ -68,10 +67,29 @@
   background-color: teal;
   box-shadow: 0px 0px 10px 7px rgb(0, 204, 160);
 }
+input[type="file"] {
+  display: none;
+}
+.makepost-file-label {
+  background-color: #0386d1;
+  margin: 1rem 0;
+  border-radius: 12px;
+  max-width: 40%;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.makepost-file-label::before {
+  font-size: 1rem;
+  content: "Upload image";
+}
 .makepost-img-preview > img {
-  width:150px;
-  height:150px;
-  object-fit:contain;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+.makepost-img-preview {
+  margin-bottom: 1rem;
 }
 
 /* Post.css */
@@ -134,7 +152,7 @@
   border-radius: 12px;
 }
 .comment-input:focus {
-  outline:none;
+  outline: none;
   box-shadow: 0px 0px 12px 1px rgb(0, 204, 160);
 }
 .user-avatar {
@@ -146,8 +164,15 @@
   overflow: hidden;
 }
 
-.post-image{
+.post-image {
   margin-top: 1rem;
-  width:100%;
-  object-fit:cover;
+  width: 100%;
+  object-fit: cover;
+}
+
+.search-bar {
+  text-align: start;
+  margin-left: 1rem;
+  width: 50%;
+  align-self: center;
 }

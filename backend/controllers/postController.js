@@ -77,6 +77,22 @@ const postController = {
     }
   },
 
+  //GET ALL POST FROM USER FOLLOWINGS
+  getFriendsPost: async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.body.userId);
+      const userPost = await Post.find({ userId: req.body.userId });
+      const friendPost = await Promise.all(
+        currentUser.followings.map((friendId) => {
+         return  Post.find({ userId: friendId });
+        })
+      );
+      res.status(200).json(userPost.concat(...friendPost));
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  
   //GET ALL POSTS
   getAllPosts: async (req, res) => {
     try {

@@ -17,8 +17,12 @@
   font-family: "Noto Sans", sans-serif;
   font-size: 700;
   background-color: #222222;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 .feed-logo-img {
+  margin-right: auto;
   width: 60px;
   margin:0.5rem 0 0 1rem;
   cursor: pointer;

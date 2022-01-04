@@ -42,6 +42,12 @@ router.get(
   postController.getAllPosts
 );
 
+//GET TIMELINE POST
+router.post(
+  "/timeline",
+  middlewareController.verifyToken,
+  postController.getFriendsPost
+);
 //UPVOTE A POST
 router.put(
   "/:id/upvote",
