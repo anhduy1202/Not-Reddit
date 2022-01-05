@@ -1,10 +1,9 @@
 import "./comments.css";
-import trashIcon from "../../assets/icons/trash.svg";
+import { BsTrash } from "react-icons/bs";
 import { format } from "timeago.js";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import { deleteUserComment } from "../../redux/apiRequests";
 const Comments = (props) => {
   const user = useSelector((state) => state.user.user?.currentUser);
@@ -65,10 +64,10 @@ const Comments = (props) => {
           <div className="author-name">u/{username}</div>
           <div className="comment-date">{format(createdAt).split("ago")}</div>
           {(user?._id === ownerId || user?.isAdmin) && (
-            <img
-              src={trashIcon}
-              alt="delete icon"
+            <BsTrash
+              size={"18px"}
               className="comment-delete"
+              color="red"
               onClick={handleDelete}
             />
           )}

@@ -26,4 +26,11 @@ router.put(
   userController.followUser
 );
 
+//SEARCH FOR USERS
+router.get(
+  "/",
+  middlewareController.verifyToken,
+  userController.searchAllUser
+)
+
 module.exports = router;

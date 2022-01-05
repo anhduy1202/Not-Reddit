@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import gpBackIcon from "../../assets/icons/leftarrow.svg";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { followUser, getUser } from "../../redux/apiRequests";
 import "./header.css";
 const Header = (props) => {
@@ -44,10 +44,9 @@ const Header = (props) => {
         <div className="info-container">
           <div className="edit-goback">
             <p className="go-back">
-              <img
-                src={gpBackIcon}
+              <IoIosArrowRoundBack
+                size={"52px"}
                 onClick={() => navigate("/")}
-                alt="go back icon"
               />
             </p>
             {user?._id === id ? (
@@ -70,7 +69,6 @@ const Header = (props) => {
           <div className="info-age"> {currentUser?.age} years old </div>
           <div className="info-about"> {currentUser?.about} </div>
         </div>
-      
       </header>
     </>
   );

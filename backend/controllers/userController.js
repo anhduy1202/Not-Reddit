@@ -112,6 +112,17 @@ const userController = {
       return res.status(403).json("You can't follow yourself");
     }
   },
+
+  //SEARCH FOR USERS
+  searchAllUser: async(req,res) => {
+    try{
+      const username = req.query.username;
+      const user = await User.find({username: {"$regex":username}}).limit(2).select('username profilePicture theme').exec();
+    return res.status(200).json(user);
+    }catch(err){
+     return res.status(500).json(err);
+    }
+  }
 };
 
 module.exports = userController;

@@ -173,6 +173,6 @@ input[type="file"] {
 .search-bar {
   text-align: start;
   margin-left: 1rem;
-  width: 50%;
+  width: 100%;
   align-self: center;
 }

@@ -48,6 +48,7 @@ router.post(
   middlewareController.verifyToken,
   postController.getFriendsPost
 );
+
 //UPVOTE A POST
 router.put(
   "/:id/upvote",
@@ -62,6 +63,11 @@ router.put(
   postController.downvotePost
 );
 
+router.put(
+  "/:id/favorite",
+  middlewareController.verifyToken,
+  postController.addFavoritePost
+);
 //ADD A COMMENT
 router.post(
   "/comment/:id",

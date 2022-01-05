@@ -7,7 +7,8 @@
   margin-top: 0.5rem;
 }
 .navbar-profile > a,
-.navbar-saved > a, .navbar-logout  {
+.navbar-saved > a,
+.navbar-logout {
   margin: 0.5rem 0;
   text-decoration: none;
   color: white;
@@ -16,15 +17,22 @@
   cursor: pointer;
 }
 
-
 .navbar-profile > a > img {
+  margin: 0 0.55rem;
+}
+.navbar-profile-icon {
   margin: 0 0.55rem;
 }
 
 .navbar-saved > a > img {
   margin: 0 0.55rem;
 }
-
+.navbar-saved-icon {
+  margin: 0 0.55rem;
+}
 .navbar-logout > img {
+  margin: 0 0.55rem;
+}
+.navbar-logout-icon{
   margin: 0 0.55rem;
 }

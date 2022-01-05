@@ -56,10 +56,7 @@ header {
   width: 36px;
   height: 36px;
 }
-.go-back > img {
-  width: 36px;
-  height: 36px;
-}
+
 .edit-goback{
   margin: 1rem 1.15rem 0 0;
   display: flex;

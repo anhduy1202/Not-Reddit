@@ -1,10 +1,7 @@
-import upVoteIcon from "../../assets/icons/upvote.svg";
-import upVotedIcon from "../../assets/icons/upvoted.svg";
-import downVoteIcon from "../../assets/icons/downvote.svg";
-import downVotedIcon from "../../assets/icons/downvoted.svg";
-import commentIcon from "../../assets/icons/comments.svg";
-import trashIcon from "../../assets/icons/trash.svg";
+import { BiCommentDetail, BiUpvote, BiDownvote } from "react-icons/bi";
+import { BsTrash } from "react-icons/bs";
 import { format } from "timeago.js";
+import { FiStar } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./post.css";
@@ -21,6 +18,7 @@ const Posts = React.forwardRef((props, ref) => {
   const { post, comments, setDeleteComment, deleteComment } = props;
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
+  const [isFavorite, setFavorite] = useState(false);
   const user = useSelector((state) => state.user.user?.currentUser);
   const [totalVotes, setTotal] = useState(
     post?.upvotes?.length - post?.downvotes?.length
@@ -91,7 +89,10 @@ const Posts = React.forwardRef((props, ref) => {
     setComment("");
     addComment(dispatch, user?.accessToken, id, newComment);
   };
-
+  const handleFavorite = (id) => {
+    setFavorite(!isFavorite);
+    console.log(id);
+  };
   return (
     <div key={post?._id} ref={ref} className="post-container">
       {fullPost?.postId === post?._id && (
@@ -115,15 +116,26 @@ const Posts = React.forwardRef((props, ref) => {
           u/{post?.username}
           <div className="post-time">{format(post?.createdAt)}</div>
         </div>
-        {(user?._id === post?.userId || user?.isAdmin) && (
-          <div className="post-edit-delete">
-            <img
-              src={trashIcon}
-              alt="delete"
-              onClick={() => handleDelete(post?._id)}
+        <div className="features-container">
+          {(user?._id === post?.userId || user?.isAdmin) && (
+            <div className="post-edit-delete">
+              <BsTrash
+                size={"24px"}
+                color="red"
+                onClick={() => handleDelete(post?._id)}
+              />
+            </div>
+          )}
+
+          <div className="add-to-favorites">
+            <FiStar
+              size="24px"
+              color={`${isFavorite ? "#e9c46a" : "grey"}`}
+              fill={`${isFavorite ? "#e9c46a" : "none"}`}
+              onClick={() => handleFavorite(post?._id)}
             />
           </div>
-        )}
+        </div>
       </div>
       <div className="post-context">
         <button className={`posts-tags-${tags[post?.tags]}`}>
@@ -159,40 +171,23 @@ const Posts = React.forwardRef((props, ref) => {
       <div className="post-interactions">
         <div className="post-vote">
           <div className="upvote">
-            {isUpVote ? (
-              <img
-                src={upVotedIcon}
-                alt="upvoted icon"
-                onClick={() => handleUpVote(post?._id)}
-              />
-            ) : (
-              <img
-                src={upVoteIcon}
-                alt="upvote icon"
-                onClick={() => handleUpVote(post?._id)}
-              />
-            )}
+            <BiUpvote
+              size={"24px"}
+              color={`${isUpVote ? "#ff9051" : ""}`}
+              onClick={() => handleUpVote(post?._id)}
+            />
           </div>
           <div className="votes">{totalVotes}</div>
           <div className="downvote">
-            {isDownVote ? (
-              <img
-                src={downVotedIcon}
-                alt="downvoted icon"
-                onClick={() => handleDownVote(post?._id)}
-              />
-            ) : (
-              <img
-                src={downVoteIcon}
-                alt="downvote icon"
-                onClick={() => handleDownVote(post?._id)}
-              />
-            )}
+            <BiDownvote
+              size={"24px"}
+              color={`${isDownVote ? "rgb(146, 0, 214)" : ""}`}
+              onClick={() => handleDownVote(post?._id)}
+            />
           </div>
           <div className="comments">
-            <img
-              src={commentIcon}
-              alt="comment icon"
+            <BiCommentDetail
+              size={"24px"}
               onClick={() => handleReadmore(post?._id)}
             />
           </div>

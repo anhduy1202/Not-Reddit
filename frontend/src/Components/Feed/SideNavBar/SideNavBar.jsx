@@ -1,8 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import profileIcon from "../../../assets/icons/profile.svg";
-import savedIcon from "../../../assets/icons/saved.svg";
-import exitIcon from "../../../assets/icons/logout.svg";
-
+import { CgProfile } from "react-icons/cg";
+import { FiStar } from "react-icons/fi";
+import {BiExit} from "react-icons/bi";
 import "./navbar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUser } from "../../../redux/apiRequests";
@@ -18,18 +17,18 @@ const SideNavBar = (props) => {
     <nav className="navbar-container">
       <div className="navbar-profile">
         <Link to={`/user/${id}`}>
-          <img src={profileIcon} alt="profile icon" />
+          <CgProfile size="24px" color="grey" className="navbar-profile-icon" />
           My profile
         </Link>
       </div>
       <div className="navbar-saved">
-        <Link to={`/user/${id}/saved`}>
-          <img src={savedIcon} alt="save post icon" />
-          Saved{" "}
+        <Link to={`/user/${id}/favorites`}>
+          <FiStar color="grey" size="24px" className="navbar-saved-icon"/>
+          Favorites
         </Link>
       </div>
       <div className="navbar-logout" onClick={logOut}>
-        <img src={exitIcon} alt="exit icon" />
+      <BiExit color="grey" size="24px" className="navbar-logout-icon"/>
         Log out{" "}
       </div>
     </nav>

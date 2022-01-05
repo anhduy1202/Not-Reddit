@@ -84,7 +84,7 @@ const postController = {
       const userPost = await Post.find({ userId: req.body.userId });
       const friendPost = await Promise.all(
         currentUser.followings.map((friendId) => {
-         return  Post.find({ userId: friendId });
+          return Post.find({ userId: friendId });
         })
       );
       res.status(200).json(userPost.concat(...friendPost));
@@ -92,7 +92,7 @@ const postController = {
       res.status(500).json(err);
     }
   },
-  
+
   //GET ALL POSTS
   getAllPosts: async (req, res) => {
     try {
@@ -176,6 +176,46 @@ const postController = {
       }
     } catch (err) {
       return res.status(500).json(err);
+    }
+  },
+
+  //ADD POST TO FAVORITE
+  addFavoritePost: async (req, res) => {
+    try {
+      const user = await User.findById(req.body.userId);
+      //if post is not in favorite yet
+      if (!user.favorites.includes(req.params.id)) {
+        await User.findByIdAndUpdate(
+          { _id: req.body.userId },
+          {
+            $push: { favorites: req.params.id },
+          },
+          { returnDocument: "after" }
+        );
+        const favoritePosts = await Promise.all(
+          user.favorites.map((postId) => {
+            console.log("Hi");
+            console.log(postId);
+           
+          })
+        );
+        return res.status(200).json(user);
+      } else {
+        await User.findByIdAndUpdate(
+          { _id: req.body.userId },
+          {
+            $pull: { favorites: req.params.id },
+          }
+        );
+        const favoritePosts = await Promise.all(
+          user.favorites.map((postId) => {
+            return Post.find({ _id: postId });
+          })
+        );
+        return res.status(200).json(favoritePosts);
+      }
+    } catch (err) {
+      res.status(500).json(err);
     }
   },
 };

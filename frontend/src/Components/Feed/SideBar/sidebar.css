@@ -46,9 +46,7 @@
   grid-template-columns: 0.5fr 1.5fr;
   margin-top: 2rem;
 }
-.sidebar-styleava > img {
-  width: 24px;
-  height: 24px;
+.sidebar-shirt {
   margin-left: 0.5rem;
 }
 .sidebar-info {
