@@ -1,0 +1,100 @@
+.message-container {
+  background-color: grey;
+  height: 100vh;
+  padding: 1rem;
+}
+.contact-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+.contact-container-div {
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  gap: 0.25rem;
+  align-items: start;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+.contact-container {
+  display: flex;
+  width: 100%;
+  background-color: #2222;
+  gap: 1rem;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+.carousel {
+  background-color: #222222;
+  border-radius: 14px;
+}
+.contact-img-container {
+  margin: 0.5rem;
+  width: 50px;
+  height: 50px;
+}
+.contact-img {
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  height: 50px;
+}
+.conversation-container {
+  width: 100%;
+  cursor: pointer;
+}
+.convo-container {
+  background-color: grey;
+  height: 100vh;
+}
+.message-header {
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.63);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10.2px);
+  -webkit-backdrop-filter: blur(10.2px);
+}
+.go-back-convo {
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+}
+.msgs-container {
+  padding: 1rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.messageText {
+  padding: 10px;
+  border-radius: 20px;
+  color: black;
+  background-color: rgb(245, 241, 241);
+
+  max-width: 300px;
+}
+.messageTop {
+  display: flex;
+}
+
+.messageBottom {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.message.own {
+  align-items: flex-end;
+}
+.message.own .messageText {
+  background-color: #1877f2;
+
+  color: white;
+}

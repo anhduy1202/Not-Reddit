@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AiOutlineMessage, AiOutlineHome } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { sideBarToggle } from "../../../redux/navigateSlice";
+import { messageToggle, sideBarToggle } from "../../../redux/navigateSlice";
 import InputField from "../../InputFields/Input";
 import "../feed.css";
 const FeedHeader = () => {
   const user = useSelector((state) => state.user.user?.currentUser);
+  const openMsg = useSelector((state) => state.nav.message.open);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
@@ -17,8 +19,8 @@ const FeedHeader = () => {
     dispatch(sideBarToggle(true));
   };
   const goToProfile = (id) => {
-    navigate("/user/"+id);
-  }
+    navigate("/user/" + id);
+  };
   const searchUsername = async () => {
     await axios
       .get(`/v1/users?username=${search}`, {
@@ -31,6 +33,13 @@ const FeedHeader = () => {
           setResulsts(res.data);
         }
       });
+  };
+
+  const handleOpenMsg = () => {
+    dispatch(messageToggle(true));
+  };
+  const handleCloseMsg = () => {
+    dispatch(messageToggle(false));
   };
   useEffect(() => {
     if (search === "") {
@@ -59,7 +68,10 @@ const FeedHeader = () => {
           <div className="feed-username-display">
             {result?.map((username) => {
               return (
-                <div className="user-container" onClick={()=>goToProfile(username._id)}>
+                <div
+                  className="user-container"
+                  onClick={() => goToProfile(username._id)}
+                >
                   <img
                     style={{ backgroundColor: `${username.theme}` }}
                     src={username.profilePicture}
@@ -73,6 +85,19 @@ const FeedHeader = () => {
           </div>
         )}
       </div>
+      {openMsg ? (
+        <AiOutlineHome
+          size="24px"
+          className="message-outline"
+          onClick={() => handleCloseMsg()}
+        />
+      ) : (
+        <AiOutlineMessage
+          size="24px"
+          className="message-outline"
+          onClick={() => handleOpenMsg()}
+        />
+      )}
     </header>
   );
 };

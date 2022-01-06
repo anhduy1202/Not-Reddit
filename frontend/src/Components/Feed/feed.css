@@ -12,6 +12,7 @@
   overflow-x: hidden;
 }
 .feed-logo {
+  padding-right: 0.75rem;
   position: relative;
   font-size: 1.5rem;
   height: 80px;
@@ -89,4 +90,14 @@
   height: 30px;
   width: 30px;
   object-fit: cover;
+}
+.message-outline{
+  cursor:pointer;
+  align-self:center;
+  margin-left:auto;
+  margin-bottom:0.5rem;
+}
+.message-container{
+  height:100vh;
+  background-color:grey;
 }

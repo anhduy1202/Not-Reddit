@@ -192,14 +192,7 @@ const postController = {
           },
           { returnDocument: "after" }
         );
-        const favoritePosts = await Promise.all(
-          user.favorites.map((postId) => {
-            console.log("Hi");
-            console.log(postId);
-           
-          })
-        );
-        return res.status(200).json(user);
+        return res.status(200).json("added to favorites");
       } else {
         await User.findByIdAndUpdate(
           { _id: req.body.userId },
@@ -207,13 +200,23 @@ const postController = {
             $pull: { favorites: req.params.id },
           }
         );
-        const favoritePosts = await Promise.all(
-          user.favorites.map((postId) => {
-            return Post.find({ _id: postId });
-          })
-        );
-        return res.status(200).json(favoritePosts);
+        return res.status(200).json("removed from favorites");
       }
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+
+  //GET FAVORITE POST
+  getFavoritePosts: async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.body.userId);
+      const favoritePost = await Promise.all(
+        currentUser.favorites.map((id) => {
+          return Post.findById(id);
+        })
+      );
+      res.status(200).json(favoritePost);
     } catch (err) {
       res.status(500).json(err);
     }

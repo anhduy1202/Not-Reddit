@@ -10,6 +10,7 @@ import RequireAuth from "./Components/RequireAuth/RequireAuth";
 import News from "./Components/Feed/News/News";
 import Footer from "./Components/Footer/Footer";
 import Friends from "./Components/Friends/Friends";
+import ChatRoom from "./Components/ChatOverview/ChatRoom";
 
 function App() {
   const [isEdit, setEdit] = useState(false);
@@ -41,6 +42,14 @@ function App() {
             element={
               <RequireAuth>
                 <Friends />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/chat/:id"
+            element={
+              <RequireAuth>
+                <ChatRoom />
               </RequireAuth>
             }
           />

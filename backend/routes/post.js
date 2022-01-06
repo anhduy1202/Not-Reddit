@@ -82,6 +82,13 @@ router.get(
   commentController.getAllComments
 );
 
+//GET FAVORITE POSTS
+router.get(
+  "/favorites",
+  middlewareController.verifyToken,
+  postController.getFavoritePosts
+);
+
 //GET ALL COMMENTS IN A POST
 router.get(
   "/comment/:id",
