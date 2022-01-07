@@ -11,7 +11,7 @@ const ChatOverview = () => {
   const [conversation, setConversations] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [messages, setMessages] = useState([]);
+  //io("ws://localhost:8900")
   const user = useSelector((state) => state.user.user?.currentUser);
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const ChatOverview = () => {
     };
     getConversation();
   }, []);
+
   const openConversation = (conversation) => {
     dispatch(setRoom(conversation));
     navigate("/chat/" + conversation._id);

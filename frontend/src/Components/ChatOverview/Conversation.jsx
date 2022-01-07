@@ -16,7 +16,13 @@ const Conversation = (props) => {
           headers: { token: `Bearer ${currentUser.accessToken}` },
         });
         setUser(res.data);
-        dispatch(setPartnerName(res.data.username));
+        const partnerName = {
+          id: res.data._id,
+          username: res.data.username,
+          profilePicture: res.data.profilePicture,
+          theme: res.data.theme,
+        };
+        dispatch(setPartnerName(partnerName));
       } catch (e) {
         console.log(e);
       }

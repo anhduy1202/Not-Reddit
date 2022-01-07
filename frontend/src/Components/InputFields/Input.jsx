@@ -1,5 +1,6 @@
 import "../Edit/edit.css";
 import "../Posts/post.css";
+import "../ChatOverview/chatroom.css";
 const InputField = (props) => {
   const {
     id,
@@ -21,7 +22,7 @@ const InputField = (props) => {
           type="text"
           value={value}
           className={classStyle}
-          placeholder={data}
+          placeholder={placeholder}
           onChange={(e) => setData(e.target.value)}
         />
       ) : inputType === "file" ? (

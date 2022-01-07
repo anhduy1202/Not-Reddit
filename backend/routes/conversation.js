@@ -16,4 +16,11 @@ router.get(
   conversationController.getConversation
 );
 
+//GET AVAILABLE CONVERSATIONS BETWEEN USERS
+router.get(
+  "/find/:first/:second",
+  middlewareController.verifyToken,
+  conversationController.getConversation
+);
+
 module.exports = router;

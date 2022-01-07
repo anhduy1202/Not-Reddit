@@ -46,6 +46,8 @@
   cursor: pointer;
 }
 .convo-container {
+  display: flex;
+  flex-direction: column;
   background-color: grey;
   height: 100vh;
 }
@@ -74,6 +76,7 @@
   margin-top: 20px;
 }
 .messageText {
+  font-size: 1rem;
   padding: 10px;
   border-radius: 20px;
   color: black;
@@ -82,6 +85,7 @@
   max-width: 300px;
 }
 .messageTop {
+  align-items: center;
   display: flex;
 }
 
@@ -95,6 +99,55 @@
 }
 .message.own .messageText {
   background-color: #1877f2;
+  color: white;
+}
+.msg-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+.msg-img-mypic {
+  order:2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+}
 
+.chat-msg-input {
+  width: 80%;
+  height: 90px;
+  border: none;
+  padding: 10px;
+  resize: none;
+  outline: none;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.chat-box-top {
+  height: 100%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  padding: 0 0.75rem;
+}
+
+.chat-box-bot {
+  margin-top: 5px;
+  padding: 0 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.chat-submit {
+  width: 70px;
+  height: 40px;
+  border: none;
+  margin-left: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: teal;
   color: white;
 }

@@ -21,6 +21,17 @@ const conversationController = {
       res.status(500).json(err);
     }
   },
+  //GET AVAILABLE CONVERSATION
+  getAvailableConversation: async (req, res) => {
+    try {
+      const conversation = await Conversation.findOne({
+        members: { $all: [req.params.first, req.params.second] },
+      });
+      res.status(200).json(conversation);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
 };
 
 module.exports = conversationController;
