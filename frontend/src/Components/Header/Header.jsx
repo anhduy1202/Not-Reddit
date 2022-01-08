@@ -7,6 +7,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { AiOutlineMessage } from "react-icons/ai";
 import { followUser, getUser } from "../../redux/apiRequests";
 import "./header.css";
+import { setRoom } from "../../redux/navigateSlice";
 const Header = (props) => {
   const user = useSelector((state) => state.user.user?.currentUser);
   const currentUser = useSelector((state) => state.user.otherUser?.otherUser);
@@ -42,16 +43,21 @@ const Header = (props) => {
         headers: { token: `Bearer ${user?.accessToken}` },
       });
       if (res.data) {
+        dispatch(setRoom(res.data));
         navigate(`/chat/${res.data._id}`);
       } else {
         const newConvo = {
           senderId: user?._id,
-          receiverId: id
+          receiverId: id,
         };
-        const convoRes = await axios.post(`/v1/conversation`, newConvo, {
-          headers: { token: `Bearer ${user?.accessToken}` },
-        });
-        navigate(`/chat/${convoRes.data._id}`);
+        await axios
+          .post(`/v1/conversation`, newConvo, {
+            headers: { token: `Bearer ${user?.accessToken}` },
+          })
+          .then((res) => {
+            dispatch(setRoom(res.data));
+            navigate(`/chat/${res.data._id}`);
+          });
       }
     } catch (err) {
       console.log(err);

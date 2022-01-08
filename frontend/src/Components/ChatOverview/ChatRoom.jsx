@@ -57,29 +57,24 @@ const ChatRoom = () => {
   }, [user]);
 
   useEffect(() => {
+    console.log(room._id);
     const getMessage = async () => {
       try {
         const partnerId = room?.members.find((m) => m !== user?._id);
-        let endpoints = [`/v1/users/${partnerId}`, `/v1/message/${room._id}`];
-        axios.all(
-          endpoints.map((endpoint) =>
-            axiosInstance.get(endpoint).then(
-              axios.spread(({ data: partner }, { data: message }) => {
-                console.log({ partner });
-                // setPartner({partner});
-                // setMessage({message});
-              })
-            )
+        axios
+          .all([
+            axiosInstance.get(`/v1/users/${partnerId}`),
+            axiosInstance.get(`/v1/message/${room._id}`),
+          ])
+          .then(
+            axios.spread((partnerRes, msgRes) => {
+              setPartner(partnerRes.data);
+              setMessage(msgRes.data);
+            })
           )
-        );
-        // const partner = await axios.get(`/v1/users/${partnerId}`, {
-        //   headers: { token: `Bearer ${user.accessToken}` },
-        // });
-        // const res = await axios.get(`/v1/message/${room._id}`, {
-        //   headers: { token: `Bearer ${user.accessToken}` },
-        // });
-        // setPartner(partner.data);
-        // setMessage(res.data);
+          .catch((err) => {
+            console.log(err);
+          });
       } catch (e) {
         console.log(e);
       }

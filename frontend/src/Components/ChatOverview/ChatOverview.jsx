@@ -11,8 +11,14 @@ const ChatOverview = () => {
   const [conversation, setConversations] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  let filteredConversation = [];
   //io("ws://localhost:8900")
   const user = useSelector((state) => state.user.user?.currentUser);
+  const axiosInstance = axios.create({
+    headers: {
+      token: `Bearer ${user?.accessToken}`,
+    },
+  });
 
   useEffect(() => {
     const getConversation = async () => {
@@ -20,9 +26,11 @@ const ChatOverview = () => {
         const res = await axios.get("/v1/conversation/" + user?._id, {
           headers: { token: `Bearer ${user?.accessToken}` },
         });
-        setConversations(res.data);
+        console.log(res.data);
+        filteredConversation = res.data.filter((c) =>  c.messageCount > 0);
+        setConversations(filteredConversation);
       } catch (e) {
-        console.log(e);
+        console.log(e); 
       }
     };
     getConversation();
