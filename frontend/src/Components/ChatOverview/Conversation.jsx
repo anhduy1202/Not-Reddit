@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./chatroom.css";
-import { useDispatch } from "react-redux";
-import { setPartnerName } from "../../redux/navigateSlice";
 
 const Conversation = (props) => {
   const { conversation, currentUser } = props;
-  const dispatch = useDispatch();
   const [user, setUser] = useState(null);
   useEffect(() => {
     const friendId = conversation.members.find((m) => m !== currentUser?._id);
@@ -16,13 +13,6 @@ const Conversation = (props) => {
           headers: { token: `Bearer ${currentUser.accessToken}` },
         });
         setUser(res.data);
-        const partnerName = {
-          id: res.data._id,
-          username: res.data.username,
-          profilePicture: res.data.profilePicture,
-          theme: res.data.theme,
-        };
-        dispatch(setPartnerName(partnerName));
       } catch (e) {
         console.log(e);
       }

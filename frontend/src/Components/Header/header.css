@@ -84,3 +84,11 @@ header {
 .follower-title, .following-title{
   color:#a1a1a4;
 }
+.chat-follow-container{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.chat{
+  cursor:pointer;
+}

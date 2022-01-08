@@ -20,7 +20,7 @@ router.get(
 router.get(
   "/find/:first/:second",
   middlewareController.verifyToken,
-  conversationController.getConversation
+  conversationController.getAvailableConversation
 );
 
 module.exports = router;

@@ -21,7 +21,6 @@ export const navigateSlice = createSlice({
     message: {
       open: false,
       room: null,
-      partnerName:null,
     },
   },
   reducers: {
@@ -43,9 +42,6 @@ export const navigateSlice = createSlice({
     setRoom: (state,action) => {
       state.message.room = action.payload;
     },
-    setPartnerName: (state,action)=>{
-      state.message.partnerName = action.payload;
-    }
   },
 });
 
@@ -56,6 +52,5 @@ export const {
   fullPostToggle,
   messageToggle,
   setRoom,
-  setPartnerName
 } = navigateSlice.actions;
 export default navigateSlice.reducer;

@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { AiOutlineMessage } from "react-icons/ai";
 import { followUser, getUser } from "../../redux/apiRequests";
 import "./header.css";
 const Header = (props) => {
@@ -33,6 +35,28 @@ const Header = (props) => {
       isFollowed
     );
   };
+
+  const goToChat = async () => {
+    try {
+      const res = await axios.get(`/v1/conversation/find/${id}/${user?._id}`, {
+        headers: { token: `Bearer ${user?.accessToken}` },
+      });
+      if (res.data) {
+        navigate(`/chat/${res.data._id}`);
+      } else {
+        const newConvo = {
+          senderId: user?._id,
+          receiverId: id
+        };
+        const convoRes = await axios.post(`/v1/conversation`, newConvo, {
+          headers: { token: `Bearer ${user?.accessToken}` },
+        });
+        navigate(`/chat/${convoRes.data._id}`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <>
       <header
@@ -54,7 +78,12 @@ const Header = (props) => {
                 Edit
               </div>
             ) : (
-              <div>
+              <div className="chat-follow-container">
+                <AiOutlineMessage
+                  size={"36px"}
+                  className="chat"
+                  onClick={goToChat}
+                />
                 <button className="follow" onClick={handleFollow}>
                   {`${isFollowed ? "👌 Following" : "Follow"}`}
                 </button>
