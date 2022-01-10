@@ -34,6 +34,9 @@ app.use(helmet());
 app.use(morgan("common"));
 
 //Routes
+app.get("/v1/", (req,res)=>{
+  res.send("Hello world");
+})
 app.use("/v1/auth", authRoute);
 app.use("/v1/post", postRoute);
 app.use("/v1/users", userRoute);
