@@ -66,7 +66,11 @@ const userController = {
           return res.status(500).json(err);
         }
       }
-      res.status(200).json({ user, accessToken });
+      const returnedUser = {
+        ...user._doc,
+        accessToken:accessToken
+      }
+      res.status(200).json(returnedUser);
     } catch (err) {
       res.status(500).json(err);
     }
