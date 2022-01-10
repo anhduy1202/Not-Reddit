@@ -59,21 +59,21 @@ const authController = {
       );
       if (!validPassword) {
         return res.status(404).json("Incorrect password");
+      } else if (user && validPassword) {
+        //   //Generate access token
+          const accessToken = authController.generateAccessToken(user);
+        //   //Generate refresh token
+        //   const refreshToken = authController.generateRefreshToken(user);
+        //   //STORE REFRESH TOKEN IN COOKIE
+        //   res.cookie("refreshToken", refreshToken, {
+        //     httpOnly: true,
+        //     secure:false,
+        //     path: "/",
+        //     sameSite: "none",
+        //   });
+        const { password, ...others } = user._doc;
+        res.status(200).json(...others,accessToken);
       }
-      // else if (user && validPassword) {
-      //   //Generate access token
-      //   const accessToken = authController.generateAccessToken(user);
-      //   //Generate refresh token
-      //   const refreshToken = authController.generateRefreshToken(user);
-      //   //STORE REFRESH TOKEN IN COOKIE
-      //   res.cookie("refreshToken", refreshToken, {
-      //     httpOnly: true,
-      //     secure:false,
-      //     path: "/",
-      //     sameSite: "none",
-      //   });
-      //   const { password, ...others } = user._doc;
-      res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
     }
