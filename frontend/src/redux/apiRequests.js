@@ -55,7 +55,7 @@ export const loginUser = async (user, dispatch, navigate, state) => {
   dispatch(loginStart());
   dispatch(updateStart());
   try {
-    const res = await axios.post("/v1/auth/login", user);
+    const res = await axios.post("/login", user);
     dispatch(loginSuccess(res.data));
     dispatch(updateSuccess(res.data));
     navigate(state?.path || "/");
