@@ -61,7 +61,7 @@ const authController = {
         return res.status(404).json("Incorrect password");
       } else if (user && validPassword) {
         //   //Generate access token
-          const accessToken = authController.generateAccessToken(user);
+          // const accessToken = authController.generateAccessToken(user);
         //   //Generate refresh token
         //   const refreshToken = authController.generateRefreshToken(user);
         //   //STORE REFRESH TOKEN IN COOKIE
@@ -72,7 +72,7 @@ const authController = {
         //     sameSite: "none",
         //   });
         const { password, ...others } = user._doc;
-        res.status(200).json(...others,accessToken);
+        res.status(200).json(...others);
       }
     } catch (err) {
       res.status(500).json(err);
