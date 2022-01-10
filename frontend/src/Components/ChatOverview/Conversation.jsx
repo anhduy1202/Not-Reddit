@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { baseURL } from "../../utils/listContainer";
 import "./chatroom.css";
 
 const Conversation = (props) => {
@@ -9,7 +10,7 @@ const Conversation = (props) => {
     const friendId = conversation.members.find((m) => m !== currentUser?._id);
     const getOtherUser = async () => {
       try {
-        const res = await axios.get(`/v1/users/${friendId}`, {
+        const res = await axios.get(`${baseURL}/users/${friendId}`, {
           headers: { token: `Bearer ${currentUser.accessToken}` },
         });
         setUser(res.data);

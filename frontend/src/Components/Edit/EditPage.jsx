@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import listContainer from "../../utils/listContainer";
+import {listContainer} from "../../utils/listContainer";
 import { updateUser } from "../../redux/apiRequests";
 import InputField from "../InputFields/Input";
 

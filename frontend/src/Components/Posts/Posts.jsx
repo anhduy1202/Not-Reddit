@@ -16,7 +16,7 @@ import {
 import Comments from "../Comments/Comments";
 import InputField from "../InputFields/Input";
 import React, { useState } from "react";
-import listContainer from "../../utils/listContainer";
+import {listContainer} from "../../utils/listContainer";
 import { useEffect } from "react";
 
 const Posts = React.forwardRef((props, ref) => {

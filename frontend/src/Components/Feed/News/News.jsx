@@ -5,11 +5,12 @@ import Loading from "../../Loading/Loading";
 import FeedLayout from "../Layout/FeedLayout";
 import NewsList from "./NewsList";
 import "./news.css";
+import { baseURL } from "../../../utils/listContainer";
 
 const News = () => {
   const user = useSelector((state) => state.user.user?.currentUser);
   const { isLoading, apiData, serverError } = useFetchData(
-    `/v1/news`,
+    `${baseURL}/news`,
     user?.accessToken,
     "get"
   );

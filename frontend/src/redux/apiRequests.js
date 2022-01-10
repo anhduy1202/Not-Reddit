@@ -1,3 +1,4 @@
+import { baseURL } from "../utils/listContainer";
 import {
   updateStart,
   updateSuccess,
@@ -55,7 +56,7 @@ export const loginUser = async (user, dispatch, navigate, state) => {
   dispatch(loginStart());
   dispatch(updateStart());
   try {
-    const res = await axios.post("/v1/auth/login", user);
+    const res = await axios.post(`${baseURL}/auth/login`, user);
     dispatch(loginSuccess(res.data));
     dispatch(updateSuccess(res.data));
     navigate(state?.path || "/");
@@ -68,7 +69,7 @@ export const loginUser = async (user, dispatch, navigate, state) => {
 export const registerUser = async (user, dispatch, navigate) => {
   dispatch(registerStart());
   try {
-    await axios.post("/v1/auth/register", user);
+    await axios.post(`${baseURL}/auth/register`, user);
     dispatch(registerSuccess());
     navigate("/login");
   } catch (err) {
@@ -80,7 +81,7 @@ export const registerUser = async (user, dispatch, navigate) => {
 export const logOutUser = async (dispatch, token, userId, navigate) => {
   dispatch(logoutStart());
   try {
-    await axios.post("/v1/auth/logout", userId, {
+    await axios.post(`${baseURL}/auth/logout`, userId, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(logoutSuccess());
@@ -93,7 +94,7 @@ export const logOutUser = async (dispatch, token, userId, navigate) => {
 export const updateUser = async (dispatch, user, id, token) => {
   dispatch(updateStart());
   try {
-    const res = await axios.put(`/v1/users/${id}`, user, {
+    const res = await axios.put(`${baseURL}/users/${id}`, user, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(updateSuccess(res.data));
@@ -106,7 +107,7 @@ export const updateUser = async (dispatch, user, id, token) => {
 export const getUser = async (dispatch, id, token) => {
   dispatch(getUserStart());
   try {
-    const res = await axios.get(`/v1/users/${id}`, {
+    const res = await axios.get(`${baseURL}/users/${id}`, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(getUserSuccess(res.data));
@@ -125,7 +126,7 @@ export const followUser = async (
 ) => {
   dispatch(followUserStart());
   try {
-    const res = await axios.put(`/v1/users/${id}/follow`, userId, {
+    const res = await axios.put(`${baseURL}/users/${id}/follow`, userId, {
       headers: { token: `Bearer ${token}` },
     });
     setFollow(isFollowed ? false : true);
@@ -152,8 +153,8 @@ export const getAllPosts = async (
   try {
     const res = await axios.get(
       hot
-        ? `/v1/post?${hot}=true&page=${pageNumber}&limit=2`
-        : `/v1/post?page=${pageNumber}&limit=2`,
+        ? `${baseURL}/post?${hot}=true&page=${pageNumber}&limit=2`
+        : `${baseURL}/post?page=${pageNumber}&limit=2`,
       {
         headers: { token: `Bearer ${token}` },
       }
@@ -168,7 +169,7 @@ export const getAllPosts = async (
 export const getUserPost = async (dispatch, token, userId) => {
   dispatch(getUserPostStart());
   try {
-    const res = await axios.get(`/v1/post/user/${userId}`, {
+    const res = await axios.get(`${baseURL}/post/user/${userId}`, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(getUserPostSuccess(res.data));
@@ -180,7 +181,7 @@ export const getUserPost = async (dispatch, token, userId) => {
 export const getUserComment = async (dispatch, token, postId) => {
   dispatch(getUserCommentStart());
   try {
-    const res = await axios.get(`/v1/post/comment/${postId}`, {
+    const res = await axios.get(`${baseURL}/post/comment/${postId}`, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(getUserCommentSuccess(res.data));
@@ -192,7 +193,7 @@ export const getUserComment = async (dispatch, token, postId) => {
 export const createPost = async (dispatch, token, post, postToggle) => {
   dispatch(createPostStart());
   try {
-    await axios.post("/v1/post", post, {
+    await axios.post(`${baseURL}/post`, post, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(postToggle(false));
@@ -213,7 +214,7 @@ export const deletePost = async (
 ) => {
   dispatch(deletePostStart());
   try {
-    await axios.delete(`/v1/post/${id}`, {
+    await axios.delete(`${baseURL}/post/${id}`, {
       headers: { token: `Bearer ${token}` },
       data: { userId: userId },
     });
@@ -231,7 +232,7 @@ export const deletePost = async (
 export const upvotePost = async (dispatch, token, id, userId) => {
   dispatch(interactPostStart());
   try {
-    await axios.put(`/v1/post/${id}/upvote`, userId, {
+    await axios.put(`${baseURL}/post/${id}/upvote`, userId, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(interactPostSuccess());
@@ -243,7 +244,7 @@ export const upvotePost = async (dispatch, token, id, userId) => {
 export const downvotePost = async (dispatch, token, id, userId) => {
   dispatch(interactPostStart());
   try {
-    await axios.put(`/v1/post/${id}/downvote`, userId, {
+    await axios.put(`${baseURL}/post/${id}/downvote`, userId, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(interactPostSuccess());
@@ -258,7 +259,7 @@ export const downvotePost = async (dispatch, token, id, userId) => {
 export const addComment = async (dispatch, token, id, comment) => {
   dispatch(addCommentStart());
   try {
-    await axios.post(`/v1/post/comment/${id}`, comment, {
+    await axios.post(`${baseURL}/post/comment/${id}`, comment, {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(addCommentSuccess());
@@ -277,7 +278,7 @@ export const deleteUserComment = async (
 ) => {
   dispatch(deleteCommentStart());
   try {
-    await axios.delete(`/v1/post/comment/${id}`, {
+    await axios.delete(`${baseURL}/post/comment/${id}`, {
       headers: { token: `Bearer ${token}` },
       data: { ownerId: ownerId },
     });

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/apiRequests";
 import { makePostToggle } from "../../redux/navigateSlice";
 import InputField from "../InputFields/Input";
-import listContainer from "../../utils/listContainer";
+import {listContainer} from "../../utils/listContainer";
 import "./post.css";
 const MakePost = () => {
   const dispatch = useDispatch();

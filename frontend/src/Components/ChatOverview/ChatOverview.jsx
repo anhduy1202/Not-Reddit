@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Conversation from "./Conversation";
+import { baseURL } from "../../utils/listContainer";
 import { setRoom } from "../../redux/navigateSlice";
 const ChatOverview = () => {
   //dummy data
@@ -23,7 +24,7 @@ const ChatOverview = () => {
   useEffect(() => {
     const getConversation = async () => {
       try {
-        const res = await axios.get("/v1/conversation/" + user?._id, {
+        const res = await axios.get(`${baseURL}/conversation/` + user?._id, {
           headers: { token: `Bearer ${user?.accessToken}` },
         });
         console.log(res.data);

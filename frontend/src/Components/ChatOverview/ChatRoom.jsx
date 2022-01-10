@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Message from "./Message";
+import { baseURL } from "../../utils/listContainer";
 import Footer from "../Footer/Footer";
 import InputField from "../InputFields/Input";
 const ChatRoom = () => {
@@ -65,8 +66,8 @@ const ChatRoom = () => {
         const partnerId = room?.members.find((m) => m !== user?._id);
         axios
           .all([
-            axiosInstance.get(`/v1/users/${partnerId}`),
-            axiosInstance.get(`/v1/message/${room._id}`),
+            axiosInstance.get(`${baseURL}/users/${partnerId}`),
+            axiosInstance.get(`${baseURL}/message/${room._id}`),
           ])
           .then(
             axios.spread((partnerRes, msgRes) => {
@@ -100,7 +101,7 @@ const ChatRoom = () => {
         text: newMsg,
       });
       try {
-        const res = await axios.post("/v1/message", message, {
+        const res = await axios.post(`${baseURL}/message`, message, {
           headers: { token: `Bearer ${user.accessToken}` },
         });
         setMessage([...messages, res.data]);

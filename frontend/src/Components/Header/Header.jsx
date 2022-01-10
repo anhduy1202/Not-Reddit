@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { baseURL } from "../../utils/listContainer";
 import { AiOutlineMessage } from "react-icons/ai";
 import { followUser, getUser } from "../../redux/apiRequests";
 import "./header.css";
@@ -39,7 +40,7 @@ const Header = (props) => {
 
   const goToChat = async () => {
     try {
-      const res = await axios.get(`/v1/conversation/find/${id}/${user?._id}`, {
+      const res = await axios.get(`${baseURL}/conversation/find/${id}/${user?._id}`, {
         headers: { token: `Bearer ${user?.accessToken}` },
       });
       if (res.data) {
@@ -51,7 +52,7 @@ const Header = (props) => {
           receiverId: id,
         };
         await axios
-          .post(`/v1/conversation`, newConvo, {
+          .post(`${baseURL}/conversation`, newConvo, {
             headers: { token: `Bearer ${user?.accessToken}` },
           })
           .then((res) => {

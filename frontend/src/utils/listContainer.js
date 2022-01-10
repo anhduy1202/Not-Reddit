@@ -1,4 +1,4 @@
-const listContainer = {
+export const listContainer = {
   routes: [
     { name: "Home", path: "/" },
     { name: "News", path: "/news" },
@@ -17,4 +17,6 @@ const listContainer = {
     "https://preview.redd.it/26s9eejm8vz51.png?auto=webp&s=e38d32ee0ffa0666fade2abd62ed59037c119990",
   ],
 };
-module.exports = listContainer;
+
+export const  baseURL = "https://reddat.onrender.com/v1";
+

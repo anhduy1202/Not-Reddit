@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import "./feednavbar.css";
-import listContainer from "../../../utils/listContainer";
+import {listContainer} from "../../../utils/listContainer";
 
 const FeedNavBar = () => {
   const location = useLocation();
