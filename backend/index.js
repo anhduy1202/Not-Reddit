@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 var bodyParser = require("body-parser");
-const { cloudinary } = require("./utils/cloudinary");
 const cookieParser = require("cookie-parser");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/post");
@@ -42,6 +41,6 @@ app.use("/v1/news", newsRoute);
 app.use("/v1/conversation", conversationRoute);
 app.use("/v1/message", messageRoute);
 
-app.listen(process.env.POST || 80000, () => {
+app.listen(process.env.PORT || 8000, () => {
   console.log("Server is running");
 });
