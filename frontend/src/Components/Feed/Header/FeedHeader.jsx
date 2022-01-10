@@ -46,8 +46,8 @@ const FeedHeader = () => {
       setOpenSearch(false);
     } else {
       setOpenSearch(true);
+      searchUsername();
     }
-    searchUsername();
   }, [search]);
   return (
     <header className="feed-logo">
