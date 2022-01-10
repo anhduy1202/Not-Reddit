@@ -50,17 +50,16 @@ const authController = {
   loginUser: async (req, res) => {
     try {
       const user = await User.findOne({ username: req.body.username });
-      // console.log("Running...");
-      // if (!user) {
-      //   return res.status(404).json("Incorrect username");
-      // }
-      // const validPassword = await bcrypt.compare(
-      //   req.body.password,
-      //   user.password
-      // );
-      // if (!validPassword) {
-      //   return res.status(404).json("Incorrect password");
-      // }
+      if (!user) {
+        return res.status(404).json("Incorrect username");
+      }
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
+      if (!validPassword) {
+        return res.status(404).json("Incorrect password");
+      }
       // else if (user && validPassword) {
       //   //Generate access token
       //   const accessToken = authController.generateAccessToken(user);
