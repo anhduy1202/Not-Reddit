@@ -42,6 +42,6 @@ app.use("/v1/news", newsRoute);
 app.use("/v1/conversation", conversationRoute);
 app.use("/v1/message", messageRoute);
 
-app.listen(8000, () => {
+app.listen(process.env.POST || 80000, () => {
   console.log("Server is running");
 });

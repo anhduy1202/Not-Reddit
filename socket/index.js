@@ -1,8 +1,18 @@
-const io = require("socket.io")(8900, {
+const express = require("express");
+const http = require("http");
+const socketio = require("socket.io");
+const cors = require("cors");
+const dotenv = require("dotenv");
+dotenv.config();
+const app = express();
+app.use(cors());
+const server = http.createServer(app);
+const io = socketio(server, {
   cors: {
     origin: "http://localhost:3000",
   },
 });
+const PORT = process.env.PORT || 8000;
 
 let users = [];
 
@@ -43,3 +53,5 @@ io.on("connection", (socket) => {
     io.emit("getUsers", users);
   });
 });
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
