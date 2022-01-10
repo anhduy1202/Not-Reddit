@@ -9,8 +9,7 @@ const userController = {
   getUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
-      const { password, ...others } = user._doc;
-      res.status(200).json(others);
+      res.status(200).json(user);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -47,7 +46,7 @@ const userController = {
           $set: req.body,
         },
         { returnDocument: "after" }
-      );
+      ).select("+password");
       const accessToken = await authController.generateAccessToken(user);
       if (req.body.profilePicture || req.body.theme) {
         try {
@@ -67,8 +66,7 @@ const userController = {
           return res.status(500).json(err);
         }
       }
-      const { password, ...others } = user._doc;
-      res.status(200).json({ ...others, accessToken });
+      res.status(200).json({ user, accessToken });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -114,15 +112,18 @@ const userController = {
   },
 
   //SEARCH FOR USERS
-  searchAllUser: async(req,res) => {
-    try{
+  searchAllUser: async (req, res) => {
+    try {
       const username = req.query.username;
-      const user = await User.find({username: {"$regex":username}}).limit(2).select('username profilePicture theme').exec();
-    return res.status(200).json(user);
-    }catch(err){
-     return res.status(500).json(err);
+      const user = await User.find({ username: { $regex: username } })
+        .limit(2)
+        .select("username profilePicture theme")
+        .exec();
+      return res.status(200).json(user);
+    } catch (err) {
+      return res.status(500).json(err);
     }
-  }
+  },
 };
 
 module.exports = userController;
