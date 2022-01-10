@@ -1,4 +1,4 @@
-const middlewareController = require("../controllers/middleWareController");
+const middlewareController = require("../controllers/middlewareController");
 const newsController = require("../controllers/newsController");
 
 const router = require("express").Router();
