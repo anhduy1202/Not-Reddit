@@ -159,7 +159,7 @@ export const getAllPosts = async (
       }
     );
     setHasMore(res.data.results.length > 0);
-      dispatch(getAllPostSuccess(res.data.results));
+    dispatch(getAllPostSuccess(res.data.results));
   } catch (err) {
     dispatch(getAllPostFailed());
   }
@@ -251,6 +251,8 @@ export const downvotePost = async (dispatch, token, id, userId) => {
     dispatch(interactPostFailed());
   }
 };
+
+
 
 //COMMENT
 export const addComment = async (dispatch, token, id, comment) => {

@@ -32,7 +32,7 @@ const authController = {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_KEY,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" }
     );
   },
 
@@ -74,7 +74,7 @@ const authController = {
           sameSite: "strict",
         });
         const { password, ...others } = user._doc;
-         res.status(200).json({ ...others, accessToken, refreshToken });
+         res.status(200).json({ ...others, accessToken });
       }
     } catch (err) {
        res.status(500).json(err);

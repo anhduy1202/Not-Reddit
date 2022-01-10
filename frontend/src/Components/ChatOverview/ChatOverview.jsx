@@ -45,7 +45,6 @@ const ChatOverview = () => {
     <section className="message-container">
       <ul className="contact-list">
         <li> Chats </li>
-        <li> Contacts </li>
       </ul>
       <div className="contact-container-div">
         {conversation.map((conversation) => {

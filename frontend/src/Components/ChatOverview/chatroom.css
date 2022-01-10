@@ -1,5 +1,6 @@
 .message-container {
-  background-color: grey;
+  background-color: #2c006b;
+  background-image: linear-gradient(180deg, #19013d 0%, #5a40bf 100%);
   height: 100vh;
   padding: 1rem;
 }
@@ -21,7 +22,13 @@
 .contact-container {
   display: flex;
   width: 100%;
-  background-color: #2222;
+  background-color: #112279;
+  background-image: linear-gradient(
+    43deg,
+    #081764 0%,
+    #3a1875 46%,
+    #1b2779 100%
+  );
   gap: 1rem;
   align-items: center;
   margin: 0.5rem 0;
@@ -47,13 +54,14 @@
 }
 .convo-container {
   display: flex;
+  background-color: #2c006b;
+  background-image: linear-gradient(180deg, #19013d 0%, #36218d 100%);
   flex-direction: column;
-  background-color: grey;
   height: 100vh;
 }
-.convo-header{
+.convo-header {
   width: 100%;
-  position:fixed;
+  position: fixed;
 }
 .message-header {
   height: 80px;
@@ -73,7 +81,6 @@
 .msgs-container {
   padding: 1rem;
 }
-
 .message {
   display: flex;
   flex-direction: column;
@@ -83,9 +90,8 @@
   font-size: 1rem;
   padding: 10px;
   border-radius: 20px;
-  color: black;
-  background-color: rgb(245, 241, 241);
-
+  color:white;
+  background-color: #2c2c2c;
   max-width: 300px;
 }
 .messageTop {
@@ -102,8 +108,9 @@
   align-items: flex-end;
 }
 .message.own .messageText {
-  background-color: #1877f2;
-  color: white;
+  background-color: #2c006b;
+  background-image: linear-gradient(45deg, #a740c7 0%, #5a40bf 100%);
+    color: white;
 }
 .msg-img {
   width: 36px;
@@ -113,7 +120,7 @@
   margin-right: 10px;
 }
 .msg-img-mypic {
-  order:2;
+  order: 2;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -123,7 +130,8 @@
 
 .chat-msg-input {
   width: 80%;
-  height: 90px;
+  height: 50px;
+  border-radius: 30px;
   border: none;
   padding: 10px;
   resize: none;
@@ -135,7 +143,7 @@
   height: 100%;
   overflow-y: scroll;
   scrollbar-width: none;
-  padding: 0 0.75rem;
+  padding: 6rem 0.75rem 0rem 0.75rem;
 }
 
 .chat-box-bot {
@@ -143,15 +151,24 @@
   padding: 0 0.75rem;
   display: flex;
   align-items: center;
+  margin-bottom: 1rem;
   justify-content: space-between;
 }
 .chat-submit {
+  padding: 0;
+  margin: 0;
   width: 70px;
   height: 40px;
   border: none;
   margin-left: 1rem;
   border-radius: 5px;
   cursor: pointer;
-  background-color: teal;
+  background-color: #08165c;
+  background-image: linear-gradient(
+    43deg,
+    #18287a 0%,
+    #522c94 46%,
+    #1b2775 100%
+  );
   color: white;
 }
