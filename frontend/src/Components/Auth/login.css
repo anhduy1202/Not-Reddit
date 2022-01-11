@@ -23,16 +23,16 @@
 }
 form {
   display: flex;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   flex-direction: column;
-  min-width: 200px;
+  max-width: 200px;
   justify-content: flex-start;
   align-items: flex-start;
 }
 input {
   border: none;
-  font-size: 1rem;
+  font-size: 0.85rem;
   padding: 0.65rem;
   font-family: "Noto Sans", sans-serif;
   margin: 1.25rem 0;
@@ -44,8 +44,8 @@ button {
   border: none;
   align-self: center;
   margin-top: 1rem;
-  font-size: 1.25rem;
-  padding: 0.65rem;
+  font-size: 1rem;
+  padding: 0.75rem;
   border-radius: 4px;
   color: white;
   background-color: #e02f93;

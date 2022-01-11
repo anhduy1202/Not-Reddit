@@ -52,7 +52,9 @@
   border-radius: 8px;
 }
 .makepost-tags > button {
-  color: white;
+  font-weight:700;
+  background-color:#535353;
+  color:white;
   border: none;
   font-size: 1rem;
   padding: 0.4rem;
@@ -61,23 +63,23 @@
   cursor: pointer;
 }
 .makepost-tags-NSFW {
-  background-color: rgb(209, 66, 47);
+  color: rgb(209, 66, 47);
 }
 .makepost-tags-Mood {
-  background-color: rgb(1, 111, 201);
+  color: rgb(1, 111, 201);
 }
-.makepost-tags-Quotes {
-  background-color: rgb(183, 47, 224);
+.makepost-tags-Meme {
+  color: rgb(183, 47, 224);
 }
 .makepost-tags-Shitpost {
-  background-color: rgb(197, 186, 23);
+  color: rgb(197, 186, 23);
 }
 .makepost-tags-None {
-  background-color: grey;
+  color: grey;
 }
 .makepost-tags-selected {
-  background-color: teal;
-  box-shadow: 0px 0px 10px 7px rgb(0, 204, 160);
+  color: teal;
+  box-shadow: 0px 0px 10px 4px rgb(1, 111, 201);
 }
 input[type="file"] {
   display: none;

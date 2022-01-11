@@ -47,7 +47,6 @@ const InputField = (props) => {
             placeholder={placeholder}
             onChange={(e) => setData(e.target.value)}
           />
-          {data === "" && <p className="errorMsg">{errorMsg}</p>}
         </>
       )}
     </>
