@@ -20,20 +20,37 @@ import { listContainer } from "../../utils/listContainer";
 import { useEffect } from "react";
 
 const Posts = React.forwardRef((props, ref) => {
-  const { post, comments, setDeleteComment, deleteComment } = props;
+  const {
+    type,
+    fullUp,
+    fullDown,
+    post,
+    comments,
+    setDeleteComment,
+    deleteComment,
+  } = props;
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.user.user?.currentUser);
   const [totalVotes, setTotal] = useState(
     post?.upvotes?.length - post?.downvotes?.length
   );
-  const [isUpVote, setUpVote] = useState(post?.upvotes?.includes(user?._id));
-  const [isDownVote, setDownVote] = useState(
-    post?.downvotes?.includes(user?._id)
-  );
+  const [isUpVote, setUpVote] = useState(null);
+  const [isDownVote, setDownVote] = useState(null);
   const fullPost = useSelector((state) => state.nav.fullPost);
   const tags = listContainer.tags;
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (type === "fullpost") {
+      console.log(fullUp);
+      setUpVote(fullUp?.includes(user?._id));
+      setDownVote(fullDown?.includes(user?._id));
+    } else {
+      setUpVote(post?.upvotes?.includes(user?._id));
+      setDownVote(post?.downvotes?.includes(user?._id));
+    }
+  }, []);
 
   const handleDelete = (id) => {
     dispatch(

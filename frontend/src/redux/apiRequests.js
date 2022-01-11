@@ -32,6 +32,9 @@ import {
   getAllPostFailed,
   getAllPostStart,
   getAllPostSuccess,
+  getOnePostFailed,
+  getOnePostStart,
+  getOnePostSuccess,
   getUserPostFailed,
   getUserPostStart,
   getUserPostSuccess,
@@ -173,9 +176,21 @@ export const getUserPost = async (dispatch, token, userId) => {
     const res = await axios.get(`${baseURL}/post/user/${userId}`, {
       headers: { token: `Bearer ${token}` },
     });
-    dispatch(getUserPostSuccess(res.data));
+    dispatch(getUserPostSuccess());
   } catch (err) {
     dispatch(getUserPostFailed());
+  }
+};
+
+export const getOnePost = async (dispatch, token, postId) => {
+  dispatch(getOnePostStart());
+  try {
+    const res = await axios.get(`${baseURL}/post/fullpost/${postId}`, {
+      headers: { token: `Bearer ${token}` },
+    });
+    dispatch(getOnePostSuccess(res.data));
+  } catch (err) {
+    dispatch(getOnePostFailed());
   }
 };
 
@@ -253,8 +268,6 @@ export const downvotePost = async (dispatch, token, id, userId) => {
     dispatch(interactPostFailed());
   }
 };
-
-
 
 //COMMENT
 export const addComment = async (dispatch, token, id, comment) => {

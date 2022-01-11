@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserComment, getUserPost } from "../../../redux/apiRequests";
-import { baseURL } from "../../../utils/listContainer";
-import useFetchData from "../../Hooks/useFetchData";
+import {
+  getOnePost,
+  getUserComment,
+  getUserPost,
+} from "../../../redux/apiRequests";
 import Overlay from "../../Overlay/Overlay";
 import Posts from "../Posts";
 
@@ -14,16 +16,16 @@ const FullPost = () => {
   const deleteComments = useSelector((state) => state.comment.deleteComments);
   const userComments = useSelector((state) => state.comment.userComments);
   const openedComment = userComments?.comments;
+  const openedPost = useSelector((state) => state.post.onePost?.post);
   const user = useSelector((state) => state.user.user?.currentUser);
   const dispatch = useDispatch();
   const filteredComment = openedComment?.filter(
     (comment) => !deleteComment.includes(comment._id)
   );
-  const { isLoading, apiData, serverError } = useFetchData(
-    `${baseURL}/post/fullpost/${fullPost.postId}`,
-    user?.accessToken,
-    "get"
-  );
+
+  useEffect(() => {
+    getOnePost(dispatch, user?.accessToken, fullPost?.postId);
+  }, []);
 
   useEffect(() => {
     getUserComment(dispatch, user?.accessToken, fullPost?.postId);
@@ -34,19 +36,16 @@ const FullPost = () => {
         <Overlay>
           <section className="fullpost-container">
             {userComments?.pending && <div className=""> Loading...</div>}
-            {apiData?.map((post) => {
-              return (
-                <>
-                  <Posts
-                    key={post._id}
-                    post={post}
-                    comments={filteredComment}
-                    setDeleteComment={setDeleteComment}
-                    deleteComment={deleteComment}
-                  />
-                </>
-              );
-            })}
+            <Posts
+              type="fullpost"
+              fullUp={openedPost.upvotes}
+              fullDown={openedPost.fullDown}
+              key={openedPost._id}
+              post={openedPost}
+              comments={filteredComment}
+              setDeleteComment={setDeleteComment}
+              deleteComment={deleteComment}
+            />
           </section>
         </Overlay>
       )}

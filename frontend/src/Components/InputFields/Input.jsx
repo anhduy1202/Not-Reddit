@@ -1,8 +1,10 @@
 import "../Edit/edit.css";
 import "../Posts/post.css";
+import "./inputfield.css";
 import "../ChatOverview/chatroom.css";
 const InputField = (props) => {
   const {
+    errorMsg,
     id,
     name,
     value,
@@ -36,13 +38,17 @@ const InputField = (props) => {
           onChange={(e) => setData(e.target.value)}
         />
       ) : (
-        <input
-          value={value}
-          type={type}
-          className={classStyle}
-          placeholder={placeholder}
-          onChange={(e) => setData(e.target.value)}
-        />
+        <>
+          <input
+            required
+            value={value}
+            type={type}
+            className={classStyle}
+            placeholder={placeholder}
+            onChange={(e) => setData(e.target.value)}
+          />
+          {data === "" && <p className="errorMsg">{errorMsg}</p>}
+        </>
       )}
     </>
   );

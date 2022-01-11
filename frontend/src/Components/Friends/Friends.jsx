@@ -5,6 +5,7 @@ import useFetchData from "../Hooks/useFetchData";
 import { baseURL } from "../../utils/listContainer";
 import Loading from "../Loading/Loading";
 import Posts from "../Posts/Posts";
+import FullPost from "../Posts/FullPost/FullPost";
 
 const Friends = () => {
   const fullPost = useSelector((state) => state.nav.fullPost);
@@ -42,6 +43,7 @@ const Friends = () => {
         size="10px"
         loading={isLoading}
       />
+      {fullPost.open && <FullPost />}
       {apiData?.map((post) => {
         return (
           <Posts

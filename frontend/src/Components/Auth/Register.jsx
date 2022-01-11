@@ -26,14 +26,16 @@ const Register = () => {
       <div className="register-input">
         <form onSubmit={handleRegister}>
           <InputField
+            errorMsg="Email should be valid"
             data={email}
-            type="text"
+            type="email"
             placeholder="Enter email"
             setData={setEmail}
             label="EMAIL"
             classStyle="register-email"
           />
           <InputField
+            errorMsg="Username should be 6-20 characters"
             data={username}
             type="text"
             placeholder="Enter username"
@@ -42,6 +44,7 @@ const Register = () => {
             classStyle="register-username"
           />
           <InputField
+            errorMsg="Password should have minimum 6 characters"
             data={password}
             type="password"
             placeholder="Enter password"
