@@ -176,7 +176,7 @@ export const getUserPost = async (dispatch, token, userId) => {
     const res = await axios.get(`${baseURL}/post/user/${userId}`, {
       headers: { token: `Bearer ${token}` },
     });
-    dispatch(getUserPostSuccess());
+    dispatch(getUserPostSuccess(res.data));
   } catch (err) {
     dispatch(getUserPostFailed());
   }

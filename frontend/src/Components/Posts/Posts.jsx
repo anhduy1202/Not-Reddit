@@ -21,9 +21,6 @@ import { useEffect } from "react";
 
 const Posts = React.forwardRef((props, ref) => {
   const {
-    type,
-    fullUp,
-    fullDown,
     post,
     comments,
     setDeleteComment,
@@ -35,23 +32,13 @@ const Posts = React.forwardRef((props, ref) => {
   const [totalVotes, setTotal] = useState(
     post?.upvotes?.length - post?.downvotes?.length
   );
-  const [isUpVote, setUpVote] = useState(null);
-  const [isDownVote, setDownVote] = useState(null);
+  const [isUpVote, setUpVote] = useState(post?.upvotes?.includes(user?._id));
+  const [isDownVote, setDownVote] = useState(post?.downvotes?.includes(user?._id));
   const fullPost = useSelector((state) => state.nav.fullPost);
   const tags = listContainer.tags;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (type === "fullpost") {
-      console.log(fullUp);
-      setUpVote(fullUp?.includes(user?._id));
-      setDownVote(fullDown?.includes(user?._id));
-    } else {
-      setUpVote(post?.upvotes?.includes(user?._id));
-      setDownVote(post?.downvotes?.includes(user?._id));
-    }
-  }, []);
-
+ 
   const handleDelete = (id) => {
     dispatch(
       setDelete({
