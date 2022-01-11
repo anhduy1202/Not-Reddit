@@ -102,6 +102,16 @@ const postController = {
     }
   },
 
+  //GET A POST
+  getAPost: async(req,res) => {
+    try{
+      const post = await Post.findById(req.body.postId);
+      res.status(200).json(post);
+    }catch(err){
+      return  res.status(500).json(err);
+    }
+  },
+
   //UPVOTE A POST
   upvotePost: async (req, res) => {
     try {

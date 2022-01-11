@@ -16,7 +16,7 @@ import {
 import Comments from "../Comments/Comments";
 import InputField from "../InputFields/Input";
 import React, { useState } from "react";
-import {listContainer} from "../../utils/listContainer";
+import { listContainer } from "../../utils/listContainer";
 import { useEffect } from "react";
 
 const Posts = React.forwardRef((props, ref) => {
@@ -34,11 +34,7 @@ const Posts = React.forwardRef((props, ref) => {
   const fullPost = useSelector((state) => state.nav.fullPost);
   const tags = listContainer.tags;
   const dispatch = useDispatch();
-  useEffect(() => {
-    setUpVote(post?.upvotes?.includes(user?._id));
-    setDownVote(post?.downvotes?.includes(user?._id));
-    setTotal(post?.upvotes?.length - post?.downvotes?.length);
-  }, [fullPost]);
+
   const handleDelete = (id) => {
     dispatch(
       setDelete({
@@ -163,11 +159,19 @@ const Posts = React.forwardRef((props, ref) => {
       <div className="post-interactions">
         <div className="post-vote">
           <div className="upvote">
-            <BiUpvote
-              size={"24px"}
-              color={`${isUpVote ? "#ff9051" : ""}`}
-              onClick={() => handleUpVote(post?._id)}
-            />
+            {isUpVote ? (
+              <BiUpvote
+                size={"24px"}
+                color="#ff9051"
+                onClick={() => handleUpVote(post?._id)}
+              />
+            ) : (
+              <BiUpvote
+                size={"24px"}
+                color=""
+                onClick={() => handleUpVote(post?._id)}
+              />
+            )}
           </div>
           <div className="votes">{totalVotes}</div>
           <div className="downvote">

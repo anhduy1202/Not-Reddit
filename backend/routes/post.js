@@ -27,6 +27,9 @@ router.delete(
   postController.deletePost
 );
 
+//GET A POST
+router.get("/:id", middlewareController.verifyToken, postController.getAPost);
+
 //GET ALL POST FROM A USER
 router.get(
   "/user/:id",
