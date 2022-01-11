@@ -85,6 +85,7 @@ export const logOutUser = async (dispatch, token, userId, navigate) => {
       headers: { token: `Bearer ${token}` },
     });
     dispatch(logoutSuccess());
+    localStorage.clear();
     navigate("/login");
   } catch (err) {
     dispatch(logoutFailed());
