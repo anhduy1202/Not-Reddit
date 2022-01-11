@@ -8,7 +8,7 @@
 .close {
   background-color: transparent;
   border: none;
-  align-self: end;
+  align-self: flex-end;
   margin: 0rem 1.15rem 0 0;
   font-size: 1rem;
   font-weight: 700;

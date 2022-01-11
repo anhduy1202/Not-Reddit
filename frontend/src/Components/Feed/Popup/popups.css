@@ -8,7 +8,7 @@
 }
 .popups-close {
     cursor: pointer;
-    align-self: end;
+    align-self: flex-end;
     margin-right: 1rem;
     color:rgb(190, 190, 190);
 }

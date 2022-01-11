@@ -6,8 +6,8 @@
 .feed-container-opened {
   height: 100vh;
   background-color: #0c0c0c;
-  max-width: 30%;
-  align-self: end;
+  width: 30%;
+  align-self: flex-end;
   transition: width 300ms;
   overflow-x: hidden;
 }
