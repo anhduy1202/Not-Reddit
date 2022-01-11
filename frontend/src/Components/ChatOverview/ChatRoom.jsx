@@ -118,10 +118,12 @@ const ChatRoom = () => {
   return (
     <section className="convo-container">
       <div className="convo-header">
-        <div className="go-back-convo" onClick={handleGoBack}>
-          Back
+        <div className="message-header">
+          <div className="go-back-convo" onClick={handleGoBack}>
+            Back
+          </div>
+          {partner?.username}
         </div>
-        <div className="message-header"> {partner?.username} </div>
       </div>
       <div className="chat-box-top">
         {messages.map((msg) => {

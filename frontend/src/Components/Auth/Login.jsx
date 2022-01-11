@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/apiRequests";
 import InputField from "../InputFields/Input";
+import Loading from "../Loading/Loading";
 import "./login.css";
 
 const Login = () => {
   const user = useSelector((state) => state.auth.login?.currentUser);
+  const loading = useSelector((state) => state.auth.login?.isFetching);
   const [username, setUsername] = useState("username");
   const [password, setPassword] = useState("password");
   const dispatch = useDispatch();
@@ -46,7 +48,18 @@ const Login = () => {
             label="PASSWORD"
             classStyle="login-password"
           />
-          <button type="submit"> Continue </button>
+          {loading ? (
+            <button type="submit">
+              <Loading
+                loadingType="ClipLoader"
+                color="white"
+                loading={loading}
+                size="36px"
+              />
+            </button>
+          ) : (
+            <button type="submit"> Continue </button>
+          )}
         </form>
         <div className="login-register"> Don't have an account yet? </div>
         <Link className="login-register-link" to="/register">

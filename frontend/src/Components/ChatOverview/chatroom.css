@@ -74,6 +74,7 @@
   -webkit-backdrop-filter: blur(10.2px);
 }
 .go-back-convo {
+  z-index: 10;
   cursor: pointer;
   position: absolute;
   top: 27px;
@@ -132,6 +133,7 @@
 .chat-msg-input {
   width: 80%;
   height: 50px;
+  font-size: 1.5rem;
   border-radius: 30px;
   border: none;
   padding: 10px;
@@ -142,6 +144,7 @@
 
 .chat-box-top {
   height: 100%;
+  margin-bottom: 2rem;
   overflow-y: scroll;
   scrollbar-width: none;
   padding: 6rem 0.75rem 0rem 0.75rem;

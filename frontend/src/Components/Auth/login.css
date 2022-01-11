@@ -6,8 +6,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-  margin-top: 4rem;
+  min-height: 80vh;
   min-width: 100%;
 }
 .login-title {
@@ -33,6 +32,7 @@ form {
 }
 input {
   border: none;
+  font-size: 1.25rem;
   padding: 0.65rem;
   font-family: "Noto Sans", sans-serif;
   margin: 1.25rem 0;
@@ -61,3 +61,4 @@ button {
   color: #7bc5fa;
   font-weight: 700;
 }
+

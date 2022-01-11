@@ -29,6 +29,7 @@
   background-color: #535353;
   color: white;
   border: none;
+  font-size: 1.5rem;
   font-family: "Noto Sans", sans-serif;
   padding: 0.25rem 0.5rem 4rem 0.5rem;
   margin-top: 1rem;
@@ -145,6 +146,7 @@ input[type="file"] {
   align-items: center;
 }
 .comment-input {
+  font-size: 1.5rem;
   margin-left: 1rem;
   background-color: #3b3b3b;
   color: white;
@@ -173,6 +175,7 @@ input[type="file"] {
 .search-bar {
   text-align: start;
   margin-left: 1rem;
-  width: 100%;
+  font-size: 1rem;
+  max-width: 100%;
   align-self: center;
 }
