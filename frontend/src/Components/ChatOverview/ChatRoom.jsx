@@ -119,7 +119,7 @@ const ChatRoom = () => {
     <section className="convo-container">
       <div className="convo-header">
         <div className="go-back-convo" onClick={handleGoBack}>
-          <IoIosArrowRoundBack size={"48px"} />
+          Back
         </div>
         <div className="message-header"> {partner?.username} </div>
       </div>

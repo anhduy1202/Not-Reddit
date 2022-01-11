@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   height: 50vh;
-  margin-top: 2rem;
+  margin-top: 4rem;
   min-width: 100%;
 }
 .login-title {
@@ -24,7 +24,7 @@
 }
 form {
   display: flex;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
   flex-direction: column;
   min-width: 200px;
@@ -33,7 +33,7 @@ form {
 }
 input {
   border: none;
-  padding: 0.35rem;
+  padding: 0.65rem;
   font-family: "Noto Sans", sans-serif;
   margin: 1.25rem 0;
   border-radius: 4px;
@@ -44,7 +44,7 @@ button {
   border: none;
   align-self: center;
   margin-top: 1rem;
-  font-size: 1rem;
+  font-size: 1.25rem;
   padding: 0.65rem;
   border-radius: 4px;
   color: white;
@@ -52,7 +52,7 @@ button {
 }
 .login-register {
   margin: 2rem 1rem 0 1rem;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 .login-register-link {
   text-decoration: none;

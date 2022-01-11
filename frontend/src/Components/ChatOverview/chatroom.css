@@ -76,7 +76,8 @@
 .go-back-convo {
   cursor: pointer;
   position: absolute;
-  top: 15px;
+  top: 27px;
+  left:20px;
 }
 .msgs-container {
   padding: 1rem;

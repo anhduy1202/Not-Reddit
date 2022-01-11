@@ -6,7 +6,7 @@
 .feed-container-opened {
   height: 100vh;
   background-color: #0c0c0c;
-  width: 30%;
+  max-width: 30%;
   align-self: end;
   transition: width 300ms;
   overflow-x: hidden;
@@ -40,7 +40,7 @@
   height: 100vh;
   background-color: #222222;
   color: rgb(219, 218, 218);
-  width: 70%;
+  min-width: 70%;
   transition: transform 300ms;
 }
 .feed-sidebar {
@@ -51,7 +51,7 @@
   height: 100vh;
   background-color: #222222;
   color: rgb(219, 218, 218);
-  width: 70%;
+  min-width: 70%;
   transition: transform 300ms;
   transform: translateX(-100%);
 }
