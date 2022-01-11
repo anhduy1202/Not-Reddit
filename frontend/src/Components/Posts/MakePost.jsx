@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/apiRequests";
 import { makePostToggle } from "../../redux/navigateSlice";
 import InputField from "../InputFields/Input";
-import {listContainer} from "../../utils/listContainer";
+import { listContainer } from "../../utils/listContainer";
 import "./post.css";
 const MakePost = () => {
   const dispatch = useDispatch();
@@ -45,6 +45,9 @@ const MakePost = () => {
       setPreviewSource(reader.result);
     };
   };
+  const removePreviewSrc = () => {
+    setPreviewSource("");
+  };
 
   return (
     <section className="makepost-container">
@@ -79,11 +82,13 @@ const MakePost = () => {
         />
       </label>
       {previewSource && (
-        <img
-          src={previewSource}
-          alt="chosen"
-          className="makepost-img-preview"
-        />
+        <div className="makepost-img-preview">
+          <p className="remove-preview" onClick={removePreviewSrc}>
+            {" "}
+            X{" "}
+          </p>
+          <img src={previewSource} alt="chosen" />
+        </div>
       )}
       <label> Tags </label>
       <div className="makepost-tags">
@@ -103,6 +108,9 @@ const MakePost = () => {
           );
         })}
       </div>
+      <p className="makepost-save-bottom" onClick={handlePost}>
+        POST
+      </p>
     </section>
   );
 };

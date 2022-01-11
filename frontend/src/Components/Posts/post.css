@@ -19,6 +19,7 @@
   background-color: #535353;
   color: white;
   border: none;
+  font-size: 1.15rem;
   font-family: "Noto Sans", sans-serif;
   padding: 0.25rem 0.5rem 4rem 0.5rem;
   margin-top: 1rem;
@@ -29,7 +30,7 @@
   background-color: #535353;
   color: white;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-family: "Noto Sans", sans-serif;
   padding: 0.25rem 0.5rem 4rem 0.5rem;
   margin-top: 1rem;
@@ -39,14 +40,24 @@
   margin-bottom: 2rem;
   display: flex;
   flex-wrap: wrap;
+  gap: 0.75rem;
   justify-content: space-between;
+}
+.makepost-save-bottom {
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  background-color: #0386d1;
+  border-radius: 8px;
 }
 .makepost-tags > button {
   color: white;
   border: none;
+  font-size: 1rem;
   padding: 0.4rem;
   font-family: "Noto Sans", sans-serif;
-  border-radius: 14px;
+  border-radius: 8px;
   cursor: pointer;
 }
 .makepost-tags-NSFW {
@@ -74,7 +85,8 @@ input[type="file"] {
 .makepost-file-label {
   background-color: #0386d1;
   margin: 1rem 0;
-  border-radius: 12px;
+  border-radius: 8px;
+  text-align: center;
   max-width: 40%;
   display: inline-block;
   padding: 6px 12px;
@@ -85,12 +97,27 @@ input[type="file"] {
   content: "Upload image";
 }
 .makepost-img-preview > img {
-  width: 150px;
-  height: 150px;
+  max-width: 300px;
+  max-height: 200px;
   object-fit: contain;
 }
 .makepost-img-preview {
-  margin-bottom: 1rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+  object-fit: contain;
+  max-width: 300px;
+  max-height: 200px;
+}
+.remove-preview {
+  cursor: pointer;
+  background-color: black;
+  font-size: 1.25rem;
+  padding: 0rem 0.5rem;
+  border-radius: 8px;
+  right: -5%;
+  top:-5%;
+  position: absolute;
 }
 
 /* Post.css */
@@ -168,8 +195,8 @@ input[type="file"] {
 
 .post-image {
   margin-top: 1rem;
-  width: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .search-bar {
