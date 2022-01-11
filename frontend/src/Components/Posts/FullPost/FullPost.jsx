@@ -20,7 +20,7 @@ const FullPost = () => {
     (comment) => !deleteComment.includes(comment._id)
   );
   const { isLoading, apiData, serverError } = useFetchData(
-    `${baseURL}/post/${fullPost.postId}`,
+    `${baseURL}/post/fullpost/${fullPost.postId}`,
     user?.accessToken,
     "get"
   );

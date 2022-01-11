@@ -105,7 +105,7 @@ const postController = {
   //GET A POST
   getAPost: async(req,res) => {
     try{
-      const post = await Post.findById(req.body.postId);
+      const post = await Post.findById(req.params.id);
       res.status(200).json(post);
     }catch(err){
       return  res.status(500).json(err);
