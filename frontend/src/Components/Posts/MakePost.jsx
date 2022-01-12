@@ -1,32 +1,46 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../../redux/apiRequests";
+import { useFormik } from "formik";
 import { makePostToggle } from "../../redux/navigateSlice";
-import InputField from "../InputFields/Input";
+import * as Yup from "yup";
 import { listContainer } from "../../utils/listContainer";
 import "./post.css";
+import Loading from "../Loading/Loading";
 const MakePost = () => {
+  const formik = useFormik({
+    initialValues: {
+      title: "",
+      desc: "",
+    },
+    validationSchema: Yup.object({
+      title: Yup.string()
+        .min(10, "Minimum 10 characters")
+        .max(100, "Maximum 100 characters")
+        .required("Required"),
+      desc: Yup.string().min(4, "Minimum 4 characters").required("Required"),
+    }),
+  });
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user?.currentUser);
-  const [title, setTitle] = useState("Add a title");
-  const [desc, setDesc] = useState("Add some descriptions");
   const [selectIdx, setSelectIdx] = useState(0);
   const tags = listContainer.tags;
+  const loading = useSelector((state) => state.post.createPost?.pending);
   const [previewSource, setPreviewSource] = useState("");
   const handlePost = () => {
     if (!previewSource) {
       const newPost = {
         userId: user?._id,
-        title: title,
-        description: desc,
+        title: formik.values.title,
+        description: formik.values.desc,
         tags: selectIdx,
       };
       createPost(dispatch, user?.accessToken, newPost, makePostToggle);
     } else if (previewSource) {
       const newPost = {
         userId: user?._id,
-        title: title,
-        description: desc,
+        title: formik.values.title,
+        description: formik.values.desc,
         tags: selectIdx,
         imageUrl: previewSource,
       };
@@ -56,22 +70,31 @@ const MakePost = () => {
           Post
         </p>
       </div>
-      <InputField
+      <label className="Title"> Title </label>
+      <textarea
+        required
+        id="title"
+        name="title"
         type="text"
-        data={title}
-        inputType="textarea"
-        setData={setTitle}
-        label="Title"
-        classStyle="makepost-title"
+        className="makepost-title"
+        placeholder="Enter title"
+        onChange={formik.handleChange}
+        value={formik.values.title}
       />
-      <InputField
+      {formik.errors.title && <p className="errorMsg">{formik.errors.title}</p>}
+      <label className="Desc"> Descriptions </label>
+      <textarea
+        required
+        id="desc"
+        name="desc"
         type="text"
-        data={desc}
-        inputType="textarea"
-        setData={setDesc}
-        label="Descriptions"
-        classStyle="makepost-desc"
+        className="makepost-desc"
+        placeholder="Enter descriptions"
+        onChange={formik.handleChange}
+        value={formik.values.desc}
       />
+      {formik.errors.desc && <p className="errorMsg">{formik.errors.desc}</p>}
+
       <label className="makepost-file-label">
         <input
           type="file"
@@ -98,7 +121,7 @@ const MakePost = () => {
               key={idx}
               className={`${
                 selectIdx === idx
-                  ? `makepost-tags-selected`
+                  ? `makepost-tags-selected-${tag}`
                   : `makepost-tags-${tag}`
               }`}
               onClick={() => setSelectIdx(idx)}
@@ -108,9 +131,20 @@ const MakePost = () => {
           );
         })}
       </div>
-      <p className="makepost-save-bottom" onClick={handlePost}>
-        POST
-      </p>
+      <div className="makepost-save-bottom">
+        {loading ? (
+            <Loading
+              loadingType="ClipLoader"
+              color="white"
+              size="32px"
+              loading={loading}
+            />
+        ) : (
+          <p className="submit" onClick={handlePost}>
+            POST
+          </p>
+        )}
+      </div>
     </section>
   );
 };

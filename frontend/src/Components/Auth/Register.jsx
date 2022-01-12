@@ -4,12 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/apiRequests";
 import * as Yup from "yup";
 import "./register.css";
-import { Formik, useFormik } from "formik";
+import {  useFormik } from "formik";
 
 const Register = () => {
-  const [email, setEmail] = useState("email");
-  const [username, setUsername] = useState("username");
-  const [password, setPassword] = useState("password");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

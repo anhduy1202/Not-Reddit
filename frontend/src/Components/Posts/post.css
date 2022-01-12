@@ -45,16 +45,30 @@
 }
 .makepost-save-bottom {
   text-align: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   margin-bottom: 1rem;
   font-size: 1.25rem;
+}
+
+.submit {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border-radius: 12px;
+  width: 90px;
+  height: 36px;
   background-color: #0386d1;
-  border-radius: 8px;
 }
 .makepost-tags > button {
-  font-weight:700;
-  background-color:#535353;
-  color:white;
+  font-weight: 700;
+  background-color: #535353;
+  color: white;
   border: none;
   font-size: 1rem;
   padding: 0.4rem;
@@ -62,24 +76,21 @@
   border-radius: 8px;
   cursor: pointer;
 }
-.makepost-tags-NSFW {
-  color: rgb(209, 66, 47);
+
+.makepost-tags-selected-None {
+  box-shadow: 0px 0px 10px 4px rgb(209, 209, 209);
 }
-.makepost-tags-Mood {
-  color: rgb(1, 111, 201);
+.makepost-tags-selected-NSFW {
+  box-shadow: 0px 0px 10px 4px rgb(209, 66, 47);
 }
-.makepost-tags-Meme {
-  color: rgb(183, 47, 224);
-}
-.makepost-tags-Shitpost {
-  color: rgb(197, 186, 23);
-}
-.makepost-tags-None {
-  color: grey;
-}
-.makepost-tags-selected {
-  color: teal;
+.makepost-tags-selected-Mood {
   box-shadow: 0px 0px 10px 4px rgb(1, 111, 201);
+}
+.makepost-tags-selected-Shitpost {
+  box-shadow: 0px 0px 10px 4px rgb(197, 186, 23);
+}
+.makepost-tags-selected-Meme {
+  box-shadow: 0px 0px 10px 4px rgb(183, 47, 224);
 }
 input[type="file"] {
   display: none;
@@ -118,7 +129,7 @@ input[type="file"] {
   padding: 0rem 0.5rem;
   border-radius: 8px;
   right: -5%;
-  top:-5%;
+  top: -5%;
   position: absolute;
 }
 
