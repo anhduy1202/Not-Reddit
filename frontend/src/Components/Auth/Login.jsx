@@ -9,6 +9,7 @@ import "./login.css";
 
 const Login = () => {
   const user = useSelector((state) => state.auth.login?.currentUser);
+  const error = useSelector((state) => state.auth.login?.message);
   const loading = useSelector((state) => state.auth.login?.isFetching);
   const [username, setUsername] = useState("username");
   const [password, setPassword] = useState("password");
@@ -61,6 +62,7 @@ const Login = () => {
             <button type="submit"> Continue </button>
           )}
         </form>
+        {error && <p className="loginError"> {error} </p>}
         <div className="login-register"> Don't have an account yet? </div>
         <Link className="login-register-link" to="/register">
           Register now

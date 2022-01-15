@@ -94,7 +94,7 @@
 }
 .features-container{
   margin-left: auto;
-  gap:1rem;
+  margin-right: 1.25rem;
   display: flex ;
   flex-direction: row;
 }

@@ -21,7 +21,7 @@
   );
   font-weight: 700;
 }
-form {
+.login-input > form {
   display: flex;
   font-size: 0.85rem;
   font-weight: 600;
@@ -61,4 +61,8 @@ button {
   color: #7bc5fa;
   font-weight: 700;
 }
-
+.loginError {
+  margin-top:1rem;
+  font-size:1rem;
+  color:rgb(255, 77, 77);
+}

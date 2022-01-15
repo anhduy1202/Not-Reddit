@@ -2,7 +2,7 @@ import "./sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { format } from "timeago.js";
-import {FaTshirt} from "react-icons/fa";
+import { FaTrophy } from "react-icons/fa";
 import { RiCopperCoinLine, RiCake3Line } from "react-icons/ri";
 import SideNavBar from "../SideNavBar/SideNavBar";
 import { sideBarToggle } from "../../../redux/navigateSlice";
@@ -16,9 +16,9 @@ const SideBar = () => {
     dispatch(sideBarToggle(false));
   };
 
-  const goToHeader = () => {
-    let id = user?._id;
-    navigate("/user/" + id);
+  const goToLeaderboard = () => {
+    dispatch(sideBarToggle(false));
+    navigate("/leaderboard");
   };
 
   return (
@@ -37,13 +37,14 @@ const SideBar = () => {
                   alt="profile pic"
                 />
               </div>
-              <div className="text-4xl font-bold">
-                u/{user?.username}
-              </div>
+              <div className="text-4xl font-bold">u/{user?.username}</div>
               <div className="sidebar-styleava">
-                <FaTshirt size={"24px"} className="sidebar-shirt"/>
-                <span className="sidebar-styleava-title" onClick={goToHeader}>
-                  Style Avatar
+                <FaTrophy size={"24px"} className="sidebar-shirt" />
+                <span
+                  className="sidebar-styleava-title"
+                  onClick={goToLeaderboard}
+                >
+                  Leader Board
                 </span>
               </div>
               <div className="sidebar-info">

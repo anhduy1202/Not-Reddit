@@ -19,6 +19,13 @@ router.delete(
 //GET A USER
 router.get("/:id", middlewareController.verifyToken, userController.getUser);
 
+//GET LEADER BOARD USERS
+router.get(
+  "/:id/leaderboard",
+  middlewareController.verifyToken,
+  userController.getLeaderboard
+);
+
 //FOLLOW A USER
 router.put(
   "/:id/follow",
@@ -27,10 +34,6 @@ router.put(
 );
 
 //SEARCH FOR USERS
-router.get(
-  "/",
-  middlewareController.verifyToken,
-  userController.searchAllUser
-)
+router.get("/", middlewareController.verifyToken, userController.searchAllUser);
 
 module.exports = router;

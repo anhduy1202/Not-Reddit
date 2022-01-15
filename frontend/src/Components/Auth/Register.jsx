@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/apiRequests";
 import * as Yup from "yup";
 import "./register.css";
-import {  useFormik } from "formik";
+import { useFormik } from "formik";
 
 const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const error = useSelector((state) => state.auth.register.message);
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +31,7 @@ const Register = () => {
       password: Yup.string()
         .required("Required")
         .matches(
-          /"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$"/,
+          /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{7,19}$/,
           "Minimum 6 characters, at least one letter and one number"
         ),
     }),
@@ -61,9 +61,6 @@ const Register = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
           />
-          {formik.errors.email && (
-            <p className="errorMsg">{formik.errors.email}</p>
-          )}
 
           <label className="username-label"> USERNAME </label>
           <input
@@ -91,6 +88,7 @@ const Register = () => {
           {formik.errors.password && (
             <p className="errorMsg">{formik.errors.password}</p>
           )}
+          {error && <p className="register-err"> {error.substr(50).replace("to be unique","already existed")} </p>}
           <button type="submit"> Create account </button>
         </form>
         <div className="register-login"> Already have an account? </div>

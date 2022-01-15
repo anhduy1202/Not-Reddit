@@ -1,23 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState =  {
+const initialState = {
   login: {
     currentUser: null,
     error: false,
     isFetching: false,
     success: false,
+    message: null,
   },
   register: {
     error: false,
     isFetching: false,
     success: false,
+    message:null,
   },
   logout: {
     error: false,
     isFetching: false,
     success: false,
   },
-}
+};
 
 export const authSlice = createSlice({
   name: "auth",
@@ -32,10 +34,11 @@ export const authSlice = createSlice({
       state.login.success = true;
       state.login.currentUser = action.payload;
     },
-    loginFailed: (state) => {
+    loginFailed: (state, action) => {
       state.login.isFetching = false;
       state.login.error = true;
       state.login.success = false;
+      state.login.message = action.payload;
     },
     registerStart: (state) => {
       state.register.isFetching = true;
@@ -49,12 +52,12 @@ export const authSlice = createSlice({
       state.register.isFetching = false;
       state.register.success = false;
       state.register.error = true;
+      state.register.message = action.payload;
     },
     logoutStart: (state) => {
       state.logout.isFetching = true;
     },
-    logoutSuccess: (state) => {
-    },
+    logoutSuccess: (state) => {},
     logoutFailed: (state) => {
       state.logout.isFetching = false;
       state.logout.error = true;

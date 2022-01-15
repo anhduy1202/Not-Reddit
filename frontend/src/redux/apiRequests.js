@@ -63,8 +63,8 @@ export const loginUser = async (user, dispatch, navigate, state) => {
     dispatch(loginSuccess(res.data));
     dispatch(updateSuccess(res.data));
     navigate(state?.path || "/");
-  } catch {
-    dispatch(loginFailed());
+  } catch (e) {
+    dispatch(loginFailed(e.response.data.message));
     dispatch(updateError());
   }
 };
@@ -76,8 +76,8 @@ export const registerUser = async (user, dispatch, navigate) => {
     dispatch(registerSuccess());
     navigate("/login");
   } catch (err) {
-    console.log(err);
-    dispatch(registerFailed("Something is wrong"));
+    console.log(err.response.data);
+    dispatch(registerFailed(err.response.data));
   }
 };
 

@@ -23,8 +23,10 @@
   );
 }
 
-.register-email, .register-password, .register-username {
-  font-size:0.85rem;
+.register-email,
+.register-password,
+.register-username {
+  font-size: 0.85rem;
 }
 
 .register-error {
@@ -33,7 +35,9 @@
   color: rgb(255, 0, 55);
 }
 
-.email-label, .username-label, .password-label {
+.email-label,
+.username-label,
+.password-label {
   font-size: 0.85rem;
 }
 
@@ -50,9 +54,22 @@
   font-weight: 700;
 }
 .errorMsg {
-  text-align:start;
+  text-align: start;
   font-size: 0.85rem;
   font-weight: 500;
   color: rgb(253, 81, 81);
   margin-bottom: 1rem;
+}
+.register-err {
+  font-size: 0.85rem;
+  color: rgb(255, 77, 77);
+}
+.register-input > form {
+  display: flex;
+  font-size: 0.85rem;
+  font-weight: 600;
+  flex-direction: column;
+  max-width: 200px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }

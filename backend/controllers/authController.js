@@ -5,22 +5,27 @@ const jwt = require("jsonwebtoken");
 const authController = {
   //REGISTER
   registerUser: async (req, res) => {
-    try {
-      const salt = await bcrypt.genSalt(10);
-      const hashed = await bcrypt.hash(req.body.password, salt);
+    if (req.body.password.length > 7) {
+      try {
+        const salt = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(req.body.password, salt);
 
-      //Create new user
-      const newUser = await new User({
-        username: req.body.username,
-        email: req.body.email,
-        password: hashed,
-      });
+        //Create new user
+        const newUser = await new User({
+          username: req.body.username,
+          email: req.body.email,
+          password: hashed,
+        });
 
-      //Save user to DB
-      const user = await newUser.save();
-      res.status(200).json(user);
-    } catch (err) {
-      res.status(500).json(err);
+        //Save user to DB
+        const user = await newUser.save();
+        res.status(200).json(user);
+      } catch (err) {
+        res.status(500).json(err.message);
+      }
+    }
+    else {
+      res.status(401).json({message:"Must be 7 character or more"});
     }
   },
 
@@ -53,14 +58,14 @@ const authController = {
         "+password"
       );
       if (!user) {
-        return res.status(404).json("Incorrect username");
+        return res.status(404).json({message:"Incorrect username"});
       }
       const validPassword = await bcrypt.compare(
         req.body.password,
         user.password
       );
       if (!validPassword) {
-        return res.status(404).json("Incorrect password");
+        return res.status(404).json({message:"Incorrect password"});
       } else if (user && validPassword) {
         //Generate access token
         const accessToken = authController.generateAccessToken(user);
@@ -75,8 +80,8 @@ const authController = {
         });
         const returnedUser = {
           ...user._doc,
-          accessToken:accessToken
-        }
+          accessToken: accessToken,
+        };
         res.status(200).json(returnedUser);
       }
     } catch (err) {

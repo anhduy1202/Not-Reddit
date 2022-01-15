@@ -185,11 +185,16 @@ input[type="file"] {
   flex-direction: row;
   align-items: center;
 }
+f.comments-interact > form {
+  max-width: 100%;
+
+}
 .comment-input {
   font-size: 1rem;
   margin-left: 1rem;
   background-color: #3b3b3b;
   color: white;
+  width: 100%;
   padding: 0.75rem 0.5rem;
   border-radius: 12px;
 }

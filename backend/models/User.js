@@ -1,12 +1,14 @@
 const mongoose = require("mongoose");
+const { isEmail } = require("validator");
+var uniqueValidator = require("mongoose-unique-validator");
 
 const userSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      minlength: 6,
-      maxlength: 20,
+      required: [true, "Required"],
+      minlength: [6, "Must be at least 6 characters"],
+      maxlength: [20, "Must be less than 20 characters"],
       unique: true,
     },
     displayName: {
@@ -24,15 +26,16 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
-      maxlength: 50,
+      required: [true, "Required"],
+      maxlength: [50, "Must be 50 characters or less"],
       unique: true,
+      validate: [isEmail, "Please enter a valid email"],
     },
     password: {
       type: String,
-      required: true,
-      select:false,
-      minlength: 6,
+      required: [true, "Required"],
+      select: false,
+      minlength: [8, "Must be 8 characters or more"],
     },
     isAdmin: {
       type: Boolean,
@@ -59,12 +62,16 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    favorites:{
-      type:Array,
-      default:[],
-    }
+    favorites: {
+      type: Array,
+      default: [],
+    },
   },
   { timestamps: true }
 );
+
+userSchema.plugin(uniqueValidator, {
+  message: "Error, expected {PATH} to be unique",
+});
 
 module.exports = mongoose.model("User", userSchema);

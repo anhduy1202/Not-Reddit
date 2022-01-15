@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import Conversation from "./Conversation";
 import { baseURL } from "../../utils/listContainer";
 import { setRoom } from "../../redux/navigateSlice";
+import Loading from "../Loading/Loading";
 const ChatOverview = () => {
   //dummy data
   const [conversation, setConversations] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [isLoading, setLoading] = useState(false);
   let filteredConversation = [];
   //io("ws://localhost:8900")
   const user = useSelector((state) => state.user.user?.currentUser);
@@ -23,15 +25,17 @@ const ChatOverview = () => {
 
   useEffect(() => {
     const getConversation = async () => {
+      setLoading(true);
       try {
         const res = await axios.get(`${baseURL}/conversation/` + user?._id, {
           headers: { token: `Bearer ${user?.accessToken}` },
         });
-        console.log(res.data);
-        filteredConversation = res.data.filter((c) =>  c.messageCount > 0);
+        setLoading(false);
+        filteredConversation = res.data.filter((c) => c.messageCount > 0);
         setConversations(filteredConversation);
       } catch (e) {
-        console.log(e); 
+        setLoading(false);
+        console.log(e);
       }
     };
     getConversation();
@@ -48,20 +52,31 @@ const ChatOverview = () => {
         <li> Chats </li>
       </ul>
       <div className="contact-container-div">
-        {conversation.map((conversation) => {
-          return (
-            <div
-              className="conversation-container"
-              onClick={() => openConversation(conversation)}
-            >
-              <Conversation
-                key={conversation._id}
-                conversation={conversation}
-                currentUser={user}
-              />
-            </div>
-          );
-        })}
+        {isLoading ? (
+          <Loading
+            loadingType="ClipLoader"
+            color="white"
+            size="32px"
+            loading={isLoading}
+          />
+        ) : (
+          <>
+            {conversation.map((conversation) => {
+              return (
+                <div
+                  className="conversation-container"
+                  onClick={() => openConversation(conversation)}
+                >
+                  <Conversation
+                    key={conversation._id}
+                    conversation={conversation}
+                    currentUser={user}
+                  />
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </section>
   );

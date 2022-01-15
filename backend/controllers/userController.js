@@ -68,8 +68,8 @@ const userController = {
       }
       const returnedUser = {
         ...user._doc,
-        accessToken:accessToken
-      }
+        accessToken: accessToken,
+      };
       res.status(200).json(returnedUser);
     } catch (err) {
       res.status(500).json(err);
@@ -124,6 +124,16 @@ const userController = {
         .select("username profilePicture theme")
         .exec();
       return res.status(200).json(user);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
+  },
+
+  //GET LEADER BOARDS
+  getLeaderboard: async (req, res) => {
+    try {
+      const users = await User.find().sort({ karmas: -1 }).limit(10);
+      res.status(200).json(users);
     } catch (err) {
       return res.status(500).json(err);
     }
