@@ -1,6 +1,7 @@
 import FeedLayout from "../Feed/Layout/FeedLayout";
 import "./leaderboard.css";
 import { FaTrophy } from "react-icons/fa";
+import { baseURL } from "../../utils/listContainer";
 import { RiCopperCoinLine } from "react-icons/ri";
 import useFetchData from "../Hooks/useFetchData";
 import { useSelector } from "react-redux";
@@ -15,7 +16,7 @@ const LeaderBoard = () => {
     isLoading,
     serverError,
   } = useFetchData(
-    `http://localhost:8000/v1/users/${user?._id}/leaderboard`,
+    `${baseURL}/users/${user?._id}/leaderboard`,
     user?.accessToken,
     "get"
   );
@@ -62,7 +63,12 @@ const LeaderBoard = () => {
         <div className="leaderboard-header"> Leaderboard </div>
         <p className="leaderboard-topten"> Top 10 </p>
         {isLoading && (
-          <Loading loadingType="BeatLoader" size="12px" loading={isLoading} color="white"/>
+          <Loading
+            loadingType="BeatLoader"
+            size="12px"
+            loading={isLoading}
+            color="white"
+          />
         )}
         {users?.map((user, idx) => {
           return (
