@@ -5,7 +5,7 @@
   font-family: "Sora", sans-serif;
   background-color: #631dbc;
   background-image: linear-gradient(180deg, #631dbc 0%, #1e0144 100%);
-  height: 100vh;
+  height:100vh;
   overflow:hidden;
 }
 .landing-header {
@@ -21,7 +21,10 @@
 .button-container{
     display: flex;
     flex-direction: column;
-    margin-top: -1.5rem;
+    margin-top: -4.5rem;
+}
+.phone-mockup{
+  margin-top: -2rem;
 }
 .login{
     border-radius: 14px;

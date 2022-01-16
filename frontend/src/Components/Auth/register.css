@@ -14,13 +14,13 @@
   font-weight: 700;
   font-size: 1.75rem;
   padding: 1.25rem;
-  background-color: #ff3cac;
+  background-color: #631dbc;
   background-image: linear-gradient(
     225deg,
-    #ff3cac 0%,
-    #784ba0 50%,
-    #2b86c5 100%
+    #631dbc 0%,
+    #1e0144 100%
   );
+
 }
 
 .register-email,
