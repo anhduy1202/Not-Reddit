@@ -4,6 +4,9 @@
   font-size: 1.5rem;
   font-weight: 700;
 }
+.leaderboard-container{
+  height: 100vh;
+}
 
 .leaderboard-topten {
   text-align: center;

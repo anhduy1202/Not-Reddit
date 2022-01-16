@@ -10,18 +10,19 @@
 }
 .landing-header {
   color: #e3d2fa;
-  position: relative;
   margin-top: 20px;
   font-size: 48px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   font-weight: 700;
 }
 .beta {
   font-size: 14px;
   background-color: #8846dd;
   padding:0.25rem;
-  right:-3rem;
+  margin-bottom: 1rem;
   border-radius: 14px;
-position: absolute;
 }
 .landing-sub {
   color: #e3d2fa;
