@@ -1,0 +1,27 @@
+.landing-header-desktop {
+  color: #e3d2fa;
+  margin-top: 20px;
+  font-size: 64px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-weight: 700;
+}
+.beta-desktop {
+  font-size: 18px;
+  background-color: #8846dd;
+  padding: 0.25rem;
+  margin-bottom: 1rem;
+  border-radius: 14px;
+}
+
+.landing-sub-desktop{
+    color: #e3d2fa;
+    font-size: 18px;
+}
+.not-available{
+    color: #e3d2fa;
+    margin-top:-2rem;
+    font-size: 32px;
+}
