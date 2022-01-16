@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 const LeaderBoard = () => {
-  //Dummy user
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user?.currentUser);
   const {
@@ -23,40 +22,7 @@ const LeaderBoard = () => {
   const goToUser = (id) => {
     navigate(`/user/${id}`);
   };
-  //   const users = [
-  //     {
-  //       _id: "61bc5107f03f6b1595aec87a",
-  //       username: "anhduy1202",
-  //       displayName: "Daniel Truong",
-  //       profilePicture: "https://i.redd.it/mozfkrjpoa261.png",
-  //       karmas: 260,
-  //       theme: "#0a4896",
-  //     },
-  //     {
-  //       _id: "61bc5107f03f6b1595aec87a",
-  //       username: "anhduy1202",
-  //       displayName: "Daniel Truong",
-  //       profilePicture: "https://i.redd.it/mozfkrjpoa261.png",
-  //       karmas: 260,
-  //       theme: "#0a4896",
-  //     },
-  //     {
-  //       _id: "61bc5107f03f6b1595aec87a",
-  //       username: "anhduy1202",
-  //       displayName: "Daniel Truong",
-  //       profilePicture: "https://i.redd.it/mozfkrjpoa261.png",
-  //       karmas: 260,
-  //       theme: "#0a4896",
-  //     },
-  //     {
-  //       _id: "61bc5107f03f6b1595aec87a",
-  //       username: "anhduy1202",
-  //       displayName: "Daniel Truong",
-  //       profilePicture: "https://i.redd.it/mozfkrjpoa261.png",
-  //       karmas: 260,
-  //       theme: "#0a4896",
-  //     },
-  //   ];
+ 
   return (
     <FeedLayout>
       <section className="leaderboard-container">

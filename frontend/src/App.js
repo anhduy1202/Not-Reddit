@@ -12,6 +12,7 @@ import Footer from "./Components/Footer/Footer";
 import Friends from "./Components/Friends/Friends";
 import ChatRoom from "./Components/ChatOverview/ChatRoom";
 import LeaderBoard from "./Components/LeaderBoard/LeaderBoard";
+import LandingPage from "./Components/LandingPage/LandingPage";
 
 function App() {
   const [isEdit, setEdit] = useState(false);
@@ -20,6 +21,7 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
+          <Route path="/landingpage" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
