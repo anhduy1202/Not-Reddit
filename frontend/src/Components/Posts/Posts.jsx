@@ -1,7 +1,7 @@
 import { BiCommentDetail, BiUpvote, BiDownvote } from "react-icons/bi";
 import { BsTrash } from "react-icons/bs";
 import { format } from "timeago.js";
-import { FiStar } from "react-icons/fi";
+import { MdSend } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./post.css";
@@ -20,12 +20,7 @@ import { listContainer } from "../../utils/listContainer";
 import { useEffect } from "react";
 
 const Posts = React.forwardRef((props, ref) => {
-  const {
-    post,
-    comments,
-    setDeleteComment,
-    deleteComment,
-  } = props;
+  const { post, comments, setDeleteComment, deleteComment } = props;
   const navigate = useNavigate();
   const [comment, setComment] = useState("");
   const user = useSelector((state) => state.user.user?.currentUser);
@@ -33,12 +28,13 @@ const Posts = React.forwardRef((props, ref) => {
     post?.upvotes?.length - post?.downvotes?.length
   );
   const [isUpVote, setUpVote] = useState(post?.upvotes?.includes(user?._id));
-  const [isDownVote, setDownVote] = useState(post?.downvotes?.includes(user?._id));
+  const [isDownVote, setDownVote] = useState(
+    post?.downvotes?.includes(user?._id)
+  );
   const fullPost = useSelector((state) => state.nav.fullPost);
   const tags = listContainer.tags;
   const dispatch = useDispatch();
 
- 
   const handleDelete = (id) => {
     dispatch(
       setDelete({
@@ -231,6 +227,11 @@ const Posts = React.forwardRef((props, ref) => {
                 type="text"
                 placeholder="Add a comment"
                 classStyle="comment-input"
+              />
+              <MdSend
+                size="32px"
+                className="submit-comment"
+                onClick={(e) => handleComment(e, post?._id)}
               />
             </form>
           </div>
