@@ -21,7 +21,6 @@ const Header = (props) => {
     setEdit(!isEdit);
   };
   useEffect(() => {
-    console.log(isFollowed);
     getUser(dispatch, id, user?.accessToken);
   }, []);
   const handleFollow = () => {

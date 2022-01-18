@@ -60,7 +60,6 @@ const ChatRoom = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log(room._id);
     const getMessage = async () => {
       try {
         const partnerId = room?.members.find((m) => m !== user?._id);

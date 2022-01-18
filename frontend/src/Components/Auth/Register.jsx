@@ -32,7 +32,7 @@ const Register = () => {
         .required("Required")
         .matches(
           /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{6,19}$/,
-          "Minimum 6 characters, at least one letter and one number"
+          "Minimum 6 characters, at least one letter, one number, one special character"
         ),
     }),
     onSubmit: (values) => {
