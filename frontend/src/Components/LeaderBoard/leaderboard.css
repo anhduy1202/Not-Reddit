@@ -6,6 +6,7 @@
 }
 .leaderboard-container{
   height: 100vh;
+  margin-bottom:3rem;
 }
 
 .leaderboard-topten {
