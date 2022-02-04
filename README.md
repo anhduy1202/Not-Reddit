@@ -16,7 +16,7 @@
 ## 🤖 Tech stacks
 ### Back-end
 * Node.js (Express)
-* MongoDB (Monoogse)
+* MongoDB (Mongoose)
 * Socket.io
 ### Front-end
 * React
